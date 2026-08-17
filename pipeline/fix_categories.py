@@ -3,7 +3,7 @@
 import json, os
 from collections import Counter
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 input_data = json.load(open(os.path.join(BASE, "data", "apps_input.json")))
 cat_map = {}

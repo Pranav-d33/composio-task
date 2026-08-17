@@ -4,7 +4,7 @@ import json, os, sys, re, time
 import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(BASE, "data", "raw_docs")
 APPS = json.load(open(os.path.join(BASE, "data", "apps_input.json")))
 

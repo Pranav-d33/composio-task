@@ -3,7 +3,7 @@
 import json, glob, os, re
 from collections import Counter
 
-ROWS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "rows")
+ROWS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "rows")
 
 def norm_auth(label):
     l = label.lower()
@@ -72,7 +72,7 @@ def main():
                        "admin": "admin_approval", "partnership": "partnership", "no": "contact_sales"}
             d["gate_type"] = mapping.get(ss, "none")
 
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "merged_final.json")
+    out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "merged_final.json")
     json.dump({"generated": __import__("datetime").datetime.now().isoformat(),
                "count": len(rows), "rows": rows}, open(out, "w"), indent=1)
     print(f"Wrote {len(rows)} rows to {out}")

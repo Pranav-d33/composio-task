@@ -5,7 +5,7 @@ by category, most common blockers, easy wins vs outreach)."""
 import json, os
 from collections import Counter, defaultdict
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 rows = json.load(open(os.path.join(BASE, "data", "merged_final.json")))["rows"]
 
 def auth_dominance():

@@ -9,7 +9,7 @@ reconciliation). We score BOTH passes against this single reference:
 """
 import json, os, glob
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 pass1 = {r["num"]: r for r in json.load(open(os.path.join(BASE, "data", "pass1_baseline.json")))}
 rows = {r["num"]: r for r in json.load(open(os.path.join(BASE, "data", "merged_final.json")))["rows"]}
 verif = {}

@@ -4,7 +4,7 @@ Updates data/patterns.json with blocker_breakdown."""
 import json, os
 from collections import Counter
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 rows = json.load(open(os.path.join(BASE, "data", "merged_final.json")))["rows"]
 
 def classify(r):

@@ -8,7 +8,7 @@ import requests
 
 from scrapling.fetchers import DynamicFetcher as Fetcher
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(BASE, "data", "raw_docs")
 APPS = json.load(open(os.path.join(BASE, "data", "apps_input.json")))
 

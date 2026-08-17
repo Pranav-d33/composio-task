@@ -2,7 +2,7 @@
 """Stratified sample: max 2 per category, mix of confidence + verdicts, include hard ones."""
 import json, random, os
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 rows = json.load(open(os.path.join(BASE, "data", "merged_final.json")))["rows"]
 by_num = {r["num"]: r for r in rows}
 

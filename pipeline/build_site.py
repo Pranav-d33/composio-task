@@ -2,7 +2,7 @@
 """Build the self-contained HTML case study (first-person, skimmable) by injecting site_data.json."""
 import json, os, html as h
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 data = json.load(open(os.path.join(BASE, "site_data.json")))
 DATA_JSON = json.dumps(data)
 p = data["patterns"]

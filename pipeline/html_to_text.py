@@ -3,7 +3,7 @@
 import os, re, json
 from bs4 import BeautifulSoup
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(BASE, "data", "raw_docs")
 OUT = os.path.join(BASE, "data", "text")
 os.makedirs(OUT, exist_ok=True)

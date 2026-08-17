@@ -2,7 +2,13 @@
 __pycache__/
 *.pyc
 .DS_Store
+*.local.json
+
+# large cached research artifacts (regenerable)
 data/raw_docs/
 data/text/
 data/pass1_baseline.json
-/tmp/.playwright-mcp
+data/composio_coverage.json
+
+# browser tooling scratch
+.playwright-mcp/

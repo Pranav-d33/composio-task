@@ -7,7 +7,7 @@ Each app writes data/verification/NN_name.json with per-field checks.
 import json, os, sys, glob
 from collections import Counter
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAMPLE = json.load(open(os.path.join(BASE, "data", "verification_sample.json")))
 ROWS = json.load(open(os.path.join(BASE, "data", "merged_final.json")))["rows"]
 by_num = {r["num"]: r for r in ROWS}

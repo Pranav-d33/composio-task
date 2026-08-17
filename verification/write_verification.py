@@ -5,7 +5,7 @@ Each record logs per-field agreement (correct/wrong/unknown) with evidence notes
 """
 import json, os
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTDIR = os.path.join(BASE, "data", "verification")
 os.makedirs(OUTDIR, exist_ok=True)
 

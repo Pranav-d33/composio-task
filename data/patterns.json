@@ -200,21 +200,25 @@
   "none": 20
  },
  "mcp_by_category": {
-  "Support and Helpdesk": {
-   "false": 6,
-   "true": 4
+  "Communications and Messaging": {
+   "true": 4,
+   "false": 6
   },
-  "AI, Research and Media-native": {
-   "false": 4,
-   "true": 6
+  "Productivity and Project Management": {
+   "true": 4,
+   "false": 6
+  },
+  "Developer, Infra and Data platforms": {
+   "true": 4,
+   "false": 6
   },
   "Data, SEO and Scraping": {
    "false": 4,
    "true": 6
   },
-  "Finance and Fintech": {
-   "true": 3,
-   "false": 7
+  "Support and Helpdesk": {
+   "false": 6,
+   "true": 4
   },
   "CRM and Sales": {
    "true": 7,
@@ -223,21 +227,17 @@
   "Marketing, Ads, Email and Social": {
    "false": 10
   },
+  "Finance and Fintech": {
+   "true": 3,
+   "false": 7
+  },
   "Ecommerce": {
    "true": 2,
    "false": 8
   },
-  "Productivity and Project Management": {
-   "true": 4,
-   "false": 6
-  },
-  "Communications and Messaging": {
-   "true": 4,
-   "false": 6
-  },
-  "Developer, Infra and Data platforms": {
-   "true": 4,
-   "false": 6
+  "AI, Research and Media-native": {
+   "false": 4,
+   "true": 6
   }
  },
  "easy_wins": [
