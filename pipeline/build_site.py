@@ -721,4 +721,9 @@ out = os.path.join(BASE, "site", "index.html")
 os.makedirs(os.path.dirname(out), exist_ok=True)
 with open(out, "w") as f:
     f.write(html)
-print("Wrote", out, len(html), "bytes")
+# Also write a copy at the repo root so GitHub Pages (which serves the repo root)
+# serves the case study directly instead of falling back to README.md.
+root_out = os.path.join(BASE, "index.html")
+with open(root_out, "w") as f:
+    f.write(html)
+print("Wrote", out, "and", root_out, len(html), "bytes")
