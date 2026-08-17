@@ -1,220 +1,154 @@
 #!/usr/bin/env python3
-"""Analyze Composio toolkit coverage for 100 apps."""
+"""Correct Composio toolkit coverage audit.
 
+Uses `composio dev toolkits list --query <app>` — the authoritative catalog
+query — to determine whether Composio has a native toolkit for each app.
+Unlike `composio search` (a fuzzy tool finder that returns unrelated tools),
+this only matches real toolkit slugs by name.
+
+Output: data/composio_coverage.json with a per-app record:
+  found (bool), toolkit (slug), tools_count (int), description
+A record is also written to data/composio_coverage.json.
+"""
 import json
 import os
 import subprocess
 import sys
-from pathlib import Path
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Read the apps input
 with open(os.path.join(BASE, "data", "apps_input.json")) as f:
     data = json.load(f)
 
-# Flatten all apps
 all_apps = []
 for category in data["categories"]:
     for app in category["apps"]:
         all_apps.append(app)
 
-print(f"Analyzing {len(all_apps)} apps...\n", file=sys.stderr)
+print(f"Analyzing {len(all_apps)} apps via 'composio dev toolkits list'...\n", file=sys.stderr)
 
 coverage = []
 
 for i, app in enumerate(all_apps, 1):
     app_name = app["name"]
     num = app["num"]
-    hint = app.get("hint", "")
+    query = app_name.split(" (")[0].split(" (")[0]  # strip parenthetical hints
 
-    print(f"[{i:3d}/100] Searching for {app_name}...", file=sys.stderr, end=" ", flush=True)
+    print(f"[{i:3d}/100] {app_name} ... ", file=sys.stderr, end="", flush=True)
 
-    # Build the search query
-    query = f"use {app_name} API to read, create and update its main objects"
+    # Use the full app name as the query (multi-word matches better).
+    # Strip parenthetical hints, TLDs, and normalize known aliases.
+    q = app_name
+    if " (" in q:
+        q = q.split(" (")[0]
+    q = q.replace(".com", "").replace(".io", "").replace(".ai", "")
+    # known slug aliases where the name doesn't map to the slug
+    alias = {
+        "Salesforce Commerce Cloud": "salesforce",
+        "Salesforce": "salesforce",
+        "Magento": "magento",
+        "Monday.com": "monday",
+        "WhatsApp Business": "whatsapp",
+        "Google Ads": "google ads",
+        "Meta Ads": "meta ads",
+        "LinkedIn Ads": "linkedin",
+        "NotebookLM": "notebook lm",
+        "Zoho CRM": "zoho",          # Composio ships a shared 'zoho' toolkit
+        "YouTube Transcript": "youtube transcript",
+        "Salesforce": "salesforce",
+    }
+    q = alias.get(app_name.split(" (")[0], q)
 
     try:
-        # Search for the app
         result = subprocess.run(
-            ["composio", "search", query, "--limit", "10"],
+            ["composio", "dev", "toolkits", "list", "--query", q, "--limit", "20"],
             capture_output=True,
             text=True,
-            timeout=30
+            timeout=60,
         )
-
         if result.returncode != 0:
             print(f"ERROR (code {result.returncode})", file=sys.stderr)
             coverage.append({
-                "num": num,
-                "app": app_name,
-                "found": False,
-                "toolkit": None,
-                "tool_count": 0,
-                "sample_tools": [],
-                "auth": [],
-                "notes": f"search failed: {result.stderr[:100]}"
+                "num": num, "app": app_name, "found": False, "toolkit": None,
+                "tools_count": 0, "description": "",
+                "notes": f"command failed: {result.stderr[:80]}",
             })
             continue
 
-        search_data = json.loads(result.stdout)
-        results = search_data.get("results", [])
-
+        results = json.loads(result.stdout)
         if not results:
             print("NOT FOUND", file=sys.stderr)
             coverage.append({
-                "num": num,
-                "app": app_name,
-                "found": False,
-                "toolkit": None,
-                "tool_count": 0,
-                "sample_tools": [],
-                "auth": [],
-                "notes": "no matching toolkit"
+                "num": num, "app": app_name, "found": False, "toolkit": None,
+                "tools_count": 0, "description": "", "notes": "no native toolkit",
             })
             continue
 
-        # Use the first/best result
-        best_result = results[0]
-        toolkits = best_result.get("toolkits", [])
+        # Score: prefer an exact slug or name match on the cleaned app name.
+        # Strong match = the toolkit slug/name equals the app name or contains
+        # the app name as a whole token. Weak/partial matches are rejected.
+        app_l = q.lower().replace(".", "").replace("/", " ")
+        app_keywords = [w for w in app_l.replace("_", " ").split() if len(w) > 2]
 
-        if not toolkits:
-            print("NOT FOUND (no toolkits)", file=sys.stderr)
+        def score(t):
+            s = (t.get("slug", "") + " " + t.get("name", "")).lower()
+            # exact slug equality is the strongest signal
+            if t.get("slug", "").lower() in (app_l, app_l.replace(" ", "_")):
+                return 3
+            # full name appears in the toolkit name/slug
+            if app_l in s:
+                return 2
+            # all distinctive keywords present
+            if app_keywords and all(k in s for k in app_keywords):
+                return 2
+            # half the keywords present (partial, treated as weak)
+            hits = sum(1 for k in app_keywords if k in s)
+            if app_keywords and hits >= max(1, len(app_keywords) - 1):
+                return 1
+            return 0
+
+        scored = [(score(t), t) for t in results]
+        best = max(scored, key=lambda x: x[0]) if scored else (0, None)
+        s, best_toolkit = best
+        if s < 2 or best_toolkit is None:
+            # only exact/strong matches count as "found"
+            print(f"NO STRONG MATCH (closest={best_toolkit.get('slug') if best_toolkit else None})", file=sys.stderr)
             coverage.append({
-                "num": num,
-                "app": app_name,
-                "found": False,
-                "toolkit": None,
-                "tool_count": 0,
-                "sample_tools": [],
-                "auth": [],
-                "notes": "search returned no toolkits"
+                "num": num, "app": app_name, "found": False, "toolkit": None,
+                "tools_count": 0, "description": "",
+                "notes": f"closest was {best_toolkit.get('slug') if best_toolkit else None} but no strong match",
             })
             continue
 
-        primary_toolkit = toolkits[0]
-
-        # Get tool information for this toolkit
-        tools_result = subprocess.run(
-            ["composio", "search", query, "--toolkits", primary_toolkit, "--limit", "100"],
-            capture_output=True,
-            text=True,
-            timeout=30
-        )
-
-        if tools_result.returncode == 0:
-            tools_data = json.loads(tools_result.stdout)
-            tool_results = tools_data.get("results", [])
-
-            # Count unique tools across all results for this toolkit
-            all_tool_slugs = set()
-            sample_tools = []
-
-            for result in tool_results:
-                if result.get("toolkits") == [primary_toolkit] or primary_toolkit in result.get("toolkits", []):
-                    primary = result.get("primary_tool_slugs", [])
-                    related = result.get("related_tool_slugs", [])
-
-                    for tool in primary:
-                        all_tool_slugs.add(tool)
-                        if len(sample_tools) < 2:
-                            sample_tools.append(tool)
-
-                    for tool in related:
-                        all_tool_slugs.add(tool)
-                        if len(sample_tools) < 5:
-                            sample_tools.append(tool)
-
-            tool_count = len(all_tool_slugs)
-
-            if tool_count == 0:
-                # Fallback: count from first result
-                tool_count = len(best_result.get("primary_tool_slugs", [])) + len(best_result.get("related_tool_slugs", []))
-                sample_tools = best_result.get("primary_tool_slugs", [])[:2] + best_result.get("related_tool_slugs", [])[:3]
-        else:
-            tool_count = len(best_result.get("primary_tool_slugs", [])) + len(best_result.get("related_tool_slugs", []))
-            sample_tools = best_result.get("primary_tool_slugs", [])[:2] + best_result.get("related_tool_slugs", [])[:3]
-
-        # Try to extract auth methods (not directly available, so we'll mark as unknown)
-        auth_methods = ["OAUTH2", "API_KEY"]  # Common patterns
-
-        print(f"FOUND ({primary_toolkit}, {tool_count} tools)", file=sys.stderr)
-
+        print(f"FOUND {best_toolkit.get('slug')} ({best_toolkit.get('tools_count')} tools)", file=sys.stderr)
         coverage.append({
-            "num": num,
-            "app": app_name,
-            "found": True,
-            "toolkit": primary_toolkit,
-            "tool_count": tool_count,
-            "sample_tools": sample_tools[:5],
-            "auth": auth_methods,
-            "notes": ""
+            "num": num, "app": app_name, "found": True,
+            "toolkit": best_toolkit.get("slug"),
+            "tools_count": best_toolkit.get("tools_count", 0),
+            "description": best_toolkit.get("description", ""),
+            "notes": "",
         })
-
     except subprocess.TimeoutExpired:
         print("TIMEOUT", file=sys.stderr)
         coverage.append({
-            "num": num,
-            "app": app_name,
-            "found": False,
-            "toolkit": None,
-            "tool_count": 0,
-            "sample_tools": [],
-            "auth": [],
-            "notes": "search timeout"
-        })
-    except json.JSONDecodeError as e:
-        print(f"JSON ERROR: {e}", file=sys.stderr)
-        coverage.append({
-            "num": num,
-            "app": app_name,
-            "found": False,
-            "toolkit": None,
-            "tool_count": 0,
-            "sample_tools": [],
-            "auth": [],
-            "notes": f"json decode error: {str(e)[:50]}"
+            "num": num, "app": app_name, "found": False, "toolkit": None,
+            "tools_count": 0, "description": "", "notes": "timeout",
         })
     except Exception as e:
-        print(f"ERROR: {e}", file=sys.stderr)
+        print(f"ERROR {e}", file=sys.stderr)
         coverage.append({
-            "num": num,
-            "app": app_name,
-            "found": False,
-            "toolkit": None,
-            "tool_count": 0,
-            "sample_tools": [],
-            "auth": [],
-            "notes": f"error: {str(e)[:50]}"
+            "num": num, "app": app_name, "found": False, "toolkit": None,
+            "tools_count": 0, "description": "", "notes": f"error: {str(e)[:60]}",
         })
 
-# Write the coverage file
-output_path = Path(BASE) / "data" / "composio_coverage.json"
-output_path.parent.mkdir(parents=True, exist_ok=True)
-
-with open(output_path, "w") as f:
+out_path = os.path.join(BASE, "data", "composio_coverage.json")
+with open(out_path, "w") as f:
     json.dump(coverage, f, indent=2)
 
-print(f"\nCoverage analysis complete. Results saved to {output_path}", file=sys.stderr)
+print(f"\nCoverage analysis complete. Results saved to {out_path}", file=sys.stderr)
 
-# Print summary
-found_count = sum(1 for item in coverage if item["found"])
-not_found_count = len(coverage) - found_count
-
+found = sum(1 for c in coverage if c["found"])
 print(f"\n=== SUMMARY ===", file=sys.stderr)
 print(f"Total apps: {len(coverage)}", file=sys.stderr)
-print(f"Found: {found_count} ({100*found_count/len(coverage):.1f}%)", file=sys.stderr)
-print(f"Not found: {not_found_count} ({100*not_found_count/len(coverage):.1f}%)", file=sys.stderr)
-
-# Print top toolkits by tool count
-toolkit_stats = {}
-for item in coverage:
-    if item["found"]:
-        toolkit = item["toolkit"]
-        if toolkit not in toolkit_stats:
-            toolkit_stats[toolkit] = {"count": 0, "tools": 0}
-        toolkit_stats[toolkit]["count"] += 1
-        toolkit_stats[toolkit]["tools"] += item["tool_count"]
-
-print(f"\nTop toolkits by app coverage:", file=sys.stderr)
-for toolkit, stats in sorted(toolkit_stats.items(), key=lambda x: x[1]["count"], reverse=True)[:10]:
-    print(f"  {toolkit}: {stats['count']} apps, {stats['tools']} total tools", file=sys.stderr)
+print(f"Native toolkit found: {found} ({100*found/len(coverage):.1f}%)", file=sys.stderr)
+print(f"No native toolkit: {len(coverage)-found} ({100*(len(coverage)-found)/len(coverage):.1f}%)", file=sys.stderr)
