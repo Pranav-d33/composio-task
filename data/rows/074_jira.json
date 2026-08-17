@@ -1,0 +1,34 @@
+{
+  "num": 74,
+  "app": "Jira",
+  "category": "Project Management",
+  "one_line": "Issue tracking and agile project management by Atlassian.",
+  "auth_methods": ["OAuth2 (3LO)", "API Token (Basic Auth)", "JWT (Connect apps)"],
+  "auth_notes": "OAuth 2.0 authorization-code grants (3LO) for apps; basic auth with an API token for scripts/ad-hoc calls; Forge/Connect apps use scopes and JWT. Text confirms all auth paths.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free plan for small teams (up to 10 users), then paid Standard/Premium. API tokens are self-service from the user profile.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "REST API v3 with hundreds of resources: issues, projects, workflows, fields, users, JQL search, dashboards, permissions, audits, webhooks.",
+    "webhooks": true,
+    "webhook_note": "Dedicated webhooks resource for issue/project/workflow events."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community Jira MCP servers exist; official Atlassian MCP not confirmed."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developer.atlassian.com/cloud/jira",
+    "note": "Fetched text is the Jira Cloud REST API v3 reference confirming auth modes, very broad resource list, pagination, and webhooks."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API token + site URL is the fastest path for a solo dev; OAuth for multi-user apps."
+}

@@ -1,0 +1,34 @@
+{
+  "num": 89,
+  "app": "Ramp",
+  "category": "Corporate Cards / Spend Management",
+  "one_line": "Corporate spend and expense management platform with a REST API for transactions, reimbursements, vendors, cards, and accounting exports.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "API keys issued from the Ramp dashboard; requires an active Ramp business account (corporate card/expense product, paid). API access is gated behind account onboarding and approval.",
+  "self_serve": "paid",
+  "self_serve_notes": "Requires a Ramp account — no free API tier. Credentials are self-issuable from the dashboard once the org is approved, but company signup/underwriting is required.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Roughly 50-100 endpoints covering transactions, reimbursements, entities/vendors, cards, limits, accounting sync, and webhook subscriptions.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported for transaction and other spend events."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MCP servers for Ramp exist; no confirmed official MCP."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://docs.ramp.com",
+    "note": "No fetched text file existed for this app; facts from domain knowledge. Docs URL confirmed reachable via curl."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API-key auth and webhook support from knowledge of Ramp docs; account gating makes it buildable_with_work rather than buildable_today."
+}

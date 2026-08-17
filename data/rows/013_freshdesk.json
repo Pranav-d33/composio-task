@@ -1,0 +1,34 @@
+{
+  "num": 13,
+  "app": "Freshdesk",
+  "category": "Customer Support / Helpdesk",
+  "one_line": "Cloud helpdesk with a comprehensive REST API (v2) covering tickets, contacts, conversations, solutions, and admin objects.",
+  "auth_methods": ["API key"],
+  "auth_notes": "API key authenticates via HTTP basic auth (API key as the password); per-product APIs (Freshdesk, Freshsales, etc. each have their own). Full v2 API at /api/v2 with rate limits per hour.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier (Sprout) exists; API key is self-serve from account settings in any Freshdesk account.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Tickets, contacts, agents, companies, conversations, solutions, surveys, products, ticket fields, time entries, satisfaction ratings",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported in Freshdesk automations for ticket/contact events"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Freshdesk MCP server found; community servers exist on GitHub/MCP registry"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developers.freshdesk.com/api/",
+    "note": "Fetched text was the full Freshdesk API reference (26k+ lines) confirming endpoints, auth, and rate limits"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Full API reference fetched; only webhook and MCP details are from knowledge rather than the fetched page."
+}

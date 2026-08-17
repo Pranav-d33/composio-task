@@ -1,0 +1,34 @@
+{
+  "num": 99,
+  "app": "YouTube Transcript",
+  "category": "YouTube Data / Transcription",
+  "one_line": "Paid REST API and MCP for YouTube transcripts, search, channels, and playlists at scale.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "Bearer API key (sk_...) from transcriptapi.com/signup; 100 free credits with no card required",
+  "self_serve": "trial",
+  "self_serve_notes": "Self-serve signup with 100 free credits; then $5/mo (1,000 credits) with paid top-ups",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Transcript, YouTube search, channel search, channel videos, latest uploads (RSS), playlist videos, info endpoints",
+    "webhooks": false,
+    "webhook_note": "No webhooks; free RSS 'track new uploads' endpoint instead"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Official MCP server at https://transcriptapi.com/mcp (HTTP transport) plus agent skills for Claude/ChatGPT/Cursor"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://transcriptapi.com",
+    "note": "fetched text (full docs page with API examples, pricing, MCP setup)"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Docs complete; API key + REST + MCP all confirmed from fetched text"
+}

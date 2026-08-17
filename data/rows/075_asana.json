@@ -1,0 +1,34 @@
+{
+  "num": 75,
+  "app": "Asana",
+  "category": "Project Management",
+  "one_line": "Work management platform for teams to plan and track projects and tasks.",
+  "auth_methods": ["OAuth2", "Personal Access Token (PAT)"],
+  "auth_notes": "REST API; PAT or service-account tokens for org-internal testing, OAuth for distributed apps; app registration in the developer console; apps private by default.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free Basic tier exists, then paid Starter/Advanced; PATs are self-service in the developer console; paid-feature testing needs a requested developer sandbox.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Tasks, projects, sections, portfolios, goals, users, workspaces, stories, attachments, webhooks, time tracking.",
+    "webhooks": true,
+    "webhook_note": "Webhooks for reacting to task/project changes."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community Asana MCP servers exist; official Asana MCP not confirmed."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developers.asana.com/docs",
+    "note": "Fetched 'Build an app with Asana' page confirms REST API, PAT vs OAuth, webhooks, and developer console flow."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Embedded API explorer and free account make first call fast; advanced features gated to paid tiers."
+}

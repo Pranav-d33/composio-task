@@ -1,0 +1,34 @@
+{
+  "num": 98,
+  "app": "Mermaid CLI",
+  "category": "Developer Tools / Diagramming",
+  "one_line": "Open-source command-line tool that converts Mermaid diagram definitions into SVG, PNG, or PDF files.",
+  "auth_methods": ["None"],
+  "auth_notes": "Not a SaaS; local open-source tool (npm @mermaid-js/mermaid-cli) — no accounts, no API keys, no hosted service",
+  "self_serve": "yes",
+  "self_serve_notes": "Free MIT-licensed open source; install via npm, Docker, or npx",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["None"],
+    "breadth": "narrow",
+    "breadth_estimate": "No web API; local CLI (mmdc) plus a Node.js run() API; Docker image available",
+    "webhooks": false,
+    "webhook_note": "N/A — local tool"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No MCP server; it is a local CLI tool (mermaid-js/mermaid-cli GitHub repo)"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://github.com/mermaid-js/mermaid-cli",
+    "note": "fetched text (GitHub README); local CLI, no auth or REST API"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Not a SaaS API — must be executed locally; integrate via subprocess or Node.js API"
+}

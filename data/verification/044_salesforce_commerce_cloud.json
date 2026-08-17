@@ -1,0 +1,13 @@
+{
+ "num": 44,
+ "app": "Salesforce Commerce Cloud",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "OCAPI/REST+GraphQL via OAuth2/JWT; enterprise-only, no self-serve credentials; blocked. Confirmed via browser fetch.",
+ "method": "browser fetch"
+}

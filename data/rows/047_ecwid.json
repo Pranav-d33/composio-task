@@ -1,0 +1,34 @@
+{
+  "num": 47,
+  "app": "Ecwid",
+  "category": "E-commerce",
+  "one_line": "E-commerce platform (now Lightspeed) whose REST API manages products, orders, customers, categories, discounts and store settings.",
+  "auth_methods": ["OAuth2", "API Key"],
+  "auth_notes": "OAuth2 for public apps or permanent access token for private apps; store id + token used as Bearer on api.ecwid.com endpoints; JS API for storefront cart/checkout events.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free Ecwid plan (up to 5 products) + free dev app registration; a dev can create a store and app, then request a permanent access token without paying.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "broad",
+    "breadth_estimate": "REST API covering products, categories, orders, customers, discounts/coupons, store profile, payment/shipping methods, invoices; GraphQL for storefront data; plus JS API and webhooks",
+    "webhooks": true,
+    "webhook_note": "Webhooks for product, order, category and profile events delivered to HTTPS endpoints"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official Ecwid MCP server found; community servers not verified"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://api-docs.ecwid.com",
+    "note": "Fetched text confirms Ecwid app API (public/private apps, OAuth flow, webhooks, JS API, storefront/API docs at api-docs.ecwid.com); token details from knowledge"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page is a docs index; free plan + permanent access token makes first call fast. Auth is simple."
+  }

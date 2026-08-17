@@ -1,0 +1,34 @@
+{
+  "num": 85,
+  "app": "iPayX",
+  "category": "Payments",
+  "one_line": "iPayX Protocol is a FINTRAC-registered FX verification/forensic audit tool that compares applied bank FX rates against mid-market rates — appears to be a consumer web app with no documented public API.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "Auth method unverified. Likely API-key based if any API exists, but no public developer documentation, auth spec, or endpoint list was found.",
+  "self_serve": "no",
+  "self_serve_notes": "No public developer signup or credential issuance found; docs page is marketing copy with only a contact email.",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Unknown — no public API reference documented; the docs page (ipayx.ai/docs) contains only marketing text and links.",
+    "webhooks": false,
+    "webhook_note": "Webhooks not documented."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No MCP server found for iPayX."
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "Insufficient public information: ipayx.ai/docs is marketing content only with no API endpoints, auth scheme, or developer portal. Cannot build against an undocumented surface.",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://ipayx.ai/docs",
+    "note": "Fetched text returned a 404 page; curl of ipayx.ai/docs confirmed the page is marketing copy (FX audit tool) with no API documentation."
+  },
+  "confidence": "low",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "May simply be a consumer product without an API at all; verify with the vendor before investing."
+}

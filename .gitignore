@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/raw_docs/
+data/text/
+data/pass1_baseline.json
+/tmp/.playwright-mcp

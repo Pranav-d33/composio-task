@@ -1,0 +1,13 @@
+{
+ "num": 7,
+ "app": "Zoho CRM",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "unknown",
+  "verdict": "correct"
+ },
+ "notes": "OAuth2; free trial; broad REST v6; webhooks. Official Zoho MCP exists (released 2025) but not verifiable from fetched thin text.",
+ "method": "knowledge (thin docs)"
+}

@@ -1,0 +1,34 @@
+{
+  "num": 55,
+  "app": "Apify",
+  "category": "Web Scraping",
+  "one_line": "Web scraping and automation platform with an actor marketplace, run via a REST API or SDK clients.",
+  "auth_methods": ["API Token"],
+  "auth_notes": "Personal API token from the Apify dashboard sent as 'Authorization: Bearer <token>'; token scoped to the user account",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier with monthly usage credits, then usage-based paid plans; API token self-serve from dashboard, no approval needed",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Full platform API (api.apify.com/v2): actors, tasks, runs, datasets, key-value stores, request queues, schedules, webhooks, storages; complete OpenAPI schema published",
+    "webhooks": true,
+    "webhook_note": "Actor run finished/failed webhooks documented; also has real-time events and webhook settings per actor"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Apify MCP server exists (knowledge); fetched text confirms REST API, OpenAPI schema and official client libraries for JS/Python/Go"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.apify.com",
+    "note": "fetched text confirms Bearer token auth, REST API v2, OpenAPI spec and API clients"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Very well-documented API; free tier makes first call trivial."
+}

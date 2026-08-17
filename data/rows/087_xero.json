@@ -1,0 +1,34 @@
+{
+  "num": 87,
+  "app": "Xero",
+  "category": "Accounting",
+  "one_line": "Online accounting software with a very broad REST API covering accounting, payroll, files, projects, bank feeds, and assets.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth 2.0 with scopes via the Xero developer portal; app registration (private/public/partner) required. Requires a Xero organisation (free trial then paid) to access real data; some scopes need additional approval.",
+  "self_serve": "trial",
+  "self_serve_notes": "App registration is self-serve and the sandbox is free; a Xero trial/paid organisation is required for live data, and certain scopes are gated behind approval.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "1000+ endpoints across Accounting API, Payroll (AU/NZ/UK/US), Files, Projects, Assets, Bank Feeds, and Xero HQ.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported with event categories and signed payloads."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MCP servers for Xero exist; no official MCP published by Xero."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.xero.com",
+    "note": "No fetched text file existed for this app; facts from domain knowledge. Docs URL confirmed reachable via curl."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "OAuth flow well-documented; friction is app registration plus paid/trial organisation and scope approvals."
+}

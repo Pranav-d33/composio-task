@@ -1,0 +1,34 @@
+{
+  "num": 2,
+  "app": "HubSpot",
+  "category": "CRM / Marketing, Sales & Service Platform",
+  "one_line": "All-in-one CRM platform (marketing, sales, service, CMS) with a broad REST API and date-based versioning.",
+  "auth_methods": ["OAuth2", "API key"],
+  "auth_notes": "OAuth2 for public/private apps with scoped tokens; private apps provide self-serve personal access keys (API keys) created in the HubSpot account. New API versioning is date-based (e.g. /crm/objects/2026-03/contacts) at api.hubapi.com.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free CRM tier exists; private app tokens are fully self-serve for any HubSpot account, no approval needed.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across CRM objects, marketing, sales, service, CMS, events, and messaging APIs",
+    "webhooks": true,
+    "webhook_note": "Webhook subscriptions supported for CRM object and event streams (contacts, companies, deals, etc.)"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official HubSpot MCP server exists (github.com/HubSpot/hubspot-mcp); multiple community servers too"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developers.hubspot.com/docs",
+    "note": "Fetched text confirmed API root, date-based versioning (2026-03) and endpoints; auth details from knowledge"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page confirmed versioning model only; OAuth/private-app token and MCP details from knowledge. Solid, low-friction integration target."
+}

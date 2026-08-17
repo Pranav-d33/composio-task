@@ -1,0 +1,34 @@
+{
+  "num": 69,
+  "app": "Datadog",
+  "category": "Observability",
+  "one_line": "Cloud monitoring and observability platform for metrics, logs, APM, dashboards, and alerts.",
+  "auth_methods": ["API Key", "Application Key", "OAuth2"],
+  "auth_notes": "REST API requires an API key (client identity) plus an application key (permission scope); OAuth2 for app integrations; personal access tokens and service account tokens also exist. Docs list 'API and Application Keys' and 'OAuth2 in Datadog'.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free tier plus 14-day free trial; then paid plans. Keys are self-service in the UI.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across metrics, logs, APM, monitors, dashboards, events, security, workflows, synthetics, CI visibility.",
+    "webhooks": true,
+    "webhook_note": "Webhook integrations for alerting/events; workflow automation actions."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Datadog docs themselves list 'MCP Server' and 'MCP Tools' sections (Feature Flags, Experiments, Security, AI Observability MCPs)."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.datadoghq.com/api",
+    "note": "Fetched text is the full API reference navigation confirming very broad REST surface, API/application keys, OAuth2, and MCP tools."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "None. Official MCP presence confirmed directly in fetched docs navigation."
+}

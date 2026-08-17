@@ -1,0 +1,34 @@
+{
+  "num": 90,
+  "app": "PitchBook",
+  "category": "Financial Data / Market Intelligence",
+  "one_line": "Private market data and analytics platform whose Research API provides programmatic access to company, deal, fund, investor, and document data.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "PitchBook Research API uses an API token/bearer credential, but access is only granted via an enterprise partnership/subscription with PitchBook — no public self-serve registration.",
+  "self_serve": "partnership",
+  "self_serve_notes": "No self-serve developer signup. API access requires a commercial partnership/subscription negotiated with PitchBook sales (enterprise accounts).",
+  "gate_type": "partnership",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Endpoints for companies, deals, funds, investors, persons, and documents in the private markets domain.",
+    "webhooks": false,
+    "webhook_note": "Webhooks not documented for the Research API."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No MCP server found for the PitchBook API."
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "No public self-serve access; the Research API is only available through an enterprise partnership/subscription with PitchBook sales.",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://pitchbook.com/products/research-api",
+    "note": "Fetched text returned a 404 page (site renders behind bot protection; curl returned 403). Product page knowledge indicates partnership-gated API."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Page fetch blocked by bot protection; partnership-gating is well-established domain knowledge for PitchBook data access."
+}

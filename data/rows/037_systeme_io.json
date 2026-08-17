@@ -1,0 +1,34 @@
+{
+  "num": 37,
+  "app": "systeme.io",
+  "category": "Marketing / Funnel Builder",
+  "one_line": "All-in-one funnel builder, email marketing, and online-course platform with a REST API for contacts, funnels, and campaigns.",
+  "auth_methods": ["API key"],
+  "auth_notes": "Auth is an API key generated in account profile settings under 'Public API keys', sent as the X-API-Key header. No OAuth currently (docs state API key is the only auth method). Server-side calls recommended to avoid exposing the key.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free plan exists; API keys generated self-serve in the dashboard. Some endpoints/features may require a paid plan; no approval process.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "~40 resources: contacts, tags, funnels/funnel steps, campaigns/newsletters, automation rules, booking calendar, courses/enrollments, subscriptions, coupons, webhooks, SMS templates",
+    "webhooks": true,
+    "webhook_note": "Webhook resource for creating and managing webhook subscriptions"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official or community MCP server found for systeme.io."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.systeme.io/",
+    "note": "Fetched text was a thin help-center shell; API existence and X-API-Key auth verified via curl of api.systeme.io / developer.systeme.io"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API is real and documented (OpenAPI available via developer.systeme.io/llms.txt); uncertainty is whether free plan gets API keys and full endpoint access."
+}

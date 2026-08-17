@@ -1,0 +1,13 @@
+{
+ "num": 90,
+ "app": "PitchBook",
+ "checks": {
+  "auth_methods": "wrong",
+  "self_serve": "correct",
+  "api_surface": "unknown",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "Research API is enterprise/partnership-gated; no public auth docs. Agent guessed 'API Key' \u2014 wrong (not verifiable). Blocked correct.",
+ "method": "browser fetch"
+}

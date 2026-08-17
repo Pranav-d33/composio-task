@@ -1,0 +1,13 @@
+{
+ "num": 50,
+ "app": "fanbasis",
+ "checks": {
+  "auth_methods": "unknown",
+  "self_serve": "correct",
+  "api_surface": "unknown",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "Platform rebranded (Commas); no public docs/API found; enterprise-gated. Blocked verdict correct; auth/API surface unknown (honest).",
+ "method": "browser fetch + search"
+}

@@ -1,0 +1,34 @@
+{
+  "num": 100,
+  "app": "Grain",
+  "category": "AI Meeting Notetakers / Meeting Intelligence",
+  "one_line": "AI meeting notetaker that captures, transcribes, and enriches meetings for teams and AI agents.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 for API access; MCP server and API let agents query transcripts, search meetings, and read full meeting history",
+  "self_serve": "trial",
+  "self_serve_notes": "Free forever plan and 14-day free trial; API/MCP access likely tied to account/paid seats (uncertain)",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Transcripts, meetings, search, Markdown export, CRM sync, clips/action items; MCP server",
+    "webhooks": false,
+    "webhook_note": "No webhooks documented"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Grain advertises 'MCP Server & API' on grain.com (fetched homepage); lets agents query transcripts and search meetings"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://grain.com",
+    "note": "fetched text (homepage mentions MCP Server & API, free plan, 14-day trial); OAuth per assignment hint"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "MCP/API existence confirmed from homepage; auth specifics (OAuth) and gating of API access not fully documented"
+}

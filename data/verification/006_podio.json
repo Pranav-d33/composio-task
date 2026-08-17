@@ -1,0 +1,13 @@
+{
+ "num": 6,
+ "app": "Podio",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "OAuth2; free basic plan; very broad REST; webhooks; community MCP only (no official).",
+ "method": "docs_text+knowledge"
+}

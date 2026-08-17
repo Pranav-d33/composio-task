@@ -1,0 +1,34 @@
+{
+  "num": 16,
+  "app": "LiveAgent",
+  "category": "Customer Support",
+  "one_line": "Omnichannel help desk and live chat platform with ticketing, knowledge base, social, and call center capabilities.",
+  "auth_methods": ["API key"],
+  "auth_notes": "REST API (v4) authenticated with API keys generated in the LiveAgent admin panel; no OAuth flow.",
+  "self_serve": "trial",
+  "self_serve_notes": "30-day free trial, then paid plans; API keys available to any account during trial. Docs/portal require login.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Tickets, agents, departments, users, conversations, calls, and related entities; tens of endpoints in API v4.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported in API v4 for ticket/conversation events."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official MCP server located; any community servers unverified."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://www.liveagent.com/api/",
+    "note": "Fetched text (016_liveagent.txt) was a 404 page but confirmed the 'new API v4' launch in product news; auth method from knowledge."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Docs page fetch failed (404). API v4 existence confirmed via product update text; webhook support inferred from knowledge."
+  }

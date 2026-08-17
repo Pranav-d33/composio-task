@@ -1,0 +1,34 @@
+{
+  "num": 42,
+  "app": "WooCommerce",
+  "category": "E-commerce",
+  "one_line": "Free, open-source WordPress e-commerce plugin with a REST API for managing products, orders, customers, and store data.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "REST API key = consumer key + consumer secret generated per user in the WordPress admin (WooCommerce > Settings > Advanced > REST API); authenticated via HTTP Basic Auth (key as username, secret as password) or OAuth 1.0a one-legged; also an application-auth endpoint for key exchange.",
+  "self_serve": "yes",
+  "self_serve_notes": "Fully free and self-serve: install WordPress + WooCommerce (open source), then generate consumer key/secret from the admin. Requires hosting the store yourself.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "v3 REST API with 30+ top-level resources (products, orders, customers, coupons, shipping, taxes, reports, webhooks, refunds, attributes, variations, etc.)",
+    "webhooks": true,
+    "webhook_note": "First-class webhooks resource; subscribe to order/product/customer lifecycle topics delivered to HTTPS endpoints"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official WooCommerce MCP server; multiple community MCP servers exist on GitHub/MCP registries"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://woocommerce.com/document/woocommerce-rest-api/",
+    "note": "Fetched text (full REST API docs) confirms consumer key/secret, HTTP Basic Auth, OAuth 1.0a, webhooks resource, REST API keys generation"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Self-hosted: a dev must stand up a WooCommerce store to get credentials, but it's free and un-gated. Auth is simple key-based."
+  }

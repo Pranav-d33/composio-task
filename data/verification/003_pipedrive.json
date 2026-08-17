@@ -1,0 +1,13 @@
+{
+ "num": 3,
+ "app": "Pipedrive",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "API token + OAuth2; free trial then paid; broad REST; webhooks; community MCP only.",
+ "method": "docs_text+knowledge"
+}

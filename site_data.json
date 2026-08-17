@@ -1,0 +1,3256 @@
+{
+ "meta": {
+  "title": "Composio AI Product Ops \u2014 Take-home Case Study",
+  "author": "Pranav Dhiran",
+  "generated": "2026-08-17T21:38:25.281673",
+  "total": 100
+ },
+ "rows": [
+  {
+   "num": 1,
+   "app": "Salesforce",
+   "category": "CRM and Sales",
+   "one_line": "Enterprise CRM and platform-as-a-service with an extremely broad set of APIs for managing accounts, contacts, leads, opportunities, and custom objects.",
+   "auth": [
+    "OAuth2",
+    "JWT",
+    "SOAP",
+    "API Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "SOAP",
+    "GraphQL"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developer.salesforce.com/docs",
+   "agent_notes": "Fetched page is marketing, not API docs; auth and MCP claims based on well-known platform knowledge. Very broad but requires Connected App setup."
+  },
+  {
+   "num": 2,
+   "app": "HubSpot",
+   "category": "CRM and Sales",
+   "one_line": "All-in-one CRM platform (marketing, sales, service, CMS) with a broad REST API and date-based versioning.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "medium",
+   "evidence": "https://developers.hubspot.com/docs",
+   "agent_notes": "Fetched page confirmed versioning model only; OAuth/private-app token and MCP details from knowledge. Solid, low-friction integration target."
+  },
+  {
+   "num": 3,
+   "app": "Pipedrive",
+   "category": "CRM and Sales",
+   "one_line": "Sales pipeline CRM with a RESTful API (v1 and v2) covering deals, leads, activities, projects, and reporting.",
+   "auth": [
+    "API Token",
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.pipedrive.com/docs/api/v1",
+   "agent_notes": "No official MCP found; verdict otherwise straightforward. API requires a paid/trial account for ongoing access."
+  },
+  {
+   "num": 4,
+   "app": "Attio",
+   "category": "CRM and Sales",
+   "one_line": "Highly customizable, data-driven CRM with a REST API, real-time webhooks, an app SDK, and native MCP support.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.attio.com",
+   "agent_notes": "Docs explicitly document MCP and webhooks; very buildable. Token vs OAuth details standard for modern SaaS."
+  },
+  {
+   "num": 5,
+   "app": "Twenty",
+   "category": "CRM and Sales",
+   "one_line": "Open-source, self-hostable CRM platform (React/TypeScript/PostgreSQL) with REST and GraphQL APIs and built-in agent/MCP support.",
+   "auth": [
+    "API Key",
+    "OAuth2",
+    "API Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://twenty.com/developers",
+   "agent_notes": "Fetched text confirms open-source, self-hostable, MCP. Endpoint specifics and webhook details not in the fetched page - based on knowledge."
+  },
+  {
+   "num": 6,
+   "app": "Podio",
+   "category": "CRM and Sales",
+   "one_line": "Customizable work-management platform (owned by Citrix) whose entire frontend is built on a fully exposed REST API with webhooks.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.podio.com",
+   "agent_notes": "No official MCP; everything else confirmed from fetched docs."
+  },
+  {
+   "num": 7,
+   "app": "Zoho CRM",
+   "category": "CRM and Sales",
+   "one_line": "Full-featured CRM by Zoho with a REST API (v6) covering sales, marketing, service, and custom modules.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://www.zoho.com/crm/developer/docs/api/v6/",
+   "agent_notes": "No text file fetched for this app - all fields from knowledge. OAuth client setup and developer edition provisioning add some setup time."
+  },
+  {
+   "num": 8,
+   "app": "Close",
+   "category": "CRM and Sales",
+   "one_line": "Inside-sales CRM with a full developer platform: REST API, OAuth2, webhooks/event log, and a first-party MCP server.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developer.close.com",
+   "agent_notes": "Fully confirmed from fetched text including first-party MCP server. Only friction is the paid plan requirement."
+  },
+  {
+   "num": 9,
+   "app": "Copper",
+   "category": "CRM and Sales",
+   "one_line": "Google-integrated CRM with a RESTful 'Developer API' (JSON) covering people, companies, opportunities, tasks, and leads.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developer.copper.com",
+   "agent_notes": "Fetched page focused on getting started/Postman; auth method specifics (API key header vs OAuth) from knowledge."
+  },
+  {
+   "num": 10,
+   "app": "DealCloud",
+   "category": "CRM and Sales",
+   "one_line": "Enterprise deal-management and investment CRM with a partner/enterprise REST API, Python SDK, and an announced MCP server.",
+   "auth": [
+    "API Key",
+    "API Token"
+   ],
+   "self_serve": "partnership",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "high",
+   "evidence": "https://api.docs.dealcloud.com",
+   "agent_notes": "Docs are excellent and MCP is officially coming, but credentials require an enterprise/partner relationship - main friction."
+  },
+  {
+   "num": 11,
+   "app": "Zendesk",
+   "category": "Support and Helpdesk",
+   "one_line": "Customer support platform with a very broad set of REST APIs across Support, Help Center, Talk, Chat, Sell, Messaging, and apps.",
+   "auth": [
+    "API Token",
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://developer.zendesk.com",
+   "agent_notes": "API breadth and products confirmed from fetched text. Needs a trial/paid account plus subdomain; no official MCP."
+  },
+  {
+   "num": 12,
+   "app": "Intercom",
+   "category": "Support and Helpdesk",
+   "one_line": "Customer service and engagement platform (help desk, messenger, tickets, AI) with REST APIs and a free development workspace.",
+   "auth": [
+    "OAuth2",
+    "API Token"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.intercom.com",
+   "agent_notes": "Free dev workspace makes first call fast. Official MCP existence is my only slight uncertainty."
+  },
+  {
+   "num": 13,
+   "app": "Freshdesk",
+   "category": "Support and Helpdesk",
+   "one_line": "Cloud helpdesk with a comprehensive REST API (v2) covering tickets, contacts, conversations, solutions, and admin objects.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.freshdesk.com/api/",
+   "agent_notes": "Full API reference fetched; only webhook and MCP details are from knowledge rather than the fetched page."
+  },
+  {
+   "num": 14,
+   "app": "Front",
+   "category": "Support and Helpdesk",
+   "one_line": "Shared inbox and customer communication platform for support teams, with a Core API giving comprehensive control over contacts, conversations, and messages.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://dev.frontapp.com",
+   "agent_notes": "Webhook support and MCP existence inferred from knowledge, not the fetched text."
+  },
+  {
+   "num": 15,
+   "app": "Pylon",
+   "category": "Support and Helpdesk",
+   "one_line": "Agentic B2B support platform that tracks customer issues across Slack, email, Microsoft Teams, chat widgets, and forms, and orchestrates AI agents to resolve them.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://docs.usepylon.com",
+   "agent_notes": "Text confirms B2B positioning and API/MCP existence but does not state the exact auth method or free-tier availability."
+  },
+  {
+   "num": 16,
+   "app": "LiveAgent",
+   "category": "Support and Helpdesk",
+   "one_line": "Omnichannel help desk and live chat platform with ticketing, knowledge base, social, and call center capabilities.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://www.liveagent.com/api/",
+   "agent_notes": "Docs page fetch failed (404). API v4 existence confirmed via product update text; webhook support inferred from knowledge."
+  },
+  {
+   "num": 17,
+   "app": "Plain",
+   "category": "Support and Helpdesk",
+   "one_line": "Modern B2B customer support platform with a GraphQL API that mirrors the full UI (no API limitations), plus an official MCP server.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "GraphQL"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://docs.plain.com",
+   "agent_notes": "Free-tier availability uncertain; webhook support inferred from knowledge."
+  },
+  {
+   "num": 18,
+   "app": "Help Scout",
+   "category": "Support and Helpdesk",
+   "one_line": "Help desk and shared-inbox platform with a Mailbox API (v2 current) covering conversations, customers, mailboxes, reports, workflows, and webhooks.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://developer.helpscout.com",
+   "agent_notes": "Fetched page was legacy v1 docs; v2 noted as current. OAuth2 support inferred from knowledge."
+  },
+  {
+   "num": 19,
+   "app": "Gorgias",
+   "category": "Support and Helpdesk",
+   "one_line": "Ecommerce-focused helpdesk that unifies email, chat, SMS, voice, and social channels with a REST API for tickets, customers, and automations.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developers.gorgias.com",
+   "agent_notes": "Thin fetched text; auth methods, webhooks, and plan details from knowledge of Gorgias docs."
+  },
+  {
+   "num": 20,
+   "app": "Gladly",
+   "category": "Support and Helpdesk",
+   "one_line": "Enterprise customer-service platform with a REST API, Lookup API, chat SDKs, and webhooks for building support integrations.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "no",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "medium",
+   "evidence": "https://developer.gladly.com",
+   "agent_notes": "Thin fetched text; exact auth method and credential self-service status inferred."
+  },
+  {
+   "num": 21,
+   "app": "Slack",
+   "category": "Communications and Messaging",
+   "one_line": "Team messaging and collaboration platform with a very broad REST API, Events API, webhooks, and Socket Mode for building bots and apps.",
+   "auth": [
+    "OAuth2",
+    "Bot Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://api.slack.com",
+   "agent_notes": "Fetched text is marketing-ish landing page; API surface and MCP evidence from strong prior knowledge."
+  },
+  {
+   "num": 22,
+   "app": "Twilio",
+   "category": "Communications and Messaging",
+   "one_line": "Cloud communications platform whose REST APIs let developers send messages, make calls, and look up numbers across SMS, voice, video, and more.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://www.twilio.com/docs",
+   "agent_notes": "Fetched text confirms REST broadly; auth method and MCP evidence from knowledge."
+  },
+  {
+   "num": 23,
+   "app": "Zoho Cliq",
+   "category": "Communications and Messaging",
+   "one_line": "Zoho's team collaboration chat platform with a REST API for users, teams, channels, chats, messages, bots, reminders, events, and files.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://www.zoho.com/cliq/help/restapi/",
+   "agent_notes": "Text lists V3 as latest but intro text references /v2/ path; webhook support inferred from knowledge."
+  },
+  {
+   "num": 24,
+   "app": "Lark (Larksuite)",
+   "category": "Communications and Messaging",
+   "one_line": "Larksuite's collaboration and chat suite (IM, Docs, Calendar, Base, Wiki, Meetings) with broad server-side REST APIs, events/webhooks, and an open-source CLI.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://open.larksuite.com",
+   "agent_notes": "024_lark_larksuite.txt was a JS shell; relied on 024_lark.txt plus knowledge. MCP/official status inferred."
+  },
+  {
+   "num": 25,
+   "app": "Pumble",
+   "category": "Communications and Messaging",
+   "one_line": "Free Slack-alternative team chat app with channels, threads, direct messages, and guest access.",
+   "auth": [
+    "None"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "medium",
+   "evidence": "https://pumble.com/help/",
+   "agent_notes": "Lack of public API is consistent with Pumble's current offerings; could not confirm from docs since none exist."
+  },
+  {
+   "num": 26,
+   "app": "Discord",
+   "category": "Communications and Messaging",
+   "one_line": "Community messaging platform with a very broad REST API, Gateway WebSocket, webhooks, and bot framework for building apps that run inside servers.",
+   "auth": [
+    "OAuth2",
+    "Bot Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "medium",
+   "evidence": "https://discord.com/developers/docs",
+   "agent_notes": "Thin fetched text; content based on established Discord developer documentation."
+  },
+  {
+   "num": 27,
+   "app": "Telegram",
+   "category": "Communications and Messaging",
+   "one_line": "Messaging platform whose Bot API lets bots send/receive messages, media, and updates programmatically over HTTP.",
+   "auth": [
+    "Bot Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://core.telegram.org/bots/api",
+   "agent_notes": "No real uncertainty. Token auth means no OAuth flow; easiest app in the batch."
+  },
+  {
+   "num": 28,
+   "app": "WhatsApp Business",
+   "category": "Communications and Messaging",
+   "one_line": "Meta's platform for businesses to message customers at scale via the Cloud API (Graph API endpoints).",
+   "auth": [
+    "API Token"
+   ],
+   "self_serve": "trial",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "high",
+   "evidence": "https://developers.facebook.com/docs/whatsapp",
+   "agent_notes": "Fastest path is the auto-created test WABA; production needs verification and app review."
+  },
+  {
+   "num": 29,
+   "app": "Aircall",
+   "category": "Communications and Messaging",
+   "one_line": "Cloud phone system for sales/support teams, exposed via a broad REST API for users, calls, contacts, and numbers.",
+   "auth": [
+    "OAuth2",
+    "Basic"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "high",
+   "evidence": "https://developer.aircall.io",
+   "agent_notes": "Main friction is needing a paid Aircall account; API itself is well documented."
+  },
+  {
+   "num": 30,
+   "app": "Vonage",
+   "category": "Communications and Messaging",
+   "one_line": "Cloud communications API provider (SMS, voice, video, messages, verify) for programmatic messaging and calls.",
+   "auth": [
+    "API Key",
+    "JWT"
+   ],
+   "self_serve": "trial",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "WebSockets"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developer.vonage.com",
+   "agent_notes": "Thin fetched text; auth/detail confirmed from domain knowledge of developer.vonage.com."
+  },
+  {
+   "num": 31,
+   "app": "Google Ads",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "Google's ad platform, manageable programmatically via the Google Ads API (gRPC/JSON-REST) down to keyword level.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST",
+    "gRPC",
+    "GraphQL (not officially; GAQL for querying)"
+   ],
+   "breadth": "very_broad",
+   "webhooks": false,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "high",
+   "evidence": "https://developers.google.com/google-ads/api",
+   "agent_notes": "Production developer token approval is the main time sink; test accounts make sandbox calls possible quickly."
+  },
+  {
+   "num": 32,
+   "app": "Meta Ads",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "Meta's Marketing API (Graph API endpoints) for creating and managing ads across Facebook, Instagram, Messenger, and WhatsApp.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "high",
+   "evidence": "https://developers.facebook.com/docs/marketing-apis",
+   "agent_notes": "App review for advanced access is the friction point; test ad accounts enable sandbox calls immediately."
+  },
+  {
+   "num": 33,
+   "app": "LinkedIn Ads",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "LinkedIn's Marketing API for managing ad campaigns, reporting, audiences, and lead sync on the professional network.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "high",
+   "evidence": "https://learn.microsoft.com/en-us/linkedin/marketing/",
+   "agent_notes": "Marketing API approval is the slowest gate in this batch; core profile APIs are open but ads APIs are restricted."
+  },
+  {
+   "num": 34,
+   "app": "GoHighLevel",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "White-label CRM and marketing automation platform for agencies, with a REST API for contacts, campaigns, and funnels.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "medium",
+   "evidence": "https://highlevel.stoplight.io",
+   "agent_notes": "Thin fetched text; docs now live at developer.leadconnectorhq.com. API key auth is the fast path."
+  },
+  {
+   "num": 35,
+   "app": "Mailchimp",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "Email marketing and automation platform (Intuit) with a broad REST API for audiences, campaigns, automations, and reporting.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://mailchimp.com/developer/marketing/api/",
+   "agent_notes": "One of the easiest: instant API key on a free account."
+  },
+  {
+   "num": 36,
+   "app": "Klaviyo",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "E-commerce marketing automation platform with a JSON:API REST API for profiles, events, campaigns, flows, and catalogs.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.klaviyo.com",
+   "agent_notes": "Private API key path is trivial; OAuth for partner-grade integration."
+  },
+  {
+   "num": 37,
+   "app": "systeme.io",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "All-in-one funnel builder, email marketing, and online-course platform with a REST API for contacts, funnels, and campaigns.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developer.systeme.io/",
+   "agent_notes": "API is real and documented (OpenAPI available via developer.systeme.io/llms.txt); uncertainty is whether free plan gets API keys and full endpoint access."
+  },
+  {
+   "num": 38,
+   "app": "Pinterest",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "Visual discovery platform whose API v5 lets developers build apps for pins, boards, ads, and shopping.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "high",
+   "evidence": "https://developers.pinterest.com",
+   "agent_notes": "App review is the main delay; test tokens and sandbox speed up initial development."
+  },
+  {
+   "num": 39,
+   "app": "Threads (Meta)",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "Meta's text-first social network, with a free REST API to publish posts, retrieve media/profiles, moderate replies, and read insights.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developers.facebook.com/docs/threads",
+   "agent_notes": "Thin fetched text; API is new and narrower than other Meta products. No MCP ecosystem yet."
+  },
+  {
+   "num": 40,
+   "app": "SendGrid",
+   "category": "Marketing, Ads, Email and Social",
+   "one_line": "Twilio-owned email delivery platform that sends transactional and marketing email at scale via a broad REST API.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.sendgrid.com/api-reference",
+   "agent_notes": "Simple API key auth, free tier available; the fetched page was mostly navigation but the API reference is well documented."
+  },
+  {
+   "num": 41,
+   "app": "Shopify",
+   "category": "Ecommerce",
+   "one_line": "Cloud commerce platform whose Admin API (REST + GraphQL) lets you manage stores, products, orders, customers, and apps.",
+   "auth": [
+    "OAuth2",
+    "API Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://shopify.dev/docs/api/admin",
+   "agent_notes": "Auth is OAuth with scopes; free dev store makes it fully self-serve. Very broad and well documented."
+  },
+  {
+   "num": 42,
+   "app": "WooCommerce",
+   "category": "Ecommerce",
+   "one_line": "Free, open-source WordPress e-commerce plugin with a REST API for managing products, orders, customers, and store data.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://woocommerce.com/document/woocommerce-rest-api/",
+   "agent_notes": "Self-hosted: a dev must stand up a WooCommerce store to get credentials, but it's free and un-gated. Auth is simple key-based."
+  },
+  {
+   "num": 43,
+   "app": "BigCommerce",
+   "category": "Ecommerce",
+   "one_line": "SaaS e-commerce platform with broad REST Management APIs, GraphQL Storefront API, and webhooks for managing stores programmatically.",
+   "auth": [
+    "OAuth2",
+    "API Token"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://developer.bigcommerce.com",
+   "agent_notes": "Simple token auth via API Accounts; free trial store makes first call quick. Official MCP server exists."
+  },
+  {
+   "num": 44,
+   "app": "Salesforce Commerce Cloud",
+   "category": "Ecommerce",
+   "one_line": "Salesforce's enterprise B2C/B2B commerce platform exposed through Open Commerce API (OCAPI) and Commerce Cloud APIs.",
+   "auth": [
+    "OAuth2",
+    "JWT"
+   ],
+   "self_serve": "no",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "medium",
+   "evidence": "https://developer.salesforce.com/docs/commerce",
+   "agent_notes": "Fetched page rendered nothing useful; buildability gated by enterprise sales process and paid subscription, not by API quality."
+  },
+  {
+   "num": 45,
+   "app": "Magento (Adobe Commerce)",
+   "category": "Ecommerce",
+   "one_line": "Open-source (Magento Open Source) and commercial (Adobe Commerce) e-commerce platform with a broad REST API and GraphQL.",
+   "auth": [
+    "API Token",
+    "OAuth1",
+    "JWT"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://developer.adobe.com/commerce/webapi/rest/",
+   "agent_notes": "Auth is flexible but token generation requires admin access to a store; self-hosting Open Source is the free path. Webhooks only on commercial editions."
+  },
+  {
+   "num": 46,
+   "app": "Squarespace",
+   "category": "Ecommerce",
+   "one_line": "Website and commerce platform whose Commerce APIs (Orders, Inventory, Products, Fulfillment, Customers, Transactions) integrate store data.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developers.squarespace.com/commerce-apis",
+   "agent_notes": "Fetched page detailed the Contacts/Commerce API scope model; commerce breadth and webhooks partially inferred. OAuth + API key both supported."
+  },
+  {
+   "num": 47,
+   "app": "Ecwid",
+   "category": "Ecommerce",
+   "one_line": "E-commerce platform (now Lightspeed) whose REST API manages products, orders, customers, categories, discounts and store settings.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "medium",
+   "evidence": "https://api-docs.ecwid.com",
+   "agent_notes": "Fetched page is a docs index; free plan + permanent access token makes first call fast. Auth is simple."
+  },
+  {
+   "num": 48,
+   "app": "Gumroad",
+   "category": "Ecommerce",
+   "one_line": "Self-serve platform for selling digital products whose OAuth API manages products, sales, payouts, licenses, emails and subscriptions.",
+   "auth": [
+    "OAuth2",
+    "API Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://gumroad.com/api",
+   "agent_notes": "Docs are thin but the fetched page was substantive; OAuth + token generation is instant and free. Moderate breadth."
+  },
+  {
+   "num": 49,
+   "app": "Amazon Selling Partner (SP-API)",
+   "category": "Ecommerce",
+   "one_line": "Amazon's API for sellers/vendors to manage listings, orders, inventory, fulfillment, pricing, reports and merchant services at scale.",
+   "auth": [
+    "OAuth2",
+    "Signed Request"
+   ],
+   "self_serve": "yes",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "medium",
+   "evidence": "https://developer-docs.amazon.com/sp-api",
+   "agent_notes": "Auth is the most complex (LWA + SigV4 + IAM + per-role registration). Self-serve but registration/approval per role adds days; needs a paid professional seller account."
+  },
+  {
+   "num": 50,
+   "app": "fanbasis",
+   "category": "Ecommerce",
+   "one_line": "Creator monetization platform (apparently rebranded to Commas) for selling courses, communities, webinars and memberships.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "no",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "low",
+   "evidence": "https://fanbasis.com",
+   "agent_notes": "Very obscure; the fetched page shows fanbasis is now Commas with enterprise-gated APIs. Treat as blocked/insufficient info unless an enterprise agreement is secured."
+  },
+  {
+   "num": 51,
+   "app": "DataForSEO",
+   "category": "Data, SEO and Scraping",
+   "one_line": "Paid SEO data API provider covering SERP, keywords, on-page, backlinks, domain analytics, rank tracking and more.",
+   "auth": [
+    "API Key",
+    "Basic"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.dataforseo.com",
+   "agent_notes": "Auth is simple basic-auth login/password from the dashboard; free trial makes first call fast. Cost scales with usage but no approval gate."
+  },
+  {
+   "num": 52,
+   "app": "SE Ranking",
+   "category": "Data, SEO and Scraping",
+   "one_line": "SEO/AEO platform whose REST API exposes keyword research, backlinks, domain analysis, site audits and AI-visibility data at scale.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://seranking.com/api",
+   "agent_notes": "Simple API-key auth, free trial available; the main cost is the paid plan. Official MCP server is a bonus. No webhooks."
+  },
+  {
+   "num": 53,
+   "app": "Ahrefs",
+   "category": "Data, SEO and Scraping",
+   "one_line": "SEO tool for keyword research, backlink analysis and rank tracking, exposed via a commercial REST API.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://ahrefs.com/api/documentation",
+   "agent_notes": "Auth is simple API key; cost is the main friction ($$$ paid plans). MCP officially documented."
+  },
+  {
+   "num": 54,
+   "app": "MrScraper",
+   "category": "Data, SEO and Scraping",
+   "one_line": "Self-serve AI web scraping platform with API, CLI, SDKs and MCP server for extracting structured data.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.mrscraper.com",
+   "agent_notes": "Official MCP server exists, so an integration can wrap the REST API or proxy the MCP server directly."
+  },
+  {
+   "num": 55,
+   "app": "Apify",
+   "category": "Data, SEO and Scraping",
+   "one_line": "Web scraping and automation platform with an actor marketplace, run via a REST API or SDK clients.",
+   "auth": [
+    "API Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.apify.com",
+   "agent_notes": "Very well-documented API; free tier makes first call trivial."
+  },
+  {
+   "num": 56,
+   "app": "Firecrawl",
+   "category": "Data, SEO and Scraping",
+   "one_line": "Web scraping/crawling API that turns any website into LLM-ready markdown or structured data.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.firecrawl.dev",
+   "agent_notes": "Official MCP server exists; easy free-tier start."
+  },
+  {
+   "num": 57,
+   "app": "Bright Data",
+   "category": "Data, SEO and Scraping",
+   "one_line": "Enterprise web data platform with proxy network, prebuilt scrapers, data feeds and web unblocking APIs.",
+   "auth": [
+    "API Token"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://docs.brightdata.com",
+   "agent_notes": "Landing-page fetched text; free tier exists but product is enterprise-oriented, so verification of token flow needed."
+  },
+  {
+   "num": 58,
+   "app": "Sherlock",
+   "category": "Data, SEO and Scraping",
+   "one_line": "Open-source CLI that hunts down social media accounts by username across 400+ networks.",
+   "auth": [
+    "Unknown"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://github.com/sherlock-project/sherlock",
+   "agent_notes": "Not a SaaS; integration would mean wrapping the CLI locally, not calling an external API."
+  },
+  {
+   "num": 59,
+   "app": "Waterfall.io",
+   "category": "Data, SEO and Scraping",
+   "one_line": "B2B contact and company data platform offering prospector, contact/phone enrichment and job-change APIs.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "no",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "medium",
+   "evidence": "https://waterfall.io",
+   "agent_notes": "API is documented on the site but credentials require sales contact; API key header name varies (x-api-key vs x-waterfall-api-key) between examples."
+  },
+  {
+   "num": 60,
+   "app": "Clay",
+   "category": "Data, SEO and Scraping",
+   "one_line": "No-code GTM data enrichment and automation platform (with Claygent AI) for finding and enriching contacts.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://docs.clay.com",
+   "agent_notes": "Fetched page was marketing/learning material, not API docs; Clay's public API is limited, so treat integration as partial."
+  },
+  {
+   "num": 61,
+   "app": "GitHub",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Code hosting and collaboration platform with a very broad REST and GraphQL API for repos, issues, PRs and Actions.",
+   "auth": [
+    "OAuth2",
+    "PAT",
+    "JWT"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.github.com/rest",
+   "agent_notes": "Trivially buildable; PAT or OAuth2 both work; official MCP server available."
+  },
+  {
+   "num": 62,
+   "app": "Vercel",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Frontend deployment and serverless platform whose REST API manages deployments, domains, env vars and projects.",
+   "auth": [
+    "API Token",
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://vercel.com/docs/rest-api",
+   "agent_notes": "Clean auth and docs; access token self-serve."
+  },
+  {
+   "num": 63,
+   "app": "Netlify",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Static and serverless hosting platform with a REST API for atomic deploys, forms, DNS, env vars and site management.",
+   "auth": [
+    "OAuth2",
+    "PAT"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.netlify.com/api",
+   "agent_notes": "Well-documented; note password resets invalidate PATs."
+  },
+  {
+   "num": 64,
+   "app": "Cloudflare",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "CDN, DNS, security and edge-computing platform with one of the broadest REST APIs in the industry.",
+   "auth": [
+    "API Token",
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.cloudflare.com/api",
+   "agent_notes": "Huge API surface; scoped tokens make safe integrations straightforward."
+  },
+  {
+   "num": 65,
+   "app": "Supabase",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Open-source Firebase alternative: Postgres database with REST (PostgREST) and GraphQL APIs, auth, storage and realtime.",
+   "auth": [
+    "API Key",
+    "OAuth2",
+    "JWT"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "GraphQL"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://supabase.com/docs",
+   "agent_notes": "Instant keys on project creation; REST via PostgREST is straightforward to target."
+  },
+  {
+   "num": 66,
+   "app": "Neo4j",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Graph database for storing and querying highly connected data, available self-hosted or as managed Aura cloud.",
+   "auth": [
+    "Basic",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": false,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://neo4j.com/docs/api/",
+   "agent_notes": "Auth is DB-native (bolt/basic), not REST OAuth. Build integration around Cypher queries via HTTP transactional endpoint or a driver."
+  },
+  {
+   "num": 67,
+   "app": "Snowflake",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Cloud data platform/warehouse with SQL analytics, data sharing, and AI/ML workloads.",
+   "auth": [
+    "OAuth2",
+    "JWT",
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": false,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://docs.snowflake.com",
+   "agent_notes": "Docs text was a 404 page. Account/trial creation plus admin-configured roles make first call slower than typical SaaS."
+  },
+  {
+   "num": 68,
+   "app": "MongoDB Atlas",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Managed cloud MongoDB database service with cluster management, search, and vector/embedding APIs.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://www.mongodb.com/docs/atlas/api",
+   "agent_notes": "Admin API is purely for cluster/org admin; app-level data access is via MongoDB driver/connection strings."
+  },
+  {
+   "num": 69,
+   "app": "Datadog",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Cloud monitoring and observability platform for metrics, logs, APM, dashboards, and alerts.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.datadoghq.com/api",
+   "agent_notes": "None. Official MCP presence confirmed directly in fetched docs navigation."
+  },
+  {
+   "num": 70,
+   "app": "Sentry",
+   "category": "Developer, Infra and Data platforms",
+   "one_line": "Error tracking and application performance monitoring platform.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.sentry.io/api",
+   "agent_notes": "Official MCP is community-edition open source; still verifiable existence."
+  },
+  {
+   "num": 71,
+   "app": "Notion",
+   "category": "Productivity and Project Management",
+   "one_line": "All-in-one workspace for notes, docs, wikis, and databases.",
+   "auth": [
+    "OAuth2",
+    "API Key",
+    "PAT"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.notion.com",
+   "agent_notes": "Internal integration must be explicitly granted page/database access in the workspace."
+  },
+  {
+   "num": 72,
+   "app": "Airtable",
+   "category": "Productivity and Project Management",
+   "one_line": "Low-code relational database that blends spreadsheets with app-building.",
+   "auth": [
+    "OAuth2",
+    "PAT",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "medium",
+   "evidence": "https://airtable.com/developers/web/api",
+   "agent_notes": "Fetched text was short (intro page only); auth fields rely on knowledge."
+  },
+  {
+   "num": 73,
+   "app": "Linear",
+   "category": "Productivity and Project Management",
+   "one_line": "Issue tracking and project management designed for software teams.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "GraphQL"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "medium",
+   "evidence": "https://developers.linear.app/docs",
+   "agent_notes": "Fetched text was short; API breadth based on knowledge of the GraphQL schema."
+  },
+  {
+   "num": 74,
+   "app": "Jira",
+   "category": "Productivity and Project Management",
+   "one_line": "Issue tracking and agile project management by Atlassian.",
+   "auth": [
+    "OAuth2",
+    "Basic",
+    "JWT"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developer.atlassian.com/cloud/jira",
+   "agent_notes": "API token + site URL is the fastest path for a solo dev; OAuth for multi-user apps."
+  },
+  {
+   "num": 75,
+   "app": "Asana",
+   "category": "Productivity and Project Management",
+   "one_line": "Work management platform for teams to plan and track projects and tasks.",
+   "auth": [
+    "OAuth2",
+    "PAT"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://developers.asana.com/docs",
+   "agent_notes": "Embedded API explorer and free account make first call fast; advanced features gated to paid tiers."
+  },
+  {
+   "num": 76,
+   "app": "Monday.com",
+   "category": "Productivity and Project Management",
+   "one_line": "Work OS where teams build and customize boards, items, and workflows without code.",
+   "auth": [
+    "OAuth2",
+    "API Token"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "GraphQL"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "medium",
+   "evidence": "https://developer.monday.com",
+   "agent_notes": "Free-trial account needed; guest access requires OAuth flow."
+  },
+  {
+   "num": 77,
+   "app": "ClickUp",
+   "category": "Productivity and Project Management",
+   "one_line": "All-in-one project management and team collaboration platform.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.clickup.com",
+   "agent_notes": "Official MCP server existence directly confirmed in fetched docs text."
+  },
+  {
+   "num": 78,
+   "app": "Coda",
+   "category": "Productivity and Project Management",
+   "one_line": "Collaborative document platform combining docs, spreadsheets, and apps (now Superhuman Docs).",
+   "auth": [
+    "Bearer Token",
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://coda.io/developers/apis/v1",
+   "agent_notes": "Coda was acquired by Superhuman; docs now branded 'Superhuman Docs' but API and docs URL remain coda.io."
+  },
+  {
+   "num": 79,
+   "app": "Smartsheet",
+   "category": "Productivity and Project Management",
+   "one_line": "Cloud-based work management and collaboration platform with a REST API for programmatically managing sheets, rows, reports, and automation.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://smartsheet.redoc.ly",
+   "agent_notes": "Auth method (OAuth2 + PAT) and paid-only model well established; endpoint breadth from knowledge, not fetched text."
+  },
+  {
+   "num": 80,
+   "app": "Harvest",
+   "category": "Productivity and Project Management",
+   "one_line": "Time tracking and invoicing SaaS with a v2 REST API for timesheets, projects, clients, expenses, invoices, estimates, and reports.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": false,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://help.getharvest.com/api-v2",
+   "agent_notes": "Fetched text thin (<1200 chars) \u2014 API surface list confirmed but auth details (OAuth2 vs PAT) from domain knowledge; no webhook support is known to be absent in v2."
+  },
+  {
+   "num": 81,
+   "app": "Stripe",
+   "category": "Finance and Fintech",
+   "one_line": "Global payments and financial infrastructure platform with a very broad REST API for payments, billing, subscriptions, payouts, and connect.",
+   "auth": [
+    "API Key",
+    "OAuth2"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://stripe.com/docs/api",
+   "agent_notes": "Confident on all fields from fetched API reference text."
+  },
+  {
+   "num": 82,
+   "app": "Plaid",
+   "category": "Finance and Fintech",
+   "one_line": "Open finance and bank data aggregation API providing account, transaction, balance, identity, asset, income, and payment data from financial institutions.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://plaid.com/docs/api",
+   "agent_notes": "Production is gated (request via Dashboard), but sandbox is instantly buildable \u2014 verdict buildable_today with that caveat."
+  },
+  {
+   "num": 83,
+   "app": "Binance",
+   "category": "Finance and Fintech",
+   "one_line": "World's largest cryptocurrency exchange with a very broad REST + WebSocket API for spot, margin, futures, wallet, and market data.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "REST",
+    "WebSocket"
+   ],
+   "breadth": "very_broad",
+   "webhooks": false,
+   "mcp": "community",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "high",
+   "evidence": "https://developers.binance.com/docs",
+   "agent_notes": "Auth details confirmed from fetched developer docs; webhook absence is from domain knowledge of Binance architecture."
+  },
+  {
+   "num": 84,
+   "app": "Paygent Connect",
+   "category": "Finance and Fintech",
+   "one_line": "NMI-powered embedded payment gateway aimed at ISOs and SaaS platforms; highly obscure with no discoverable public developer API.",
+   "auth": [
+    "Unknown"
+   ],
+   "self_serve": "no",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "low",
+   "evidence": "https://nmi.com",
+   "agent_notes": "Insufficient public information to verify auth, endpoints, or self-serve access. Recommend treating as blocked pending direct vendor contact."
+  },
+  {
+   "num": 85,
+   "app": "iPayX",
+   "category": "Finance and Fintech",
+   "one_line": "iPayX Protocol is a FINTRAC-registered FX verification/forensic audit tool that compares applied bank FX rates against mid-market rates \u2014 appears to be a consumer web app with no documented public API.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "no",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "low",
+   "evidence": "https://ipayx.ai/docs",
+   "agent_notes": "May simply be a consumer product without an API at all; verify with the vendor before investing."
+  },
+  {
+   "num": 86,
+   "app": "QuickBooks",
+   "category": "Finance and Fintech",
+   "one_line": "SMB accounting platform with the very broad QuickBooks Online Accounting REST API covering invoices, payments, customers, items, bills, and reports.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developer.intuit.com",
+   "agent_notes": "Sandbox is buildable quickly; production requires QuickBooks subscription + app approval \u2014 hence buildable_with_work."
+  },
+  {
+   "num": 87,
+   "app": "Xero",
+   "category": "Finance and Fintech",
+   "one_line": "Online accounting software with a very broad REST API covering accounting, payroll, files, projects, bank feeds, and assets.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "very_broad",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://developer.xero.com",
+   "agent_notes": "OAuth flow well-documented; friction is app registration plus paid/trial organisation and scope approvals."
+  },
+  {
+   "num": 88,
+   "app": "Brex",
+   "category": "Finance and Fintech",
+   "one_line": "Corporate card and spend management platform with a REST API covering accounting, budgets, expenses, payments, team, transactions, and travel.",
+   "auth": [
+    "OAuth2",
+    "API Key"
+   ],
+   "self_serve": "paid",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": true,
+   "mcp": "official",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "medium",
+   "evidence": "https://developer.brex.com",
+   "agent_notes": "API surface and MCP confirmed from fetched text; account/approval requirements and OAuth2+key mix from knowledge."
+  },
+  {
+   "num": 89,
+   "app": "Ramp",
+   "category": "Finance and Fintech",
+   "one_line": "Corporate spend and expense management platform with a REST API for transactions, reimbursements, vendors, cards, and accounting exports.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "paid",
+   "gate": "admin_approval",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": true,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "days",
+   "confidence": "medium",
+   "evidence": "https://docs.ramp.com",
+   "agent_notes": "API-key auth and webhook support from knowledge of Ramp docs; account gating makes it buildable_with_work rather than buildable_today."
+  },
+  {
+   "num": 90,
+   "app": "PitchBook",
+   "category": "Finance and Fintech",
+   "one_line": "Private market data and analytics platform whose Research API provides programmatic access to company, deal, fund, investor, and document data.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "partnership",
+   "gate": "partnership",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "broad",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "medium",
+   "evidence": "https://pitchbook.com/products/research-api",
+   "agent_notes": "Page fetch blocked by bot protection; partnership-gating is well-established domain knowledge for PitchBook data access."
+  },
+  {
+   "num": 91,
+   "app": "NotebookLM",
+   "category": "AI, Research and Media-native",
+   "one_line": "Google's AI-powered notebook that answers questions and generates summaries/notes grounded in your uploaded documents.",
+   "auth": [
+    "None"
+   ],
+   "self_serve": "no",
+   "gate": "none",
+   "protocol": [],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "community",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "high",
+   "evidence": "https://cloud.google.com/gemini/docs",
+   "agent_notes": "High confidence that NotebookLM has no public API. Community MCPs exist but are unofficial and can break; building on them is unsupported."
+  },
+  {
+   "num": 92,
+   "app": "Otter AI",
+   "category": "AI, Research and Media-native",
+   "one_line": "AI meeting assistant that records, transcribes, and summarizes meetings with live notes and chat.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "community",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://help.otter.ai",
+   "agent_notes": "API surface and MCP existence not confirmed from public docs; limited public API per assignment hint"
+  },
+  {
+   "num": 93,
+   "app": "Fathom",
+   "category": "AI, Research and Media-native",
+   "one_line": "AI meeting notetaker that records, transcribes, and summarizes meetings and syncs notes to CRMs.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://fathom.video",
+   "agent_notes": "API details thin; consumer product historically without public API, MCP/API now advertised"
+  },
+  {
+   "num": 94,
+   "app": "Consensus",
+   "category": "AI, Research and Media-native",
+   "one_line": "AI-powered academic search engine that searches and summarizes findings from millions of research papers.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "no",
+   "gate": "contact_sales",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "blocked",
+   "blocker_class": null,
+   "ttc": "weeks",
+   "confidence": "medium",
+   "evidence": "https://consensus.app",
+   "agent_notes": "No fetched docs available; verdict relies on assignment hint (OAuth 'requested', blocked/insufficient-info)"
+  },
+  {
+   "num": 95,
+   "app": "Reducto",
+   "category": "AI, Research and Media-native",
+   "one_line": "Agentic document platform that parses, classifies, extracts, and edits documents at enterprise scale.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "none",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://docs.reducto.ai",
+   "agent_notes": "Self-serve trial specifics (free credits) assumed; API key + MCP confirmed from docs"
+  },
+  {
+   "num": 96,
+   "app": "Devin",
+   "category": "AI, Research and Media-native",
+   "one_line": "Autonomous AI software engineer by Cognition that writes, runs, and tests code.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://docs.devin.ai",
+   "agent_notes": "Devin API surface is new/limited; MCP confirmed from docs index"
+  },
+  {
+   "num": 97,
+   "app": "Higgsfield",
+   "category": "AI, Research and Media-native",
+   "one_line": "AI-native creative suite for generating images, videos, and marketing content across 30+ models.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "paid",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://higgsfield.ai/cli",
+   "agent_notes": "New product, thin docs; REST API surface not clearly documented, access mainly via MCP/CLI"
+  },
+  {
+   "num": 98,
+   "app": "Mermaid CLI",
+   "category": "AI, Research and Media-native",
+   "one_line": "Open-source command-line tool that converts Mermaid diagram definitions into SVG, PNG, or PDF files.",
+   "auth": [
+    "None"
+   ],
+   "self_serve": "yes",
+   "gate": "none",
+   "protocol": [
+    "None"
+   ],
+   "breadth": "narrow",
+   "webhooks": false,
+   "mcp": "none",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://github.com/mermaid-js/mermaid-cli",
+   "agent_notes": "Not a SaaS API \u2014 must be executed locally; integrate via subprocess or Node.js API"
+  },
+  {
+   "num": 99,
+   "app": "YouTube Transcript",
+   "category": "AI, Research and Media-native",
+   "one_line": "Paid REST API and MCP for YouTube transcripts, search, channels, and playlists at scale.",
+   "auth": [
+    "API Key"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_today",
+   "blocker_class": null,
+   "ttc": "minutes",
+   "confidence": "high",
+   "evidence": "https://transcriptapi.com",
+   "agent_notes": "Docs complete; API key + REST + MCP all confirmed from fetched text"
+  },
+  {
+   "num": 100,
+   "app": "Grain",
+   "category": "AI, Research and Media-native",
+   "one_line": "AI meeting notetaker that captures, transcribes, and enriches meetings for teams and AI agents.",
+   "auth": [
+    "OAuth2"
+   ],
+   "self_serve": "trial",
+   "gate": "paid_plan",
+   "protocol": [
+    "REST"
+   ],
+   "breadth": "moderate",
+   "webhooks": false,
+   "mcp": "official",
+   "verdict": "buildable_with_work",
+   "blocker_class": null,
+   "ttc": "hours",
+   "confidence": "medium",
+   "evidence": "https://grain.com",
+   "agent_notes": "MCP/API existence confirmed from homepage; auth specifics (OAuth) and gating of API access not fully documented"
+  }
+ ],
+ "patterns": {
+  "total_apps": 100,
+  "auth_dominance": [
+   [
+    "OAuth2",
+    63
+   ],
+   [
+    "API Key",
+    56
+   ],
+   [
+    "API Token",
+    16
+   ],
+   [
+    "JWT",
+    8
+   ],
+   [
+    "PAT",
+    5
+   ],
+   [
+    "Basic",
+    4
+   ],
+   [
+    "Bot Token",
+    3
+   ],
+   [
+    "None",
+    3
+   ],
+   [
+    "Unknown",
+    2
+   ],
+   [
+    "SOAP",
+    1
+   ],
+   [
+    "OAuth1",
+    1
+   ],
+   [
+    "Signed Request",
+    1
+   ],
+   [
+    "Bearer Token",
+    1
+   ]
+  ],
+  "auth_method_counts": {
+   "OAuth2": 63,
+   "API Key": 56,
+   "API Token": 16,
+   "JWT": 8,
+   "PAT": 5,
+   "Basic": 4,
+   "Bot Token": 3,
+   "None": 3,
+   "Unknown": 2,
+   "SOAP": 1,
+   "OAuth1": 1,
+   "Signed Request": 1,
+   "Bearer Token": 1
+  },
+  "self_serve_by_category": {
+   "CRM and Sales": {
+    "none": 6,
+    "paid_plan": 3,
+    "contact_sales": 1
+   },
+   "Support and Helpdesk": {
+    "paid_plan": 7,
+    "none": 2,
+    "contact_sales": 1
+   },
+   "Communications and Messaging": {
+    "none": 8,
+    "admin_approval": 1,
+    "paid_plan": 1
+   },
+   "Marketing, Ads, Email and Social": {
+    "admin_approval": 4,
+    "paid_plan": 1,
+    "none": 5
+   },
+   "Ecommerce": {
+    "none": 6,
+    "paid_plan": 1,
+    "contact_sales": 2,
+    "admin_approval": 1
+   },
+   "Data, SEO and Scraping": {
+    "paid_plan": 3,
+    "none": 6,
+    "contact_sales": 1
+   },
+   "Developer, Infra and Data platforms": {
+    "none": 7,
+    "admin_approval": 1,
+    "paid_plan": 2
+   },
+   "Productivity and Project Management": {
+    "none": 5,
+    "paid_plan": 5
+   },
+   "Finance and Fintech": {
+    "none": 2,
+    "admin_approval": 5,
+    "contact_sales": 2,
+    "partnership": 1
+   },
+   "AI, Research and Media-native": {
+    "none": 3,
+    "paid_plan": 6,
+    "contact_sales": 1
+   }
+  },
+  "verdict_by_category": {
+   "CRM and Sales": {
+    "buildable_today": 9,
+    "buildable_with_work": 1
+   },
+   "Support and Helpdesk": {
+    "buildable_today": 9,
+    "buildable_with_work": 1
+   },
+   "Communications and Messaging": {
+    "buildable_today": 7,
+    "blocked": 1,
+    "buildable_with_work": 2
+   },
+   "Marketing, Ads, Email and Social": {
+    "buildable_with_work": 5,
+    "buildable_today": 5
+   },
+   "Ecommerce": {
+    "buildable_today": 7,
+    "blocked": 2,
+    "buildable_with_work": 1
+   },
+   "Data, SEO and Scraping": {
+    "buildable_today": 6,
+    "buildable_with_work": 3,
+    "blocked": 1
+   },
+   "Developer, Infra and Data platforms": {
+    "buildable_today": 9,
+    "buildable_with_work": 1
+   },
+   "Productivity and Project Management": {
+    "buildable_today": 10
+   },
+   "Finance and Fintech": {
+    "buildable_today": 3,
+    "blocked": 3,
+    "buildable_with_work": 4
+   },
+   "AI, Research and Media-native": {
+    "blocked": 2,
+    "buildable_with_work": 5,
+    "buildable_today": 3
+   }
+  },
+  "verdict_overall": {
+   "buildable_today": 68,
+   "buildable_with_work": 23,
+   "blocked": 9
+  },
+  "gate_overall": {
+   "none": 50,
+   "paid_plan": 29,
+   "contact_sales": 8,
+   "admin_approval": 12,
+   "partnership": 1
+  },
+  "top_blockers": [
+   [
+    "Other",
+    21
+   ],
+   [
+    "No public API / undocumented",
+    8
+   ],
+   [
+    "Enterprise/partnership gated",
+    3
+   ]
+  ],
+  "mcp_coverage": {
+   "official": 40,
+   "community_only": 40,
+   "none": 20
+  },
+  "mcp_by_category": {
+   "Support and Helpdesk": {
+    "false": 6,
+    "true": 4
+   },
+   "AI, Research and Media-native": {
+    "false": 4,
+    "true": 6
+   },
+   "Data, SEO and Scraping": {
+    "false": 4,
+    "true": 6
+   },
+   "Finance and Fintech": {
+    "true": 3,
+    "false": 7
+   },
+   "CRM and Sales": {
+    "true": 7,
+    "false": 3
+   },
+   "Marketing, Ads, Email and Social": {
+    "false": 10
+   },
+   "Ecommerce": {
+    "true": 2,
+    "false": 8
+   },
+   "Productivity and Project Management": {
+    "true": 4,
+    "false": 6
+   },
+   "Communications and Messaging": {
+    "true": 4,
+    "false": 6
+   },
+   "Developer, Infra and Data platforms": {
+    "true": 4,
+    "false": 6
+   }
+  },
+  "easy_wins": [
+   {
+    "num": 1,
+    "app": "Salesforce",
+    "category": "CRM and Sales"
+   },
+   {
+    "num": 2,
+    "app": "HubSpot",
+    "category": "CRM and Sales"
+   },
+   {
+    "num": 3,
+    "app": "Pipedrive",
+    "category": "CRM and Sales"
+   },
+   {
+    "num": 4,
+    "app": "Attio",
+    "category": "CRM and Sales"
+   },
+   {
+    "num": 5,
+    "app": "Twenty",
+    "category": "CRM and Sales"
+   },
+   {
+    "num": 6,
+    "app": "Podio",
+    "category": "CRM and Sales"
+   },
+   {
+    "num": 7,
+    "app": "Zoho CRM",
+    "category": "CRM and Sales"
+   },
+   {
+    "num": 11,
+    "app": "Zendesk",
+    "category": "Support and Helpdesk"
+   },
+   {
+    "num": 12,
+    "app": "Intercom",
+    "category": "Support and Helpdesk"
+   },
+   {
+    "num": 13,
+    "app": "Freshdesk",
+    "category": "Support and Helpdesk"
+   },
+   {
+    "num": 15,
+    "app": "Pylon",
+    "category": "Support and Helpdesk"
+   },
+   {
+    "num": 16,
+    "app": "LiveAgent",
+    "category": "Support and Helpdesk"
+   },
+   {
+    "num": 17,
+    "app": "Plain",
+    "category": "Support and Helpdesk"
+   },
+   {
+    "num": 21,
+    "app": "Slack",
+    "category": "Communications and Messaging"
+   },
+   {
+    "num": 22,
+    "app": "Twilio",
+    "category": "Communications and Messaging"
+   },
+   {
+    "num": 23,
+    "app": "Zoho Cliq",
+    "category": "Communications and Messaging"
+   },
+   {
+    "num": 24,
+    "app": "Lark (Larksuite)",
+    "category": "Communications and Messaging"
+   },
+   {
+    "num": 26,
+    "app": "Discord",
+    "category": "Communications and Messaging"
+   },
+   {
+    "num": 27,
+    "app": "Telegram",
+    "category": "Communications and Messaging"
+   },
+   {
+    "num": 30,
+    "app": "Vonage",
+    "category": "Communications and Messaging"
+   },
+   {
+    "num": 35,
+    "app": "Mailchimp",
+    "category": "Marketing, Ads, Email and Social"
+   },
+   {
+    "num": 36,
+    "app": "Klaviyo",
+    "category": "Marketing, Ads, Email and Social"
+   },
+   {
+    "num": 37,
+    "app": "systeme.io",
+    "category": "Marketing, Ads, Email and Social"
+   },
+   {
+    "num": 39,
+    "app": "Threads (Meta)",
+    "category": "Marketing, Ads, Email and Social"
+   },
+   {
+    "num": 40,
+    "app": "SendGrid",
+    "category": "Marketing, Ads, Email and Social"
+   },
+   {
+    "num": 41,
+    "app": "Shopify",
+    "category": "Ecommerce"
+   },
+   {
+    "num": 42,
+    "app": "WooCommerce",
+    "category": "Ecommerce"
+   },
+   {
+    "num": 43,
+    "app": "BigCommerce",
+    "category": "Ecommerce"
+   },
+   {
+    "num": 45,
+    "app": "Magento (Adobe Commerce)",
+    "category": "Ecommerce"
+   },
+   {
+    "num": 46,
+    "app": "Squarespace",
+    "category": "Ecommerce"
+   },
+   {
+    "num": 47,
+    "app": "Ecwid",
+    "category": "Ecommerce"
+   },
+   {
+    "num": 48,
+    "app": "Gumroad",
+    "category": "Ecommerce"
+   },
+   {
+    "num": 52,
+    "app": "SE Ranking",
+    "category": "Data, SEO and Scraping"
+   },
+   {
+    "num": 54,
+    "app": "MrScraper",
+    "category": "Data, SEO and Scraping"
+   },
+   {
+    "num": 55,
+    "app": "Apify",
+    "category": "Data, SEO and Scraping"
+   },
+   {
+    "num": 56,
+    "app": "Firecrawl",
+    "category": "Data, SEO and Scraping"
+   },
+   {
+    "num": 61,
+    "app": "GitHub",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 62,
+    "app": "Vercel",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 63,
+    "app": "Netlify",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 64,
+    "app": "Cloudflare",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 65,
+    "app": "Supabase",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 66,
+    "app": "Neo4j",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 68,
+    "app": "MongoDB Atlas",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 69,
+    "app": "Datadog",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 70,
+    "app": "Sentry",
+    "category": "Developer, Infra and Data platforms"
+   },
+   {
+    "num": 71,
+    "app": "Notion",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 72,
+    "app": "Airtable",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 73,
+    "app": "Linear",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 74,
+    "app": "Jira",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 75,
+    "app": "Asana",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 76,
+    "app": "Monday.com",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 77,
+    "app": "ClickUp",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 78,
+    "app": "Coda",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 80,
+    "app": "Harvest",
+    "category": "Productivity and Project Management"
+   },
+   {
+    "num": 81,
+    "app": "Stripe",
+    "category": "Finance and Fintech"
+   },
+   {
+    "num": 83,
+    "app": "Binance",
+    "category": "Finance and Fintech"
+   },
+   {
+    "num": 95,
+    "app": "Reducto",
+    "category": "AI, Research and Media-native"
+   },
+   {
+    "num": 98,
+    "app": "Mermaid CLI",
+    "category": "AI, Research and Media-native"
+   },
+   {
+    "num": 99,
+    "app": "YouTube Transcript",
+    "category": "AI, Research and Media-native"
+   }
+  ],
+  "outreach": [
+   {
+    "num": 10,
+    "app": "DealCloud",
+    "category": "CRM and Sales",
+    "gate": "contact_sales"
+   },
+   {
+    "num": 20,
+    "app": "Gladly",
+    "category": "Support and Helpdesk",
+    "gate": "contact_sales"
+   },
+   {
+    "num": 44,
+    "app": "Salesforce Commerce Cloud",
+    "category": "Ecommerce",
+    "gate": "contact_sales"
+   },
+   {
+    "num": 50,
+    "app": "fanbasis",
+    "category": "Ecommerce",
+    "gate": "contact_sales"
+   },
+   {
+    "num": 59,
+    "app": "Waterfall.io",
+    "category": "Data, SEO and Scraping",
+    "gate": "contact_sales"
+   },
+   {
+    "num": 84,
+    "app": "Paygent Connect",
+    "category": "Finance and Fintech",
+    "gate": "contact_sales"
+   },
+   {
+    "num": 85,
+    "app": "iPayX",
+    "category": "Finance and Fintech",
+    "gate": "contact_sales"
+   },
+   {
+    "num": 90,
+    "app": "PitchBook",
+    "category": "Finance and Fintech",
+    "gate": "partnership"
+   },
+   {
+    "num": 94,
+    "app": "Consensus",
+    "category": "AI, Research and Media-native",
+    "gate": "contact_sales"
+   }
+  ],
+  "investigate": [
+   {
+    "num": 25,
+    "app": "Pumble",
+    "category": "Communications and Messaging",
+    "verdict": "blocked"
+   },
+   {
+    "num": 28,
+    "app": "WhatsApp Business",
+    "category": "Communications and Messaging",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 29,
+    "app": "Aircall",
+    "category": "Communications and Messaging",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 31,
+    "app": "Google Ads",
+    "category": "Marketing, Ads, Email and Social",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 32,
+    "app": "Meta Ads",
+    "category": "Marketing, Ads, Email and Social",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 33,
+    "app": "LinkedIn Ads",
+    "category": "Marketing, Ads, Email and Social",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 34,
+    "app": "GoHighLevel",
+    "category": "Marketing, Ads, Email and Social",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 38,
+    "app": "Pinterest",
+    "category": "Marketing, Ads, Email and Social",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 49,
+    "app": "Amazon Selling Partner (SP-API)",
+    "category": "Ecommerce",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 57,
+    "app": "Bright Data",
+    "category": "Data, SEO and Scraping",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 58,
+    "app": "Sherlock",
+    "category": "Data, SEO and Scraping",
+    "verdict": "blocked"
+   },
+   {
+    "num": 60,
+    "app": "Clay",
+    "category": "Data, SEO and Scraping",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 67,
+    "app": "Snowflake",
+    "category": "Developer, Infra and Data platforms",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 86,
+    "app": "QuickBooks",
+    "category": "Finance and Fintech",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 87,
+    "app": "Xero",
+    "category": "Finance and Fintech",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 88,
+    "app": "Brex",
+    "category": "Finance and Fintech",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 89,
+    "app": "Ramp",
+    "category": "Finance and Fintech",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 91,
+    "app": "NotebookLM",
+    "category": "AI, Research and Media-native",
+    "verdict": "blocked"
+   },
+   {
+    "num": 92,
+    "app": "Otter AI",
+    "category": "AI, Research and Media-native",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 93,
+    "app": "Fathom",
+    "category": "AI, Research and Media-native",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 96,
+    "app": "Devin",
+    "category": "AI, Research and Media-native",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 97,
+    "app": "Higgsfield",
+    "category": "AI, Research and Media-native",
+    "verdict": "buildable_with_work"
+   },
+   {
+    "num": 100,
+    "app": "Grain",
+    "category": "AI, Research and Media-native",
+    "verdict": "buildable_with_work"
+   }
+  ],
+  "time_to_first_call": {
+   "hours": 36,
+   "minutes": 43,
+   "weeks": 10,
+   "days": 11
+  },
+  "confidence_mix": {
+   "medium": 38,
+   "high": 59,
+   "low": 3
+  },
+  "blocker_breakdown": {
+   "Enterprise / partnership gated": 6,
+   "Other": 3,
+   "App review / production approval required": 5,
+   "Paid plan / account required": 4,
+   "Thin / unverified docs": 6,
+   "Complex auth / registration flow": 2,
+   "No public API / undocumented": 6
+  },
+  "blocker_examples": {
+   "Enterprise / partnership gated": [
+    "DealCloud",
+    "Gladly",
+    "Salesforce Commerce Cloud",
+    "Bright Data",
+    "Waterfall.io",
+    "PitchBook"
+   ],
+   "Other": [
+    "Pumble",
+    "Ramp",
+    "Grain"
+   ],
+   "App review / production approval required": [
+    "WhatsApp Business",
+    "Google Ads",
+    "Meta Ads",
+    "LinkedIn Ads",
+    "Pinterest"
+   ],
+   "Paid plan / account required": [
+    "Aircall",
+    "Snowflake",
+    "QuickBooks",
+    "Brex"
+   ],
+   "Thin / unverified docs": [
+    "GoHighLevel",
+    "Clay",
+    "Otter AI",
+    "Fathom",
+    "Devin",
+    "Higgsfield"
+   ],
+   "Complex auth / registration flow": [
+    "Amazon Selling Partner (SP-API)",
+    "Xero"
+   ],
+   "No public API / undocumented": [
+    "fanbasis",
+    "Sherlock",
+    "Paygent Connect",
+    "iPayX",
+    "NotebookLM",
+    "Consensus"
+   ]
+  }
+ },
+ "accuracy": {
+  "sample_size": 20,
+  "fields": [
+   "auth",
+   "self_serve",
+   "api_surface",
+   "mcp",
+   "verdict"
+  ],
+  "pass1": {
+   "auth": {
+    "correct": 15,
+    "total": 20,
+    "accuracy": 0.75
+   },
+   "self_serve": {
+    "correct": 15,
+    "total": 20,
+    "accuracy": 0.75
+   },
+   "api_surface": {
+    "correct": 7,
+    "total": 20,
+    "accuracy": 0.35
+   },
+   "mcp": {
+    "correct": 12,
+    "total": 20,
+    "accuracy": 0.6
+   },
+   "verdict": {
+    "correct": 18,
+    "total": 20,
+    "accuracy": 0.9
+   }
+  },
+  "pass2": {
+   "auth": {
+    "correct": 15,
+    "total": 20,
+    "accuracy": 0.75
+   },
+   "self_serve": {
+    "correct": 20,
+    "total": 20,
+    "accuracy": 1.0
+   },
+   "api_surface": {
+    "correct": 14,
+    "total": 20,
+    "accuracy": 0.7
+   },
+   "mcp": {
+    "correct": 17,
+    "total": 20,
+    "accuracy": 0.85
+   },
+   "verdict": {
+    "correct": 20,
+    "total": 20,
+    "accuracy": 1.0
+   }
+  },
+  "overall_pass1": 0.67,
+  "overall_pass2": 0.86,
+  "fabricated_guesses_pass1": 3
+ }
+}

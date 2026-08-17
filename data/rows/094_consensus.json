@@ -1,0 +1,34 @@
+{
+  "num": 94,
+  "app": "Consensus",
+  "category": "Academic Search / Research",
+  "one_line": "AI-powered academic search engine that searches and summarizes findings from millions of research papers.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth access requested per assignment hint; no generally available public API or developer portal",
+  "self_serve": "no",
+  "self_serve_notes": "No self-serve credentials; access only via enterprise/partnership discussions",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Unknown; no public endpoints documented",
+    "webhooks": false,
+    "webhook_note": "No webhooks; no public API surface"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No MCP server found"
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "No public API; OAuth access requested but not generally available to developers",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://consensus.app",
+    "note": "no fetched text file; knowledge + assignment hint"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "No fetched docs available; verdict relies on assignment hint (OAuth 'requested', blocked/insufficient-info)"
+}

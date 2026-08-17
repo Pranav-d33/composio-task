@@ -1,0 +1,34 @@
+{
+  "num": 1,
+  "app": "Salesforce",
+  "category": "CRM / Enterprise Sales & Marketing",
+  "one_line": "Enterprise CRM and platform-as-a-service with an extremely broad set of APIs for managing accounts, contacts, leads, opportunities, and custom objects.",
+  "auth_methods": ["OAuth2", "JWT Bearer", "SOAP", "API token"],
+  "auth_notes": "OAuth2 web-server and JWT bearer flows require a Connected App (client id/secret) registered in the org; SOAP API uses session id / username-password (legacy). Free Developer Edition org provides an integration-testing sandbox. Requests hit instance or login.salesforce.com with a session token.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free Developer Edition org is self-serve; register a Connected App there to get OAuth credentials. No payment required.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "SOAP", "GraphQL"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Thousands of endpoints across REST/SOAP/Bulk/Streaming/Metadata/Tooling/GraphQL APIs covering the entire platform",
+    "webhooks": true,
+    "webhook_note": "Push Topics, Platform Events, Change Data Capture, and Apex callouts for real-time notifications"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Salesforce MCP server exists (Agentforce/AI era); multiple community servers on GitHub/MCP registry"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.salesforce.com/docs",
+    "note": "Fetched text was a thin trail/marketing page (~1.2KB, JS shell); facts from knowledge of the platform plus official docs URL"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page is marketing, not API docs; auth and MCP claims based on well-known platform knowledge. Very broad but requires Connected App setup."
+}

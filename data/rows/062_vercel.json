@@ -1,0 +1,34 @@
+{
+  "num": 62,
+  "app": "Vercel",
+  "category": "Deployment and Hosting",
+  "one_line": "Frontend deployment and serverless platform whose REST API manages deployments, domains, env vars and projects.",
+  "auth_methods": ["Access Token", "OAuth2"],
+  "auth_notes": "Vercel Access Tokens sent as 'Authorization: Bearer <TOKEN>' created in account settings; OAuth2 for third-party app integrations with scopes",
+  "self_serve": "yes",
+  "self_serve_notes": "Free (hobby) tier; access tokens self-serve from account settings, team resources accessed via teamId param",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "REST API at api.vercel.com covering deployments, projects, domains, DNS, certs, teams, env vars, webhooks, edge config and more (40+ endpoint groups)",
+    "webhooks": true,
+    "webhook_note": "Webhooks endpoint group documented; deployment/ready and error events"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP server confirmed; community MCP servers exist (knowledge)"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://vercel.com/docs/rest-api",
+    "note": "fetched text confirms Bearer access token auth, rate limits, endpoint list and webhooks"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Clean auth and docs; access token self-serve."
+}

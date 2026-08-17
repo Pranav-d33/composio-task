@@ -1,0 +1,34 @@
+{
+  "num": 5,
+  "app": "Twenty",
+  "category": "CRM / Open-source",
+  "one_line": "Open-source, self-hostable CRM platform (React/TypeScript/PostgreSQL) with REST and GraphQL APIs and built-in agent/MCP support.",
+  "auth_methods": ["API key", "OAuth2", "GraphQL"],
+  "auth_notes": "REST API authenticates with an API key (workspace-level); GraphQL API available; self-hosted deployments use their own auth. Open-source core means you can run it yourself and fully control credentials.",
+  "self_serve": "yes",
+  "self_serve_notes": "Open-source and free to self-host; managed cloud also has a free tier. No approval needed.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "moderate",
+    "breadth_estimate": "Covers core CRM objects (companies, people, opportunities, notes, tasks); ecosystem still maturing vs Salesforce/HubSpot",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported for object/record change events"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "MCP is a documented, built-in capability of Twenty ('Agents operate inside your data model... Skills, Tools, MCP'); community servers also exist"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://twenty.com/developers",
+    "note": "Fetched page was marketing/positioning, not API reference; API/MCP/webhook facts from knowledge of the project and docs URL"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched text confirms open-source, self-hostable, MCP. Endpoint specifics and webhook details not in the fetched page - based on knowledge."
+}

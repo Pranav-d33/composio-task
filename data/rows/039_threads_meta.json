@@ -1,0 +1,34 @@
+{
+  "num": 39,
+  "app": "Threads (Meta)",
+  "category": "Social Media",
+  "one_line": "Meta's text-first social network, with a free REST API to publish posts, retrieve media/profiles, moderate replies, and read insights.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 via a Meta app with the Threads API use case enabled. Access tokens from the App Dashboard or API; rate limited per user. Free to use.",
+  "self_serve": "yes",
+  "self_serve_notes": "Self-serve: create a Meta developer account and app, add the Threads API use case, connect an Instagram/Threads account, and start calling. No payment; app review not required for basic Threads API access.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "~15 endpoints: publish (single/carousel posts), retrieve media and profiles, reply moderation, mentions, keyword search, insights, oEmbed, webhooks",
+    "webhooks": true,
+    "webhook_note": "Webhooks for reply events and other activity"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official MCP found in docs; no well-known community MCP server for Threads API."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developers.facebook.com/docs/threads",
+    "note": "Fetched text was thin (856 chars) but confirms scope (publish, media, profiles, moderation, insights, webhooks); details from Threads API docs"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Thin fetched text; API is new and narrower than other Meta products. No MCP ecosystem yet."
+}

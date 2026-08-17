@@ -1,0 +1,9 @@
+requests
+beautifulsoup4
+lxml
+composio
+scrapling
+curl_cffi
+playwright
+browserforge
+msgspec

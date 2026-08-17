@@ -1,0 +1,34 @@
+{
+  "num": 59,
+  "app": "Waterfall.io",
+  "category": "Contact Data",
+  "one_line": "B2B contact and company data platform offering prospector, contact/phone enrichment and job-change APIs.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "API key sent as 'x-api-key' (or 'x-waterfall-api-key') header on api.waterfall.io/v1 endpoints",
+  "self_serve": "no",
+  "self_serve_notes": "Enterprise/GTM-focused; access gated behind 'Book a call' with sales/founders - no self-serve signup for API keys confirmed",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "REST v1 APIs: Prospector, Contact Enrichment, Phone Enrichment, Job Changes; high rate limits and unified schema claimed",
+    "webhooks": false,
+    "webhook_note": "None mentioned in fetched text"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No MCP server mentioned"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://waterfall.io",
+    "note": "fetched text confirms API endpoints, x-api-key auth, enterprise positioning and 'Book a call' gating"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API is documented on the site but credentials require sales contact; API key header name varies (x-api-key vs x-waterfall-api-key) between examples."
+}

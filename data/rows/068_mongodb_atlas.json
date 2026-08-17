@@ -1,0 +1,34 @@
+{
+  "num": 68,
+  "app": "MongoDB Atlas",
+  "category": "Database",
+  "one_line": "Managed cloud MongoDB database service with cluster management, search, and vector/embedding APIs.",
+  "auth_methods": ["API Key (public/private)", "OAuth2"],
+  "auth_notes": "Atlas Admin API authenticates with a public/private API key pair or OAuth2 client credentials; database access uses MongoDB connection strings/credentials. API keys are created in the Atlas UI.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free M0 tier cluster; any developer can sign up and generate Admin API keys solo, no sales.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Atlas Admin API covers projects, clusters, database users, backups, monitoring, search, data federation — 100+ endpoints.",
+    "webhooks": true,
+    "webhook_note": "Atlas Triggers and alert third-party integrations can call external webhooks."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MongoDB/Atlas MCP servers exist (e.g. mongodb-mcp-server); official MCP not confirmed."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://www.mongodb.com/docs/atlas/api",
+    "note": "Fetched text 'Atlas Programmatic Access' confirms the Atlas Administration API, CLI, Terraform provider, and Go SDK."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Admin API is purely for cluster/org admin; app-level data access is via MongoDB driver/connection strings."
+}

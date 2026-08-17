@@ -1,0 +1,34 @@
+{
+  "num": 77,
+  "app": "ClickUp",
+  "category": "Project Management",
+  "one_line": "All-in-one project management and team collaboration platform.",
+  "auth_methods": ["OAuth2", "API Key"],
+  "auth_notes": "REST API at docs.clickup.com; personal API keys (Bearer) or OAuth2 for user sign-in; docs cover API, MCP, webhooks, and OAuth.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free Forever plan exists; personal API keys are self-service in user settings.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Teams, spaces, folders, lists, tasks, docs, goals, comments, views, time tracking, attachments, dashboards.",
+    "webhooks": true,
+    "webhook_note": "Webhooks to trigger workflows from ClickUp events (task/list/space changes)."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "ClickUp docs explicitly advertise 'Connect your AI with ClickUp using our MCP Server' — official MCP confirmed in fetched text."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.clickup.com",
+    "note": "Fetched ClickUp developer landing page confirms API, official MCP server, webhooks, and OAuth."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Official MCP server existence directly confirmed in fetched docs text."
+}

@@ -1,0 +1,34 @@
+{
+  "num": 9,
+  "app": "Copper",
+  "category": "CRM / Relationship Intelligence",
+  "one_line": "Google-integrated CRM with a RESTful 'Developer API' (JSON) covering people, companies, opportunities, tasks, and leads.",
+  "auth_methods": ["API key", "OAuth2"],
+  "auth_notes": "API key (X-API-Key header) for server integrations; OAuth2 also supported. API at https://api.copper.com/developer_api/ with Postman collection available. Domain changed from api.prosperworks.com (auto-redirects until early 2022).",
+  "self_serve": "paid",
+  "self_serve_notes": "Paid plans required; API keys are issued per account. No free tier documented for API access.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "People, companies, opportunities, leads, tasks, activities, pipelines, custom fields; smaller surface than major CRMs",
+    "webhooks": true,
+    "webhook_note": "Webhooks/triggers supported for record change events (integration triggers)"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Copper MCP server found; community servers exist"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developer.copper.com",
+    "note": "Fetched getting-started page confirmed REST/JSON API, API domain, Postman resources; auth details partly from knowledge"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page focused on getting started/Postman; auth method specifics (API key header vs OAuth) from knowledge."
+}

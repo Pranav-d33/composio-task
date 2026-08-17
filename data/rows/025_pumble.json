@@ -1,0 +1,34 @@
+{
+  "num": 25,
+  "app": "Pumble",
+  "category": "Team Communication",
+  "one_line": "Free Slack-alternative team chat app with channels, threads, direct messages, and guest access.",
+  "auth_methods": ["None"],
+  "auth_notes": "No public developer API documented; only app integrations via existing connectors and help-center docs.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free self-serve signup for the app itself, but no developer credentials or API access are offered.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "No public API surface; integrations limited to prebuilt connectors and webhooks (undocumented for third parties).",
+    "webhooks": false,
+    "webhook_note": "No public webhook API for developers documented."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No MCP server exists (no public API to wrap)."
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "No public developer API or docs; integration only via prebuilt connectors.",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://pumble.com/help/",
+    "note": "Fetched text (025_pumble.txt) is a help-center homepage only; no developer API documentation found."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Lack of public API is consistent with Pumble's current offerings; could not confirm from docs since none exist."
+  }

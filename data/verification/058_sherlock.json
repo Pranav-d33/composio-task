@@ -1,0 +1,13 @@
+{
+ "num": 58,
+ "app": "Sherlock",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "Open-source CLI, no SaaS API; self-serve (free GitHub); blocked for toolkit integration. Confirmed from GitHub repo.",
+ "method": "docs_text (fetched)"
+}

@@ -1,0 +1,34 @@
+{
+  "num": 23,
+  "app": "Zoho Cliq",
+  "category": "Team Communication",
+  "one_line": "Zoho's team collaboration chat platform with a REST API for users, teams, channels, chats, messages, bots, reminders, events, and files.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "REST API uses OAuth 2.0 (scopes); apps registered in Zoho developer console. Multiple data-center domains (9) with per-region base URIs.",
+  "self_serve": "yes",
+  "self_serve_notes": "Self-serve; free and paid plans, API works on free orgs. OAuth app registration free.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "V2/V3 REST API: users, roles, teams, departments, channels, chats, messages, threads, bots, events, files, bulk export; 100+ endpoints, OAS available.",
+    "webhooks": true,
+    "webhook_note": "Bot webhook URLs and extension webhooks supported for delivering events."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP server confirmed; community MCP wrappers may exist (unverified)."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://www.zoho.com/cliq/help/restapi/",
+    "note": "Fetched text (023_zoho_cliq.txt) is the full API docs: OAuth 2.0 auth, REST root endpoint, endpoint list, data centers."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Text lists V3 as latest but intro text references /v2/ path; webhook support inferred from knowledge."
+  }

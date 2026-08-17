@@ -1,0 +1,34 @@
+{
+  "num": 79,
+  "app": "Smartsheet",
+  "category": "Work Management / Collaboration",
+  "one_line": "Cloud-based work management and collaboration platform with a REST API for programmatically managing sheets, rows, reports, and automation.",
+  "auth_methods": ["OAuth2", "API Key"],
+  "auth_notes": "OAuth2 (client credentials + user scope authorization) for user-authorized app access; also supports Personal Access Tokens (PAT) / API access tokens for server-to-server use. App registration required via the Smartsheet developer portal.",
+  "self_serve": "paid",
+  "self_serve_notes": "No free plan — Smartsheet requires a paid plan (30-day free trial available). Once on a plan, developers can create API tokens or register an OAuth app in the developer portal without manual approval.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints covering sheets, rows, columns, cells, reports, dashboards/sights, workspaces, folders, users, groups, automation rules, and events/webhooks.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported; subscription to sheet/row/cell events with HMAC-signed payloads."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MCP servers for Smartsheet exist (e.g. community-built smartsheet-mcp); no confirmed official MCP."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://smartsheet.redoc.ly",
+    "note": "Fetched text was empty (JS shell); confirmed docs endpoint reachable via curl and used domain knowledge of Smartsheet API."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth method (OAuth2 + PAT) and paid-only model well established; endpoint breadth from knowledge, not fetched text."
+}

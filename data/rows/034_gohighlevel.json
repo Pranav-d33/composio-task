@@ -1,0 +1,34 @@
+{
+  "num": 34,
+  "app": "GoHighLevel",
+  "category": "CRM / Marketing Automation",
+  "one_line": "White-label CRM and marketing automation platform for agencies, with a REST API for contacts, campaigns, and funnels.",
+  "auth_methods": ["API key", "OAuth2"],
+  "auth_notes": "Private/API integration uses an API key from the location/sub-account settings; public apps use OAuth2 with app approval. Docs at developer.leadconnectorhq.com (formerly highlevel.stoplight.io).",
+  "self_serve": "paid",
+  "self_serve_notes": "Requires a paid GoHighLevel subscription (Starter/Unlimited/SaaS plans; 14-day trial available). API key self-serve within an account; OAuth public apps require submitting for review.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Contacts, campaigns, conversations, calendars/appointments, funnels/triggers, opportunities, workflows, emails, SMS; ~100+ endpoints",
+    "webhooks": true,
+    "webhook_note": "Webhooks for contact, campaign, calendar, conversation and other events"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP; community MCP servers for GoHighLevel exist (unverified)."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://highlevel.stoplight.io",
+    "note": "Fetched text was a Stoplight 'workspace does not exist' shell (thin); facts from knowledge of GoHighLevel docs at developer.leadconnectorhq.com"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Thin fetched text; docs now live at developer.leadconnectorhq.com. API key auth is the fast path."
+}

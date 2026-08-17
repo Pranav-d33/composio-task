@@ -1,0 +1,13 @@
+{
+ "num": 10,
+ "app": "DealCloud",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "API docs exist (api.docs.dealcloud.com) but credential issuance is partner/enterprise-gated (contact sales). REST, broad. No MCP.",
+ "method": "docs_text (fetched)"
+}

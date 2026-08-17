@@ -1,0 +1,34 @@
+{
+  "num": 49,
+  "app": "Amazon Selling Partner (SP-API)",
+  "category": "E-commerce / Marketplace",
+  "one_line": "Amazon's API for sellers/vendors to manage listings, orders, inventory, fulfillment, pricing, reports and merchant services at scale.",
+  "auth_methods": ["OAuth2", "Signature (SigV4)"],
+  "auth_notes": "OAuth2 via Login with Amazon (LWA) to get a refresh token per selling partner, then AWS SigV4-signed requests with IAM role/credentials; requires a registered SP-API application with role(s) assigned per seller.",
+  "self_serve": "yes",
+  "self_serve_notes": "A dev with a professional seller account (~$39.99/mo) or vendor account can self-register in Seller Central > Partner Network > SP-API and create apps; each role (e.g., Listings, Orders, Fulfillment) requires separate registration and approval.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "40+ distinct SP-API sections (Orders, Feeds, Reports, Product Pricing, Inventory, Fulfillment, Merchant Fulfillment, Listings Items/Restrictions, Catalog Items, Finances, Merchant Fulfillment, Notifications, etc.) with hundreds of endpoints; OpenAPI specs published on GitHub",
+    "webhooks": true,
+    "webhook_note": "SP-API Notifications (order/listing/report lifecycle events) pushed via destination SQS/SNS/EventBridge instead of classic webhooks"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Amazon MCP server; community SP-API MCP servers exist on GitHub/MCP registries"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developer-docs.amazon.com/sp-api",
+    "note": "Fetched text confirms SP-API docs portal for sellers/vendors with API references, models, notifications and GitHub swagger models; LWA OAuth + SigV4 from knowledge"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth is the most complex (LWA + SigV4 + IAM + per-role registration). Self-serve but registration/approval per role adds days; needs a paid professional seller account."
+  }

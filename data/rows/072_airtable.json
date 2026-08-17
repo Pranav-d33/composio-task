@@ -1,0 +1,34 @@
+{
+  "num": 72,
+  "app": "Airtable",
+  "category": "Database",
+  "one_line": "Low-code relational database that blends spreadsheets with app-building.",
+  "auth_methods": ["OAuth2", "Personal Access Token (PAT)", "API Key"],
+  "auth_notes": "Modern Web API uses OAuth2 or personal access tokens (Bearer); legacy API keys still function. Token scopes restrict base/table access.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier available; any developer can generate a PAT free and solo in the Airtable account UI.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Bases, tables, records, fields, attachments, comments, webhooks, automations — full CRUD over base content.",
+    "webhooks": true,
+    "webhook_note": "Webhooks API for base changes with payload curation support."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Airtable MCP server exists (airtable/airtable-mcp); community servers also exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://airtable.com/developers/web/api",
+    "note": "Fetched text is the Airtable Web API intro confirming REST semantics, JSON, and official JS client; auth details from knowledge plus official docs URL."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched text was short (intro page only); auth fields rely on knowledge."
+}

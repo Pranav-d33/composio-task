@@ -1,0 +1,34 @@
+{
+  "num": 11,
+  "app": "Zendesk",
+  "category": "Customer Support / Helpdesk",
+  "one_line": "Customer support platform with a very broad set of REST APIs across Support, Help Center, Talk, Chat, Sell, Messaging, and apps.",
+  "auth_methods": ["API token", "OAuth2"],
+  "auth_notes": "API token (email + token via basic auth) or OAuth2 for apps; per-product APIs (Support, Help Center, Talk, Chat, Sell, Sunshine Conversations, ZIS). Public Postman workspace available.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free trial then paid plans; API token is self-serve from the admin UI once you have a Zendesk subdomain/account.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Support, Help Center, Talk, Chat, Sell, Messaging, Custom Objects, Apps, and Integration Services (ZIS) APIs",
+    "webhooks": true,
+    "webhook_note": "Webhooks API plus ZIS inbound webhooks for triggering external integrations"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Zendesk MCP server found; several community servers exist on GitHub/MCP registry"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.zendesk.com",
+    "note": "Fetched API reference home confirmed API breadth across products and Postman workspace; auth details from knowledge"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API breadth and products confirmed from fetched text. Needs a trial/paid account plus subdomain; no official MCP."
+}

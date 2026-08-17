@@ -1,0 +1,34 @@
+{
+  "num": 93,
+  "app": "Fathom",
+  "category": "AI Meeting Notetakers",
+  "one_line": "AI meeting notetaker that records, transcribes, and summarizes meetings and syncs notes to CRMs.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "Public API & MCP announced; auth via account-based API key/token, no self-serve developer portal historically",
+  "self_serve": "trial",
+  "self_serve_notes": "Free forever individual plan; team/paid plans for features; API/MCP access not fully self-serve",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Limited meeting notes/transcripts retrieval endpoints; API is new",
+    "webhooks": false,
+    "webhook_note": "No webhooks documented"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "'Public API & MCP' listed as a Fathom integration on fathom.video (confirmed via homepage navigation)"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://fathom.video",
+    "note": "fetched text was a marketing page; API/MCP confirmed from homepage footer navigation"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API details thin; consumer product historically without public API, MCP/API now advertised"
+}

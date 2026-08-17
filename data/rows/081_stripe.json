@@ -1,0 +1,34 @@
+{
+  "num": 81,
+  "app": "Stripe",
+  "category": "Payments",
+  "one_line": "Global payments and financial infrastructure platform with a very broad REST API for payments, billing, subscriptions, payouts, and connect.",
+  "auth_methods": ["API Key", "OAuth2"],
+  "auth_notes": "API keys (secret/publishable, sk_test/sk_live restricted keys) issued from the Dashboard; OAuth2 used for Stripe Connect platform accounts. Keys sent via HTTP Basic/Bearer. Test-mode keys available immediately without a live business.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free self-serve signup — instant sandbox (test mode) keys; live mode enabled after minimal account activation. Pay-as-you-go; no up-front fee.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across payments, billing, subscriptions, checkouts, connect, issuing, terminal, treasury, tax, identity, reporting, and more; plus webhook/event destinations.",
+    "webhooks": true,
+    "webhook_note": "Mature webhook support via webhook endpoints and event destinations (v2); signed payloads with configurable events."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Stripe publishes an official MCP server (stripe-mcp); multiple community MCP servers also exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://stripe.com/docs/api",
+    "note": "Fetched text of Stripe API reference confirms REST architecture, API key auth, error model, and broad resource list."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Confident on all fields from fetched API reference text."
+}

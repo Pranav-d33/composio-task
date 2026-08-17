@@ -1,0 +1,34 @@
+{
+  "num": 4,
+  "app": "Attio",
+  "category": "CRM / Data-driven Workspace",
+  "one_line": "Highly customizable, data-driven CRM with a REST API, real-time webhooks, an app SDK, and native MCP support.",
+  "auth_methods": ["OAuth2", "API key"],
+  "auth_notes": "OAuth2 for published third-party apps; workspace API tokens (bearer) for personal/workspace integrations. Developer platform also offers an App SDK (TypeScript/React) and SQL query interface.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier exists; developers can create a workspace and issue API tokens without approval.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "REST API covering records, lists, objects, attributes, workspaces, notes, tasks, calendar events, and emails",
+    "webhooks": true,
+    "webhook_note": "Subscribe to workspace events in realtime via webhooks (explicitly documented)"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "MCP is a first-class part of the Attio developer platform ('Manage Attio via AI - connect Claude, ChatGPT or your AI tool of choice')"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.attio.com",
+    "note": "Fetched docs index confirmed REST API, webhooks, MCP, App SDK, and SQL access"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Docs explicitly document MCP and webhooks; very buildable. Token vs OAuth details standard for modern SaaS."
+}

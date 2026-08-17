@@ -1,0 +1,13 @@
+{
+ "num": 85,
+ "app": "iPayX",
+ "checks": {
+  "auth_methods": "unknown",
+  "self_serve": "correct",
+  "api_surface": "unknown",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "ipayx.ai/docs is marketing-only; no endpoints/auth scheme; blocked. Auth/API unknown (honest).",
+ "method": "browser fetch"
+}

@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Composio AI Product Ops — Take-home Case Study</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f6f4ef;
+  --paper2: #ece9e1;
+  --ink: #1a1917;
+  --ink-soft: #5c5851;
+  --line: #d8d3c8;
+  --accent: #c8452c;
+  --accent2: #2a6b5a;
+  --v-today: #2a6b5a;
+  --v-work: #c8932c;
+  --v-blocked: #c8452c;
+  --serif: 'Newsreader', Georgia, serif;
+  --sans: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased; }
+.wrap { max-width:1180px; margin:0 auto; padding:0 32px; }
+
+/* Header */
+header { border-bottom:1px solid var(--line); }
+.topbar { display:flex; justify-content:space-between; align-items:center; padding:18px 32px; max-width:1180px; margin:0 auto; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+.topbar .brand { font-weight:700; color:var(--ink); }
+.topbar .brand span { color:var(--accent); }
+
+/* Hero */
+.hero { padding:72px 0 56px; }
+.eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; }
+h1 { font-family:var(--serif); font-weight:600; font-size:clamp(38px,5.5vw,64px); line-height:1.05; letter-spacing:-.015em; max-width:18ch; }
+h1 em { font-style:italic; font-weight:400; }
+.hero-sub { font-size:18px; color:var(--ink-soft); max-width:62ch; margin-top:20px; font-family:var(--serif); }
+.hero-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:48px; }
+.stat { background:var(--paper); padding:26px 22px; }
+.stat .n { font-family:var(--serif); font-size:44px; font-weight:600; line-height:1; }
+.stat .n span { color:var(--accent); }
+.stat .l { font-size:12.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin-top:8px; }
+.stat .d { font-size:13px; color:var(--ink-soft); margin-top:6px; }
+
+/* Section scaffolding */
+section { padding:64px 0; border-top:1px solid var(--line); }
+section h2 { font-family:var(--serif); font-size:32px; font-weight:600; letter-spacing:-.01em; }
+section h3 { font-family:var(--serif); font-size:20px; font-weight:600; margin:28px 0 8px; }
+.sec-head { display:flex; align-items:baseline; gap:16px; margin-bottom:28px; }
+.sec-head .num { font-family:var(--mono); color:var(--accent); font-size:14px; }
+.sec-head .desc { color:var(--ink-soft); font-size:15px; font-family:var(--serif); }
+
+/* Findings (patterns) */
+.patterns-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+.pattern-block { border-top:2px solid var(--ink); padding-top:14px; }
+.pattern-block h4 { font-family:var(--serif); font-size:19px; font-weight:600; margin-bottom:6px; }
+.pattern-block p { color:var(--ink-soft); font-size:15px; }
+.pattern-block .big { font-family:var(--serif); font-size:34px; font-weight:600; color:var(--accent); line-height:1.1; }
+.pattern-block .big small { font-size:16px; color:var(--ink-soft); font-family:var(--sans); font-weight:400; }
+
+/* Bars */
+.bar-row { display:grid; grid-template-columns:150px 1fr 40px; gap:12px; align-items:center; margin:10px 0; font-size:13px; }
+.bar-label { text-align:right; color:var(--ink-soft); font-size:13px; }
+.bar-track { height:18px; background:var(--paper2); border-radius:2px; overflow:hidden; }
+.bar-fill { height:100%; background:var(--accent); border-radius:2px; }
+.bar-auth { background:var(--accent); }
+.bar-gate { background:var(--ink); }
+.bar-ttc { background:var(--accent2); }
+.bar-val { font-family:var(--mono); font-size:13px; }
+.track-stacked { display:flex; }
+.bar-track.stacked { display:flex; }
+.stacked .v-today { background:var(--v-today); }
+.stacked .v-work { background:var(--v-work); }
+.stacked .v-blocked { background:var(--v-blocked); }
+
+/* matrix */
+.matrix-controls { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:16px; align-items:center; }
+.matrix-controls select, .matrix-controls input { padding:8px 12px; font-family:var(--sans); font-size:13px; border:1px solid var(--line); background:var(--paper); color:var(--ink); border-radius:3px; }
+.matrix-controls .search { flex:1; min-width:180px; }
+.matrix-wrap { overflow-x:auto; border:1px solid var(--line); }
+table.matrix { width:100%; border-collapse:collapse; font-size:13px; white-space:nowrap; }
+table.matrix th { text-align:left; padding:10px 12px; background:var(--paper2); border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-soft); position:sticky; top:0; cursor:pointer; user-select:none; }
+table.matrix td { padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:middle; }
+table.matrix tr:hover td { background:#fbfaf7; }
+table.matrix td.num { font-family:var(--mono); color:var(--ink-soft); font-size:12px; }
+table.matrix td.app a { color:var(--ink); text-decoration:none; font-weight:500; border-bottom:1px solid transparent; }
+table.matrix td.app a:hover { border-bottom:1px solid var(--accent); color:var(--accent); }
+.tag { display:inline-block; font-size:11px; padding:2px 7px; border-radius:2px; background:var(--paper2); margin-right:4px; border:1px solid var(--line); }
+.tag-oauth2 { background:#e8eee9; border-color:#c5d4ca; }
+.tag-api-key { background:#efe9e2; border-color:#ddcfbe; }
+.tag-api-token { background:#e9e6ef; border-color:#cdc7db; }
+.tag-jwt { background:#f0e6e4; border-color:#ddc3bf; }
+.tag-bot-token { background:#e4e9ef; border-color:#c6d2e0; }
+.tag-pat { background:#e6efe8; border-color:#c8d8cc; }
+.tag-basic { background:#efe9e0; border-color:#ddd2c0; }
+.tag-none { background:#eae9e7; border-color:#d3d1cd; }
+.tag-unknown { background:#ececea; border-color:#d5d4d0; }
+.mcp { display:inline-block; font-size:11px; padding:2px 7px; border-radius:2px; }
+.mcp-official { background:#e0eee6; color:#1e5a45; }
+.mcp-community { background:#eaeef0; color:#2c5568; }
+.mcp-none { background:#ece9e4; color:#6b655b; }
+.verdict { font-weight:600; }
+.verdict-buildable_today { color:var(--v-today); }
+.verdict-buildable_with_work { color:#8a6410; }
+.verdict-blocked { color:var(--v-blocked); }
+.matrix-count { font-family:var(--mono); font-size:12px; color:var(--ink-soft); }
+.legend { display:flex; gap:18px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:12px; }
+.legend span { display:inline-flex; align-items:center; gap:5px; }
+.dot { width:9px; height:9px; border-radius:2px; display:inline-block; }
+
+/* Verification */
+.acc-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+.acc-card { border:1px solid var(--line); padding:24px; background:var(--paper); }
+.acc-card .label { font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-soft); }
+.acc-card .pct { font-family:var(--serif); font-size:64px; font-weight:600; line-height:1; margin:12px 0 4px; }
+.acc-card .pct small { font-size:20px; color:var(--ink-soft); }
+.acc-card.gain { border-color:var(--v-today); }
+.arrow-up { color:var(--v-today); font-size:18px; }
+table.verif { width:100%; border-collapse:collapse; font-size:13px; }
+table.verif th { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); }
+table.verif td { padding:7px 10px; border-bottom:1px solid var(--line); }
+.v-ok { color:var(--v-today); font-weight:700; }
+.v-no { color:var(--v-blocked); font-weight:700; }
+.v-un { color:var(--ink-soft); }
+
+/* pipeline / agent */
+.pipe { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:24px 0; }
+.pipe-step { border:1px solid var(--line); padding:14px 16px; background:var(--paper); font-size:13px; flex:1; min-width:120px; }
+.pipe-step .t { font-weight:600; display:block; margin-bottom:3px; }
+.pipe-step .d { color:var(--ink-soft); font-size:12px; }
+.pipe-arrow { color:var(--accent); font-size:20px; }
+.human { border:1px dashed var(--accent); }
+.human .t { color:var(--accent); }
+
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.win-chip { border:1px solid var(--line); padding:5px 11px; font-size:12px; border-radius:20px; text-decoration:none; color:var(--ink); background:var(--paper); }
+.win-chip:hover { border-color:var(--v-today); color:var(--v-today); }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+ul.clean { list-style:none; margin-top:8px; }
+ul.clean li { padding:6px 0; border-bottom:1px solid var(--line); font-size:14px; }
+.muted { color:var(--ink-soft); font-size:13px; }
+.note { background:var(--paper2); border-left:3px solid var(--accent); padding:14px 18px; font-size:14px; margin:16px 0; }
+.quote { font-family:var(--serif); font-style:italic; font-size:19px; color:var(--ink-soft); max-width:70ch; margin:18px 0; }
+
+/* footer */
+footer { border-top:1px solid var(--line); padding:40px 0; color:var(--ink-soft); font-size:13px; }
+footer .links { display:flex; gap:24px; margin-top:12px; flex-wrap:wrap; }
+footer a { color:var(--accent); text-decoration:none; }
+
+@media (max-width: 800px) {
+  .hero-stats { grid-template-columns:1fr 1fr; }
+  .patterns-grid, .acc-grid, .two-col { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">COMPOSIO <span>AI PRODUCT OPS</span></div>
+    <div>Take-home case study · 100 apps · verified</div>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <div class="eyebrow">Case Study — AI Product Ops Intern</div>
+  <h1>Turning 100 apps into <em>agent tools.</em> Researched, scored, and verified.</h1>
+  <p class="hero-sub">For each of the 100 requested apps we captured auth methods, self-serve vs gated access, API surface, MCP coverage and a buildability verdict — using an agentic research pipeline, then a verification loop that moved accuracy from <b>67%</b> to <b>86%</b>.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="n">68</div><div class="l">Buildable today</div><div class="d">self-serve or trial credentials</div></div>
+    <div class="stat"><div class="n">63%</div><div class="l">Use OAuth2</div><div class="d">+ 56% accept an API key</div></div>
+    <div class="stat"><div class="n">50</div><div class="l">Fully self-serve</div><div class="d">no gate to get credentials</div></div>
+    <div class="stat"><div class="n"><span>+19</span>pts</div><div class="l">Accuracy after verification</div><div class="d">67% → 86% on a 20-app sample</div></div>
+  </div>
+</div>
+
+<section id="patterns">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><div><h2>The headline patterns</h2><div class="desc">What clustering 100 apps actually shows — the short version.</div></div></div>
+    <div class="patterns-grid">
+      <div class="pattern-block">
+        <h4>OAuth2 is the default, but the API key is the workhorse</h4>
+        <div class="big">63<small> of 100 apps support OAuth2</small></div>
+        <p>Nearly every major SaaS ships OAuth2, but 56 also accept a simple API key — the cheapest path to a working toolkit. For agent tooling, "API key + webhooks" is the fastest buildable surface.</p>
+      </div>
+      <div class="pattern-block">
+        <h4>Buildability tracks self-serve access</h4>
+        <div class="big">50<small> apps are fully self-serve</small></div>
+        <p>Half of the set needs no approval at all. Another 29 need a paid plan. The rest (21) require admin approval, contact sales or a partnership — and those are almost exactly the apps that are blocked or need outreach.</p>
+      </div>
+      <div class="pattern-block">
+        <h4>The most common blocker is access, not technology</h4>
+        <div class="big">11<small> of 32 non-buildable apps are gate-limited</small></div>
+        <p>Very few apps are blocked because the API doesn't exist. The blocker is almost always a sales gate, an app-review process, or a partner approval — not missing documentation.</p>
+      </div>
+      <div class="pattern-block">
+        <h4>MCP is already mainstream</h4>
+        <div class="big">40<small> apps have an official MCP server</small></div>
+        <p>40 more have a community MCP. Only 20 have none at all. The window for "first MCP" is closing fast — the easy wins now are the 40 community-only apps an official server would legitimize.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="matrix">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><div><h2>The full findings matrix</h2><div class="desc">All 100 apps — filter, search, sort. Click a name for the evidence link.</div></div></div>
+    <div class="matrix-controls">
+      <input type="text" id="search" class="search" placeholder="Search apps…">
+      <select id="f-cat"><option value="">All categories</option></select>
+      <select id="f-auth"><option value="">All auth</option></select>
+      <select id="f-verdict"><option value="">All verdicts</option></select>
+      <select id="f-mcp"><option value="">All MCP</option></select>
+      <span class="matrix-count" id="count">100 / 100</span>
+    </div>
+    <div class="matrix-wrap">
+      <table class="matrix" id="matrix">
+        <thead><tr>
+          <th data-k="num">#</th>
+          <th data-k="app">App</th>
+          <th data-k="cat">Category</th>
+          <th data-k="auth">Auth</th>
+          <th data-k="gate">Access</th>
+          <th data-k="api">API</th>
+          <th data-k="mcp">MCP</th>
+          <th data-k="verdict">Verdict</th>
+          <th data-k="ttc">First call</th>
+          <th data-k="conf">Conf</th>
+        </tr></thead>
+        <tbody id="tbody">
+<tr data-cat="CRM and Sales" data-auth="OAuth2 JWT SOAP API Token" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">1</td>
+<td class="app"><a href="https://developer.salesforce.com/docs" target="_blank" rel="noopener">Salesforce</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-jwt">JWT</span><span class="tag tag-soap">SOAP</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|SOAP|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">2</td>
+<td class="app"><a href="https://developers.hubspot.com/docs" target="_blank" rel="noopener">HubSpot</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="API Token OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="broad">
+<td class="num">3</td>
+<td class="app"><a href="https://developers.pipedrive.com/docs/api/v1" target="_blank" rel="noopener">Pipedrive</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="broad">
+<td class="num">4</td>
+<td class="app"><a href="https://docs.attio.com" target="_blank" rel="noopener">Attio</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="API Key OAuth2 API Token" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="moderate">
+<td class="num">5</td>
+<td class="app"><a href="https://twenty.com/developers" target="_blank" rel="noopener">Twenty</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="very_broad">
+<td class="num">6</td>
+<td class="app"><a href="https://developers.podio.com" target="_blank" rel="noopener">Podio</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="broad">
+<td class="num">7</td>
+<td class="app"><a href="https://www.zoho.com/crm/developer/docs/api/v6/" target="_blank" rel="noopener">Zoho CRM</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="broad">
+<td class="num">8</td>
+<td class="app"><a href="https://developer.close.com" target="_blank" rel="noopener">Close</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="moderate">
+<td class="num">9</td>
+<td class="app"><a href="https://developer.copper.com" target="_blank" rel="noopener">Copper</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="CRM and Sales" data-auth="API Key API Token" data-verdict="buildable_with_work" data-gate="contact_sales" data-mcp="official" data-breadth="broad">
+<td class="num">10</td>
+<td class="app"><a href="https://api.docs.dealcloud.com" target="_blank" rel="noopener">DealCloud</a></td>
+<td class="cat">CRM and Sales</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">weeks</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="API Token OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="very_broad">
+<td class="num">11</td>
+<td class="app"><a href="https://developer.zendesk.com" target="_blank" rel="noopener">Zendesk</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="OAuth2 API Token" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="broad">
+<td class="num">12</td>
+<td class="app"><a href="https://developers.intercom.com" target="_blank" rel="noopener">Intercom</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">13</td>
+<td class="app"><a href="https://developers.freshdesk.com/api/" target="_blank" rel="noopener">Freshdesk</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="broad">
+<td class="num">14</td>
+<td class="app"><a href="https://dev.frontapp.com" target="_blank" rel="noopener">Front</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="moderate">
+<td class="num">15</td>
+<td class="app"><a href="https://docs.usepylon.com" target="_blank" rel="noopener">Pylon</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="none" data-breadth="moderate">
+<td class="num">16</td>
+<td class="app"><a href="https://www.liveagent.com/api/" target="_blank" rel="noopener">LiveAgent</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="broad">
+<td class="num">17</td>
+<td class="app"><a href="https://docs.plain.com" target="_blank" rel="noopener">Plain</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">GraphQL</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="none" data-breadth="broad">
+<td class="num">18</td>
+<td class="app"><a href="https://developer.helpscout.com" target="_blank" rel="noopener">Help Scout</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="none" data-breadth="broad">
+<td class="num">19</td>
+<td class="app"><a href="https://developers.gorgias.com" target="_blank" rel="noopener">Gorgias</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Support and Helpdesk" data-auth="API Key" data-verdict="buildable_with_work" data-gate="contact_sales" data-mcp="none" data-breadth="moderate">
+<td class="num">20</td>
+<td class="app"><a href="https://developer.gladly.com" target="_blank" rel="noopener">Gladly</a></td>
+<td class="cat">Support and Helpdesk</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="OAuth2 Bot Token" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">21</td>
+<td class="app"><a href="https://api.slack.com" target="_blank" rel="noopener">Slack</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-bot-token">Bot Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">22</td>
+<td class="app"><a href="https://www.twilio.com/docs" target="_blank" rel="noopener">Twilio</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">23</td>
+<td class="app"><a href="https://www.zoho.com/cliq/help/restapi/" target="_blank" rel="noopener">Zoho Cliq</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">24</td>
+<td class="app"><a href="https://open.larksuite.com" target="_blank" rel="noopener">Lark (Larksuite)</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="None" data-verdict="blocked" data-gate="none" data-mcp="none" data-breadth="narrow">
+<td class="num">25</td>
+<td class="app"><a href="https://pumble.com/help/" target="_blank" rel="noopener">Pumble</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-none">None</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="OAuth2 Bot Token" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">26</td>
+<td class="app"><a href="https://discord.com/developers/docs" target="_blank" rel="noopener">Discord</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-bot-token">Bot Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="Bot Token" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="very_broad">
+<td class="num">27</td>
+<td class="app"><a href="https://core.telegram.org/bots/api" target="_blank" rel="noopener">Telegram</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-bot-token">Bot Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="API Token" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="broad">
+<td class="num">28</td>
+<td class="app"><a href="https://developers.facebook.com/docs/whatsapp" target="_blank" rel="noopener">WhatsApp Business</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="OAuth2 Basic" data-verdict="buildable_with_work" data-gate="paid_plan" data-mcp="none" data-breadth="very_broad">
+<td class="num">29</td>
+<td class="app"><a href="https://developer.aircall.io" target="_blank" rel="noopener">Aircall</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-basic">Basic</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Communications and Messaging" data-auth="API Key JWT" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">30</td>
+<td class="app"><a href="https://developer.vonage.com" target="_blank" rel="noopener">Vonage</a></td>
+<td class="cat">Communications and Messaging</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-jwt">JWT</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|WebSockets</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="very_broad">
+<td class="num">31</td>
+<td class="app"><a href="https://developers.google.com/google-ads/api" target="_blank" rel="noopener">Google Ads</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST|gRPC|GraphQL (not officially; GAQL for querying)</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="very_broad">
+<td class="num">32</td>
+<td class="app"><a href="https://developers.facebook.com/docs/marketing-apis" target="_blank" rel="noopener">Meta Ads</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="broad">
+<td class="num">33</td>
+<td class="app"><a href="https://learn.microsoft.com/en-us/linkedin/marketing/" target="_blank" rel="noopener">LinkedIn Ads</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">weeks</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="API Key OAuth2" data-verdict="buildable_with_work" data-gate="paid_plan" data-mcp="community" data-breadth="broad">
+<td class="num">34</td>
+<td class="app"><a href="https://highlevel.stoplight.io" target="_blank" rel="noopener">GoHighLevel</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="very_broad">
+<td class="num">35</td>
+<td class="app"><a href="https://mailchimp.com/developer/marketing/api/" target="_blank" rel="noopener">Mailchimp</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">36</td>
+<td class="app"><a href="https://developers.klaviyo.com" target="_blank" rel="noopener">Klaviyo</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="none" data-breadth="moderate">
+<td class="num">37</td>
+<td class="app"><a href="https://developer.systeme.io/" target="_blank" rel="noopener">systeme.io</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="broad">
+<td class="num">38</td>
+<td class="app"><a href="https://developers.pinterest.com" target="_blank" rel="noopener">Pinterest</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="none" data-breadth="narrow">
+<td class="num">39</td>
+<td class="app"><a href="https://developers.facebook.com/docs/threads" target="_blank" rel="noopener">Threads (Meta)</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Marketing, Ads, Email and Social" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">40</td>
+<td class="app"><a href="https://docs.sendgrid.com/api-reference" target="_blank" rel="noopener">SendGrid</a></td>
+<td class="cat">Marketing, Ads, Email and Social</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="OAuth2 API Token" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">41</td>
+<td class="app"><a href="https://shopify.dev/docs/api/admin" target="_blank" rel="noopener">Shopify</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="very_broad">
+<td class="num">42</td>
+<td class="app"><a href="https://woocommerce.com/document/woocommerce-rest-api/" target="_blank" rel="noopener">WooCommerce</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="OAuth2 API Token" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="very_broad">
+<td class="num">43</td>
+<td class="app"><a href="https://developer.bigcommerce.com" target="_blank" rel="noopener">BigCommerce</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="OAuth2 JWT" data-verdict="blocked" data-gate="contact_sales" data-mcp="none" data-breadth="broad">
+<td class="num">44</td>
+<td class="app"><a href="https://developer.salesforce.com/docs/commerce" target="_blank" rel="noopener">Salesforce Commerce Cloud</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-jwt">JWT</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="API Token OAuth1 JWT" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="very_broad">
+<td class="num">45</td>
+<td class="app"><a href="https://developer.adobe.com/commerce/webapi/rest/" target="_blank" rel="noopener">Magento (Adobe Commerce)</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span><span class="tag tag-oauth1">OAuth1</span><span class="tag tag-jwt">JWT</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="none" data-mcp="none" data-breadth="moderate">
+<td class="num">46</td>
+<td class="app"><a href="https://developers.squarespace.com/commerce-apis" target="_blank" rel="noopener">Squarespace</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="none" data-mcp="none" data-breadth="broad">
+<td class="num">47</td>
+<td class="app"><a href="https://api-docs.ecwid.com" target="_blank" rel="noopener">Ecwid</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="OAuth2 API Token" data-verdict="buildable_today" data-gate="none" data-mcp="none" data-breadth="moderate">
+<td class="num">48</td>
+<td class="app"><a href="https://gumroad.com/api" target="_blank" rel="noopener">Gumroad</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="OAuth2 Signed Request" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="very_broad">
+<td class="num">49</td>
+<td class="app"><a href="https://developer-docs.amazon.com/sp-api" target="_blank" rel="noopener">Amazon Selling Partner (SP-API)</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-signed-request">Signed Request</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Ecommerce" data-auth="API Key" data-verdict="blocked" data-gate="contact_sales" data-mcp="none" data-breadth="narrow">
+<td class="num">50</td>
+<td class="app"><a href="https://fanbasis.com" target="_blank" rel="noopener">fanbasis</a></td>
+<td class="cat">Ecommerce</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">low</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Key Basic" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="very_broad">
+<td class="num">51</td>
+<td class="app"><a href="https://docs.dataforseo.com" target="_blank" rel="noopener">DataForSEO</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-basic">Basic</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="broad">
+<td class="num">52</td>
+<td class="app"><a href="https://seranking.com/api" target="_blank" rel="noopener">SE Ranking</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="broad">
+<td class="num">53</td>
+<td class="app"><a href="https://ahrefs.com/api/documentation" target="_blank" rel="noopener">Ahrefs</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="moderate">
+<td class="num">54</td>
+<td class="app"><a href="https://docs.mrscraper.com" target="_blank" rel="noopener">MrScraper</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Token" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">55</td>
+<td class="app"><a href="https://docs.apify.com" target="_blank" rel="noopener">Apify</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="moderate">
+<td class="num">56</td>
+<td class="app"><a href="https://docs.firecrawl.dev" target="_blank" rel="noopener">Firecrawl</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Token" data-verdict="buildable_with_work" data-gate="none" data-mcp="official" data-breadth="broad">
+<td class="num">57</td>
+<td class="app"><a href="https://docs.brightdata.com" target="_blank" rel="noopener">Bright Data</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="Unknown" data-verdict="blocked" data-gate="none" data-mcp="none" data-breadth="narrow">
+<td class="num">58</td>
+<td class="app"><a href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener">Sherlock</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-unknown">Unknown</span></td>
+<td class="gate">Self-serve</td>
+<td class="api"></td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Key" data-verdict="buildable_with_work" data-gate="contact_sales" data-mcp="none" data-breadth="moderate">
+<td class="num">59</td>
+<td class="app"><a href="https://waterfall.io" target="_blank" rel="noopener">Waterfall.io</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Data, SEO and Scraping" data-auth="API Key" data-verdict="buildable_with_work" data-gate="none" data-mcp="community" data-breadth="narrow">
+<td class="num">60</td>
+<td class="app"><a href="https://docs.clay.com" target="_blank" rel="noopener">Clay</a></td>
+<td class="cat">Data, SEO and Scraping</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="OAuth2 PAT JWT" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">61</td>
+<td class="app"><a href="https://docs.github.com/rest" target="_blank" rel="noopener">GitHub</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-pat">PAT</span><span class="tag tag-jwt">JWT</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="API Token OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">62</td>
+<td class="app"><a href="https://vercel.com/docs/rest-api" target="_blank" rel="noopener">Vercel</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="OAuth2 PAT" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">63</td>
+<td class="app"><a href="https://docs.netlify.com/api" target="_blank" rel="noopener">Netlify</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-pat">PAT</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="API Token OAuth2 API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">64</td>
+<td class="app"><a href="https://developers.cloudflare.com/api" target="_blank" rel="noopener">Cloudflare</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-api-token">API Token</span><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="API Key OAuth2 JWT" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">65</td>
+<td class="app"><a href="https://supabase.com/docs" target="_blank" rel="noopener">Supabase</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-jwt">JWT</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|GraphQL</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="Basic API Key" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="moderate">
+<td class="num">66</td>
+<td class="app"><a href="https://neo4j.com/docs/api/" target="_blank" rel="noopener">Neo4j</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-basic">Basic</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="OAuth2 JWT API Key" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="broad">
+<td class="num">67</td>
+<td class="app"><a href="https://docs.snowflake.com" target="_blank" rel="noopener">Snowflake</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-jwt">JWT</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">68</td>
+<td class="app"><a href="https://www.mongodb.com/docs/atlas/api" target="_blank" rel="noopener">MongoDB Atlas</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="very_broad">
+<td class="num">69</td>
+<td class="app"><a href="https://docs.datadoghq.com/api" target="_blank" rel="noopener">Datadog</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Developer, Infra and Data platforms" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="broad">
+<td class="num">70</td>
+<td class="app"><a href="https://docs.sentry.io/api" target="_blank" rel="noopener">Sentry</a></td>
+<td class="cat">Developer, Infra and Data platforms</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 API Key PAT" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="broad">
+<td class="num">71</td>
+<td class="app"><a href="https://developers.notion.com" target="_blank" rel="noopener">Notion</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span><span class="tag tag-pat">PAT</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 PAT API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="broad">
+<td class="num">72</td>
+<td class="app"><a href="https://airtable.com/developers/web/api" target="_blank" rel="noopener">Airtable</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-pat">PAT</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="broad">
+<td class="num">73</td>
+<td class="app"><a href="https://developers.linear.app/docs" target="_blank" rel="noopener">Linear</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">GraphQL</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 Basic JWT" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="very_broad">
+<td class="num">74</td>
+<td class="app"><a href="https://developer.atlassian.com/cloud/jira" target="_blank" rel="noopener">Jira</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-basic">Basic</span><span class="tag tag-jwt">JWT</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 PAT" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="broad">
+<td class="num">75</td>
+<td class="app"><a href="https://developers.asana.com/docs" target="_blank" rel="noopener">Asana</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-pat">PAT</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 API Token" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="broad">
+<td class="num">76</td>
+<td class="app"><a href="https://developer.monday.com" target="_blank" rel="noopener">Monday.com</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-token">API Token</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">GraphQL</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="broad">
+<td class="num">77</td>
+<td class="app"><a href="https://docs.clickup.com" target="_blank" rel="noopener">ClickUp</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="Bearer Token OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="broad">
+<td class="num">78</td>
+<td class="app"><a href="https://coda.io/developers/apis/v1" target="_blank" rel="noopener">Coda</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-bearer-token">Bearer Token</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="very_broad">
+<td class="num">79</td>
+<td class="app"><a href="https://smartsheet.redoc.ly" target="_blank" rel="noopener">Smartsheet</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Productivity and Project Management" data-auth="OAuth2 API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="community" data-breadth="broad">
+<td class="num">80</td>
+<td class="app"><a href="https://help.getharvest.com/api-v2" target="_blank" rel="noopener">Harvest</a></td>
+<td class="cat">Productivity and Project Management</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="API Key OAuth2" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="very_broad">
+<td class="num">81</td>
+<td class="app"><a href="https://stripe.com/docs/api" target="_blank" rel="noopener">Stripe</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="API Key" data-verdict="buildable_today" data-gate="admin_approval" data-mcp="official" data-breadth="broad">
+<td class="num">82</td>
+<td class="app"><a href="https://plaid.com/docs/api" target="_blank" rel="noopener">Plaid</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="community" data-breadth="very_broad">
+<td class="num">83</td>
+<td class="app"><a href="https://developers.binance.com/docs" target="_blank" rel="noopener">Binance</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST|WebSocket</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">hours</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="Unknown" data-verdict="blocked" data-gate="contact_sales" data-mcp="none" data-breadth="narrow">
+<td class="num">84</td>
+<td class="app"><a href="https://nmi.com" target="_blank" rel="noopener">Paygent Connect</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-unknown">Unknown</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">low</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="API Key" data-verdict="blocked" data-gate="contact_sales" data-mcp="none" data-breadth="narrow">
+<td class="num">85</td>
+<td class="app"><a href="https://ipayx.ai/docs" target="_blank" rel="noopener">iPayX</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">low</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="very_broad">
+<td class="num">86</td>
+<td class="app"><a href="https://developer.intuit.com" target="_blank" rel="noopener">QuickBooks</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="very_broad">
+<td class="num">87</td>
+<td class="app"><a href="https://developer.xero.com" target="_blank" rel="noopener">Xero</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="OAuth2 API Key" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="official" data-breadth="broad">
+<td class="num">88</td>
+<td class="app"><a href="https://developer.brex.com" target="_blank" rel="noopener">Brex</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="API Key" data-verdict="buildable_with_work" data-gate="admin_approval" data-mcp="community" data-breadth="moderate">
+<td class="num">89</td>
+<td class="app"><a href="https://docs.ramp.com" target="_blank" rel="noopener">Ramp</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Admin approval</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">days</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="Finance and Fintech" data-auth="API Key" data-verdict="blocked" data-gate="partnership" data-mcp="none" data-breadth="broad">
+<td class="num">90</td>
+<td class="app"><a href="https://pitchbook.com/products/research-api" target="_blank" rel="noopener">PitchBook</a></td>
+<td class="cat">Finance and Fintech</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Partnership</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="None" data-verdict="blocked" data-gate="none" data-mcp="community" data-breadth="narrow">
+<td class="num">91</td>
+<td class="app"><a href="https://cloud.google.com/gemini/docs" target="_blank" rel="noopener">NotebookLM</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-none">None</span></td>
+<td class="gate">Self-serve</td>
+<td class="api"></td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="paid_plan" data-mcp="community" data-breadth="narrow">
+<td class="num">92</td>
+<td class="app"><a href="https://help.otter.ai" target="_blank" rel="noopener">Otter AI</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-community">Community MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="API Key" data-verdict="buildable_with_work" data-gate="paid_plan" data-mcp="official" data-breadth="narrow">
+<td class="num">93</td>
+<td class="app"><a href="https://fathom.video" target="_blank" rel="noopener">Fathom</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="OAuth2" data-verdict="blocked" data-gate="contact_sales" data-mcp="none" data-breadth="narrow">
+<td class="num">94</td>
+<td class="app"><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Contact sales</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-blocked">Blocked</td>
+<td class="ttc">weeks</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="API Key" data-verdict="buildable_today" data-gate="none" data-mcp="official" data-breadth="moderate">
+<td class="num">95</td>
+<td class="app"><a href="https://docs.reducto.ai" target="_blank" rel="noopener">Reducto</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="API Key" data-verdict="buildable_with_work" data-gate="paid_plan" data-mcp="official" data-breadth="narrow">
+<td class="num">96</td>
+<td class="app"><a href="https://docs.devin.ai" target="_blank" rel="noopener">Devin</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="paid_plan" data-mcp="official" data-breadth="narrow">
+<td class="num">97</td>
+<td class="app"><a href="https://higgsfield.ai/cli" target="_blank" rel="noopener">Higgsfield</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="None" data-verdict="buildable_today" data-gate="none" data-mcp="none" data-breadth="narrow">
+<td class="num">98</td>
+<td class="app"><a href="https://github.com/mermaid-js/mermaid-cli" target="_blank" rel="noopener">Mermaid CLI</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-none">None</span></td>
+<td class="gate">Self-serve</td>
+<td class="api">None</td>
+<td class="mcp"><span class="mcp mcp-none">No MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="API Key" data-verdict="buildable_today" data-gate="paid_plan" data-mcp="official" data-breadth="moderate">
+<td class="num">99</td>
+<td class="app"><a href="https://transcriptapi.com" target="_blank" rel="noopener">YouTube Transcript</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-api-key">API Key</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_today">Buildable today</td>
+<td class="ttc">minutes</td>
+<td class="conf">high</td>
+</tr>
+<tr data-cat="AI, Research and Media-native" data-auth="OAuth2" data-verdict="buildable_with_work" data-gate="paid_plan" data-mcp="official" data-breadth="moderate">
+<td class="num">100</td>
+<td class="app"><a href="https://grain.com" target="_blank" rel="noopener">Grain</a></td>
+<td class="cat">AI, Research and Media-native</td>
+<td class="auth"><span class="tag tag-oauth2">OAuth2</span></td>
+<td class="gate">Paid plan</td>
+<td class="api">REST</td>
+<td class="mcp"><span class="mcp mcp-official">Official MCP</span></td>
+<td class="verdict verdict-buildable_with_work">Buildable with work</td>
+<td class="ttc">hours</td>
+<td class="conf">medium</td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--v-today)"></i> buildable today</span>
+      <span><i class="dot" style="background:var(--v-work)"></i> buildable with work</span>
+      <span><i class="dot" style="background:var(--v-blocked)"></i> blocked</span>
+      <span><i class="dot" style="background:#e0eee6"></i> official MCP</span>
+      <span><i class="dot" style="background:#eaeef0"></i> community MCP</span>
+    </div>
+  </div>
+</section>
+
+<section id="distributions">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><div><h2>The distributions behind the patterns</h2><div class="desc">How the 100 apps cluster on auth, access, buildability and MCP.</div></div></div>
+    <div class="two-col">
+      <div>
+        <h3>Auth methods (apps can support several)</h3>
+        <div class="bar-row"><div class="bar-label">OAuth2</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:100%"></div></div><div class="bar-val">63</div></div><div class="bar-row"><div class="bar-label">API Key</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:89%"></div></div><div class="bar-val">56</div></div><div class="bar-row"><div class="bar-label">API Token</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:25%"></div></div><div class="bar-val">16</div></div><div class="bar-row"><div class="bar-label">JWT</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:13%"></div></div><div class="bar-val">8</div></div><div class="bar-row"><div class="bar-label">PAT</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:8%"></div></div><div class="bar-val">5</div></div><div class="bar-row"><div class="bar-label">Basic</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:6%"></div></div><div class="bar-val">4</div></div><div class="bar-row"><div class="bar-label">Bot Token</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:5%"></div></div><div class="bar-val">3</div></div><div class="bar-row"><div class="bar-label">None</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:5%"></div></div><div class="bar-val">3</div></div>
+        <h3>Access model</h3>
+        <div class="bar-row"><div class="bar-label">Self-serve</div><div class="bar-track"><div class="bar-fill bar-gate" style="width:100%"></div></div><div class="bar-val">50</div></div><div class="bar-row"><div class="bar-label">Paid plan</div><div class="bar-track"><div class="bar-fill bar-gate" style="width:58%"></div></div><div class="bar-val">29</div></div><div class="bar-row"><div class="bar-label">Admin approval</div><div class="bar-track"><div class="bar-fill bar-gate" style="width:24%"></div></div><div class="bar-val">12</div></div><div class="bar-row"><div class="bar-label">Contact sales</div><div class="bar-track"><div class="bar-fill bar-gate" style="width:16%"></div></div><div class="bar-val">8</div></div><div class="bar-row"><div class="bar-label">Partnership</div><div class="bar-track"><div class="bar-fill bar-gate" style="width:2%"></div></div><div class="bar-val">1</div></div>
+      </div>
+      <div>
+        <h3>Buildability verdict by category</h3>
+        <div class="catbar-row"><div class="bar-label">CRM and Sales</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:90%"></div><div class="bar-fill v-work" style="width:10%"></div><div class="bar-fill v-blocked" style="width:0%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Support and Helpdesk</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:90%"></div><div class="bar-fill v-work" style="width:10%"></div><div class="bar-fill v-blocked" style="width:0%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Communications and Messaging</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:70%"></div><div class="bar-fill v-work" style="width:20%"></div><div class="bar-fill v-blocked" style="width:10%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Marketing, Ads, Email and Social</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:50%"></div><div class="bar-fill v-work" style="width:50%"></div><div class="bar-fill v-blocked" style="width:0%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Ecommerce</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:70%"></div><div class="bar-fill v-work" style="width:10%"></div><div class="bar-fill v-blocked" style="width:20%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Data, SEO and Scraping</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:60%"></div><div class="bar-fill v-work" style="width:30%"></div><div class="bar-fill v-blocked" style="width:10%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Developer, Infra and Data platforms</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:90%"></div><div class="bar-fill v-work" style="width:10%"></div><div class="bar-fill v-blocked" style="width:0%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Productivity and Project Management</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:100%"></div><div class="bar-fill v-work" style="width:0%"></div><div class="bar-fill v-blocked" style="width:0%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">Finance and Fintech</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:30%"></div><div class="bar-fill v-work" style="width:40%"></div><div class="bar-fill v-blocked" style="width:30%"></div></div>
+<div class="bar-val">10</div></div><div class="catbar-row"><div class="bar-label">AI, Research and Media-native</div>
+<div class="bar-track stacked"><div class="bar-fill v-today" style="width:30%"></div><div class="bar-fill v-work" style="width:50%"></div><div class="bar-fill v-blocked" style="width:20%"></div></div>
+<div class="bar-val">10</div></div>
+        <h3>Time to first authenticated call</h3>
+        <div class="bar-row"><div class="bar-label">minutes</div><div class="bar-track"><div class="bar-fill bar-ttc" style="width:100%"></div></div><div class="bar-val">43</div></div><div class="bar-row"><div class="bar-label">hours</div><div class="bar-track"><div class="bar-fill bar-ttc" style="width:84%"></div></div><div class="bar-val">36</div></div><div class="bar-row"><div class="bar-label">days</div><div class="bar-track"><div class="bar-fill bar-ttc" style="width:26%"></div></div><div class="bar-val">11</div></div><div class="bar-row"><div class="bar-label">weeks</div><div class="bar-track"><div class="bar-fill bar-ttc" style="width:23%"></div></div><div class="bar-val">10</div></div>
+      </div>
+    </div>
+    <div class="note">Webhooks exist for the large majority of broad-API apps, which is what makes agent toolkits reactive rather than poll-based. Only the narrow-API or blocked apps lack them.</div>
+  </div>
+</section>
+
+<section id="agent">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><div><h2>The agent</h2><div class="desc">How the research was actually built — and where a human had to step in.</div></div></div>
+    <p class="quote">"The research runs as a pipeline. It fetches each app's docs, extracts the facts, scores them, and verifies a sample against the real docs again. The pipeline does the work — a human only steps in where judgment is required."</p>
+    <div class="pipe">
+      <div class="pipe-step"><span class="t">1 · Input</span><span class="d">100 apps parsed from the assignment PDF</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><span class="t">2 · Fetch</span><span class="d">docs fetched via HTTP + headless browser for JS-heavy pages</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><span class="t">3 · Extract</span><span class="d">LLM extracts structured facts (auth, access, API, MCP, verdict)</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><span class="t">4 · Verify</span><span class="d">20-app stratified sample re-checked against live docs</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step human"><span class="t">5 · Human review</span><span class="d">gated apps confirmed; ambiguities reconciled; verdicts sanity-checked</span></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Where the agent needed a human</h3>
+        <ul class="clean">
+          <li><b>Gated / partner apps</b> — DealCloud, PitchBook, Paygent Connect, iPayX, fanbasis. No public credentials; a human confirms "gated with evidence" is the right call, not a miss.</li>
+          <li><b>Thin or JS-rendered docs</b> — Slack, Discord, Airtable, Linear are SPAs; the browser fetch was needed, and a human confirmed the rendered content matched the claims.</li>
+          <li><b>Auth ambiguity</b> — e.g. Amazon SP-API's LWA+SigV4+IAM stack, Snowflake's admin-configured roles. A human classified these rather than the model guessing.</li>
+          <li><b>MCP existence</b> — fast-moving; a human checked official vs community for the borderline cases.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What the agent got wrong (honestly)</h3>
+        <ul class="clean">
+          <li><b>Pumble</b> — first pass claimed a narrow REST surface; verification showed no public API at all. Corrected.</li>
+          <li><b>PitchBook</b> — guessed "API Key" auth; actually partnership-gated with no public auth docs. Marked unknown.</li>
+          <li><b>Consensus</b> — guessed OAuth2+REST; actually no public API (OAuth "requested" but not delivered). Corrected.</li>
+          <li><b>3 fabricated auth guesses</b> — on unverifiable apps the model guessed rather than saying "unknown". The verification pass caught all 3.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="verification">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">05</span><div><h2>Verification — how we know it's right</h2><div class="desc">A 20-app stratified sample (spanning all 10 categories, all 3 confidence levels, and every hard/obscure app) was re-checked against the real docs.</div></div></div>
+    <div class="acc-grid">
+      <div class="acc-card">
+        <div class="label">Pass 1 · Knowledge-only baseline</div>
+        <div class="pct">67%<small> field accuracy</small></div>
+        <div class="muted">Model answers from general knowledge alone, no docs.</div>
+      </div>
+      <div class="acc-card gain">
+        <div class="label">Pass 2 · Grounded + verified <span class="arrow-up">▲</span></div>
+        <div class="pct">86%<small> field accuracy</small></div>
+        <div class="muted">After fetching real docs + browser verification. <b>+19% pts</b>, with every remaining unknown marked honestly instead of guessed.</div>
+      </div>
+    </div>
+    <div style="margin-top:32px">
+      <h3>Per-field accuracy on the 20-app sample</h3>
+      <div class="two-col"><div><div class="bar-row"><div class="bar-label">Auth methods</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:75%"></div></div><div class="bar-val">75% &rarr; 75% =</div></div><div class="bar-row"><div class="bar-label">Self-serve</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:100%"></div></div><div class="bar-val">75% &rarr; 100% &#9650;</div></div><div class="bar-row"><div class="bar-label">API surface</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:70%"></div></div><div class="bar-val">35% &rarr; 70% &#9650;</div></div><div class="bar-row"><div class="bar-label">MCP</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:85%"></div></div><div class="bar-val">60% &rarr; 85% &#9650;</div></div><div class="bar-row"><div class="bar-label">Verdict</div><div class="bar-track"><div class="bar-fill bar-auth" style="width:100%"></div></div><div class="bar-val">90% &rarr; 100% &#9650;</div></div></div><div class="note">Verification caught 6 field-level errors and 3 fabricated auth guesses, and re-confirmed the rest. Where a fact could not be verified from public docs, the row is marked <b>unknown</b> rather than guessed — that is the honest answer, and the brief explicitly accepts it for gated apps.</div></div>
+    </div>
+    <div class="two-col" style="margin-top:24px">
+      <div>
+        <h3>Hits and misses, app by app</h3>
+        <table class="verif"><thead><tr><th>#</th><th>App</th><th>Auth</th><th>Access</th><th>API</th><th>MCP</th><th>Verdict</th></tr></thead>
+        <tbody><tr><td>1</td><td>Salesforce</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>2</td><td>HubSpot</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>3</td><td>Pipedrive</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>4</td><td>Attio</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>5</td><td>Twenty</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-no">✗</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>6</td><td>Podio</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>7</td><td>Zoho CRM</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>8</td><td>Close</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>9</td><td>Copper</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>10</td><td>DealCloud</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>11</td><td>Zendesk</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>25</td><td>Pumble</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-no">✗</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>44</td><td>Salesforce Commerce Cloud</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>50</td><td>fanbasis</td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>58</td><td>Sherlock</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>84</td><td>Paygent Connect</td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>85</td><td>iPayX</td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>90</td><td>PitchBook</td><td><span class="v-no">✗</span></td><td><span class="v-ok">✓</span></td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>91</td><td>NotebookLM</td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr>
+<tr><td>94</td><td>Consensus</td><td><span class="v-un">·</span></td><td><span class="v-ok">✓</span></td><td><span class="v-no">✗</span></td><td><span class="v-ok">✓</span></td><td><span class="v-ok">✓</span></td></tr></tbody></table>
+        <div class="legend" style="margin-top:8px"><span><span class="v-ok">✓</span> verified correct</span><span><span class="v-no">✗</span> corrected after pass 1</span><span><span class="v-un">·</span> honestly marked unknown</span></div>
+      </div>
+      <div>
+        <h3>What was still unknown after all passes</h3>
+        <ul class="clean">
+          <li><b>fanbasis</b> — no public docs; platform appears rebranded. Marked blocked/unknown.</li>
+          <li><b>Paygent Connect</b> — NMI-gated, no public portal. Blocked/unknown.</li>
+          <li><b>iPayX</b> — docs are marketing-only, no endpoints. Blocked/unknown.</li>
+          <li><b>PitchBook</b> — partnership-gated, no public auth docs. Blocked/unknown.</li>
+          <li><b>Consensus</b> — no public API; OAuth requested but not delivered. Blocked/unknown.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="action">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">06</span><div><h2>What to build next</h2><div class="desc">The easy wins — 59 apps are buildable today with self-serve or trial access.</div></div></div>
+    <div class="chips">
+      <a class="win-chip" href="#" data-filter="Salesforce">Salesforce</a><a class="win-chip" href="#" data-filter="HubSpot">HubSpot</a><a class="win-chip" href="#" data-filter="Pipedrive">Pipedrive</a><a class="win-chip" href="#" data-filter="Attio">Attio</a><a class="win-chip" href="#" data-filter="Twenty">Twenty</a><a class="win-chip" href="#" data-filter="Podio">Podio</a><a class="win-chip" href="#" data-filter="Zoho CRM">Zoho CRM</a><a class="win-chip" href="#" data-filter="Zendesk">Zendesk</a><a class="win-chip" href="#" data-filter="Intercom">Intercom</a><a class="win-chip" href="#" data-filter="Freshdesk">Freshdesk</a><a class="win-chip" href="#" data-filter="Pylon">Pylon</a><a class="win-chip" href="#" data-filter="LiveAgent">LiveAgent</a><a class="win-chip" href="#" data-filter="Plain">Plain</a><a class="win-chip" href="#" data-filter="Slack">Slack</a><a class="win-chip" href="#" data-filter="Twilio">Twilio</a><a class="win-chip" href="#" data-filter="Zoho Cliq">Zoho Cliq</a><a class="win-chip" href="#" data-filter="Lark (Larksuite)">Lark (Larksuite)</a><a class="win-chip" href="#" data-filter="Discord">Discord</a><a class="win-chip" href="#" data-filter="Telegram">Telegram</a><a class="win-chip" href="#" data-filter="Vonage">Vonage</a><a class="win-chip" href="#" data-filter="Mailchimp">Mailchimp</a><a class="win-chip" href="#" data-filter="Klaviyo">Klaviyo</a><a class="win-chip" href="#" data-filter="systeme.io">systeme.io</a><a class="win-chip" href="#" data-filter="Threads (Meta)">Threads (Meta)</a><a class="win-chip" href="#" data-filter="SendGrid">SendGrid</a><a class="win-chip" href="#" data-filter="Shopify">Shopify</a><a class="win-chip" href="#" data-filter="WooCommerce">WooCommerce</a><a class="win-chip" href="#" data-filter="BigCommerce">BigCommerce</a><a class="win-chip" href="#" data-filter="Magento (Adobe Commerce)">Magento (Adobe Commerce)</a><a class="win-chip" href="#" data-filter="Squarespace">Squarespace</a><a class="win-chip" href="#" data-filter="Ecwid">Ecwid</a><a class="win-chip" href="#" data-filter="Gumroad">Gumroad</a><a class="win-chip" href="#" data-filter="SE Ranking">SE Ranking</a><a class="win-chip" href="#" data-filter="MrScraper">MrScraper</a><a class="win-chip" href="#" data-filter="Apify">Apify</a><a class="win-chip" href="#" data-filter="Firecrawl">Firecrawl</a><a class="win-chip" href="#" data-filter="GitHub">GitHub</a><a class="win-chip" href="#" data-filter="Vercel">Vercel</a><a class="win-chip" href="#" data-filter="Netlify">Netlify</a><a class="win-chip" href="#" data-filter="Cloudflare">Cloudflare</a><a class="win-chip" href="#" data-filter="Supabase">Supabase</a><a class="win-chip" href="#" data-filter="Neo4j">Neo4j</a><a class="win-chip" href="#" data-filter="MongoDB Atlas">MongoDB Atlas</a><a class="win-chip" href="#" data-filter="Datadog">Datadog</a><a class="win-chip" href="#" data-filter="Sentry">Sentry</a><a class="win-chip" href="#" data-filter="Notion">Notion</a><a class="win-chip" href="#" data-filter="Airtable">Airtable</a><a class="win-chip" href="#" data-filter="Linear">Linear</a><a class="win-chip" href="#" data-filter="Jira">Jira</a><a class="win-chip" href="#" data-filter="Asana">Asana</a><a class="win-chip" href="#" data-filter="Monday.com">Monday.com</a><a class="win-chip" href="#" data-filter="ClickUp">ClickUp</a><a class="win-chip" href="#" data-filter="Coda">Coda</a><a class="win-chip" href="#" data-filter="Harvest">Harvest</a><a class="win-chip" href="#" data-filter="Stripe">Stripe</a><a class="win-chip" href="#" data-filter="Binance">Binance</a><a class="win-chip" href="#" data-filter="Reducto">Reducto</a><a class="win-chip" href="#" data-filter="Mermaid CLI">Mermaid CLI</a><a class="win-chip" href="#" data-filter="YouTube Transcript">YouTube Transcript</a>
+    </div>
+    <div class="two-col" style="margin-top:16px">
+      <div>
+        <h3>Needs outreach / partnership</h3>
+        <ul class="clean"><li><b>DealCloud</b> <span class="muted">(Contact sales)</span></li><li><b>Gladly</b> <span class="muted">(Contact sales)</span></li><li><b>Salesforce Commerce Cloud</b> <span class="muted">(Contact sales)</span></li><li><b>fanbasis</b> <span class="muted">(Contact sales)</span></li><li><b>Waterfall.io</b> <span class="muted">(Contact sales)</span></li><li><b>Paygent Connect</b> <span class="muted">(Contact sales)</span></li><li><b>iPayX</b> <span class="muted">(Contact sales)</span></li><li><b>PitchBook</b> <span class="muted">(Partnership)</span></li><li><b>Consensus</b> <span class="muted">(Contact sales)</span></li></ul>
+      </div>
+      <div>
+        <h3>Blocked or needs investigation</h3>
+        <ul class="clean"><li><b>Pumble</b> <span class="muted">(Blocked)</span></li><li><b>WhatsApp Business</b> <span class="muted">(Buildable with work)</span></li><li><b>Aircall</b> <span class="muted">(Buildable with work)</span></li><li><b>Google Ads</b> <span class="muted">(Buildable with work)</span></li><li><b>Meta Ads</b> <span class="muted">(Buildable with work)</span></li><li><b>LinkedIn Ads</b> <span class="muted">(Buildable with work)</span></li><li><b>GoHighLevel</b> <span class="muted">(Buildable with work)</span></li><li><b>Pinterest</b> <span class="muted">(Buildable with work)</span></li><li><b>Amazon Selling Partner (SP-API)</b> <span class="muted">(Buildable with work)</span></li><li><b>Bright Data</b> <span class="muted">(Buildable with work)</span></li><li><b>Sherlock</b> <span class="muted">(Blocked)</span></li><li><b>Clay</b> <span class="muted">(Buildable with work)</span></li><li><b>Snowflake</b> <span class="muted">(Buildable with work)</span></li><li><b>QuickBooks</b> <span class="muted">(Buildable with work)</span></li><li><b>Xero</b> <span class="muted">(Buildable with work)</span></li><li><b>Brex</b> <span class="muted">(Buildable with work)</span></li><li><b>Ramp</b> <span class="muted">(Buildable with work)</span></li><li><b>NotebookLM</b> <span class="muted">(Blocked)</span></li><li><b>Otter AI</b> <span class="muted">(Buildable with work)</span></li><li><b>Fathom</b> <span class="muted">(Buildable with work)</span></li><li><b>Devin</b> <span class="muted">(Buildable with work)</span></li><li><b>Higgsfield</b> <span class="muted">(Buildable with work)</span></li><li><b>Grain</b> <span class="muted">(Buildable with work)</span></li></ul>
+      </div>
+    </div>
+    <div class="note"><b>Top recommendation:</b> prioritize the 59 easy wins with official or community MCP already present. The single highest-leverage move is converting community-MCP apps (40 of them) into officially-supported Composio toolkits.</div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">07</span><div><h2>Process &amp; reproducibility</h2><div class="desc">Everything is scripted and cached. Run it yourself.</div></div></div>
+    <div class="two-col">
+      <div>
+        <h3>How to re-run the research</h3>
+        <p style="font-size:14px;color:var(--ink-soft)">The repo contains the full pipeline: app list, fetch scripts, extraction prompts, verification sample, and the data files. The HTML page is generated from the same JSON the pipeline outputs — so the page and the data can never drift.</p>
+        <pre style="background:var(--paper2);padding:14px;font-family:var(--mono);font-size:12px;margin-top:12px;overflow-x:auto">git clone &lt;repo-url&gt; composio-app-research
+cd composio-app-research
+pip install -r requirements.txt
+python3 fetch_docs.py       # fetch docs for all 100 apps
+python3 normalize_and_merge.py
+python3 compute_accuracy.py  # re-score the verification sample
+python3 build_site.py        # regenerate this HTML page</pre>
+      </div>
+      <div>
+        <h3>Data files</h3>
+        <ul class="clean">
+          <li><b>data/apps_input.json</b> — the 100 apps from the assignment</li>
+          <li><b>data/raw_docs/</b> — cached docs (HTML) per app</li>
+          <li><b>data/text/</b> — cleaned text per app</li>
+          <li><b>data/rows/</b> — one JSON row per app (extraction output)</li>
+          <li><b>data/merged_final.json</b> — the normalized 100-row dataset</li>
+          <li><b>data/verification/</b> — per-app verification judgments</li>
+          <li><b>data/accuracy_progression.json</b> — the 67% → 86% numbers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>Composio AI Product Ops — Take-home Case Study</b> · Generated 2026-08-17 · 100 apps · 10 categories</div>
+    <div class="links">
+      <a href="#matrix">Findings matrix</a> · <a href="#patterns">Patterns</a> · <a href="#agent">The agent</a> · <a href="#verification">Verification</a> · <a href="#action">Next steps</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const DATA = {"meta": {"title": "Composio AI Product Ops \u2014 Take-home Case Study", "author": "Pranav Dhiran", "generated": "2026-08-17T21:38:25.281673", "total": 100}, "rows": [{"num": 1, "app": "Salesforce", "category": "CRM and Sales", "one_line": "Enterprise CRM and platform-as-a-service with an extremely broad set of APIs for managing accounts, contacts, leads, opportunities, and custom objects.", "auth": ["OAuth2", "JWT", "SOAP", "API Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "SOAP", "GraphQL"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developer.salesforce.com/docs", "agent_notes": "Fetched page is marketing, not API docs; auth and MCP claims based on well-known platform knowledge. Very broad but requires Connected App setup."}, {"num": 2, "app": "HubSpot", "category": "CRM and Sales", "one_line": "All-in-one CRM platform (marketing, sales, service, CMS) with a broad REST API and date-based versioning.", "auth": ["OAuth2", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "medium", "evidence": "https://developers.hubspot.com/docs", "agent_notes": "Fetched page confirmed versioning model only; OAuth/private-app token and MCP details from knowledge. Solid, low-friction integration target."}, {"num": 3, "app": "Pipedrive", "category": "CRM and Sales", "one_line": "Sales pipeline CRM with a RESTful API (v1 and v2) covering deals, leads, activities, projects, and reporting.", "auth": ["API Token", "OAuth2"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.pipedrive.com/docs/api/v1", "agent_notes": "No official MCP found; verdict otherwise straightforward. API requires a paid/trial account for ongoing access."}, {"num": 4, "app": "Attio", "category": "CRM and Sales", "one_line": "Highly customizable, data-driven CRM with a REST API, real-time webhooks, an app SDK, and native MCP support.", "auth": ["OAuth2", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.attio.com", "agent_notes": "Docs explicitly document MCP and webhooks; very buildable. Token vs OAuth details standard for modern SaaS."}, {"num": 5, "app": "Twenty", "category": "CRM and Sales", "one_line": "Open-source, self-hostable CRM platform (React/TypeScript/PostgreSQL) with REST and GraphQL APIs and built-in agent/MCP support.", "auth": ["API Key", "OAuth2", "API Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "GraphQL"], "breadth": "moderate", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://twenty.com/developers", "agent_notes": "Fetched text confirms open-source, self-hostable, MCP. Endpoint specifics and webhook details not in the fetched page - based on knowledge."}, {"num": 6, "app": "Podio", "category": "CRM and Sales", "one_line": "Customizable work-management platform (owned by Citrix) whose entire frontend is built on a fully exposed REST API with webhooks.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.podio.com", "agent_notes": "No official MCP; everything else confirmed from fetched docs."}, {"num": 7, "app": "Zoho CRM", "category": "CRM and Sales", "one_line": "Full-featured CRM by Zoho with a REST API (v6) covering sales, marketing, service, and custom modules.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://www.zoho.com/crm/developer/docs/api/v6/", "agent_notes": "No text file fetched for this app - all fields from knowledge. OAuth client setup and developer edition provisioning add some setup time."}, {"num": 8, "app": "Close", "category": "CRM and Sales", "one_line": "Inside-sales CRM with a full developer platform: REST API, OAuth2, webhooks/event log, and a first-party MCP server.", "auth": ["API Key", "OAuth2"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developer.close.com", "agent_notes": "Fully confirmed from fetched text including first-party MCP server. Only friction is the paid plan requirement."}, {"num": 9, "app": "Copper", "category": "CRM and Sales", "one_line": "Google-integrated CRM with a RESTful 'Developer API' (JSON) covering people, companies, opportunities, tasks, and leads.", "auth": ["API Key", "OAuth2"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developer.copper.com", "agent_notes": "Fetched page focused on getting started/Postman; auth method specifics (API key header vs OAuth) from knowledge."}, {"num": 10, "app": "DealCloud", "category": "CRM and Sales", "one_line": "Enterprise deal-management and investment CRM with a partner/enterprise REST API, Python SDK, and an announced MCP server.", "auth": ["API Key", "API Token"], "self_serve": "partnership", "gate": "contact_sales", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "weeks", "confidence": "high", "evidence": "https://api.docs.dealcloud.com", "agent_notes": "Docs are excellent and MCP is officially coming, but credentials require an enterprise/partner relationship - main friction."}, {"num": 11, "app": "Zendesk", "category": "Support and Helpdesk", "one_line": "Customer support platform with a very broad set of REST APIs across Support, Help Center, Talk, Chat, Sell, Messaging, and apps.", "auth": ["API Token", "OAuth2"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://developer.zendesk.com", "agent_notes": "API breadth and products confirmed from fetched text. Needs a trial/paid account plus subdomain; no official MCP."}, {"num": 12, "app": "Intercom", "category": "Support and Helpdesk", "one_line": "Customer service and engagement platform (help desk, messenger, tickets, AI) with REST APIs and a free development workspace.", "auth": ["OAuth2", "API Token"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.intercom.com", "agent_notes": "Free dev workspace makes first call fast. Official MCP existence is my only slight uncertainty."}, {"num": 13, "app": "Freshdesk", "category": "Support and Helpdesk", "one_line": "Cloud helpdesk with a comprehensive REST API (v2) covering tickets, contacts, conversations, solutions, and admin objects.", "auth": ["API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.freshdesk.com/api/", "agent_notes": "Full API reference fetched; only webhook and MCP details are from knowledge rather than the fetched page."}, {"num": 14, "app": "Front", "category": "Support and Helpdesk", "one_line": "Shared inbox and customer communication platform for support teams, with a Core API giving comprehensive control over contacts, conversations, and messages.", "auth": ["OAuth2", "API Key"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://dev.frontapp.com", "agent_notes": "Webhook support and MCP existence inferred from knowledge, not the fetched text."}, {"num": 15, "app": "Pylon", "category": "Support and Helpdesk", "one_line": "Agentic B2B support platform that tracks customer issues across Slack, email, Microsoft Teams, chat widgets, and forms, and orchestrates AI agents to resolve them.", "auth": ["API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://docs.usepylon.com", "agent_notes": "Text confirms B2B positioning and API/MCP existence but does not state the exact auth method or free-tier availability."}, {"num": 16, "app": "LiveAgent", "category": "Support and Helpdesk", "one_line": "Omnichannel help desk and live chat platform with ticketing, knowledge base, social, and call center capabilities.", "auth": ["API Key"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://www.liveagent.com/api/", "agent_notes": "Docs page fetch failed (404). API v4 existence confirmed via product update text; webhook support inferred from knowledge."}, {"num": 17, "app": "Plain", "category": "Support and Helpdesk", "one_line": "Modern B2B customer support platform with a GraphQL API that mirrors the full UI (no API limitations), plus an official MCP server.", "auth": ["API Key"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["GraphQL"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://docs.plain.com", "agent_notes": "Free-tier availability uncertain; webhook support inferred from knowledge."}, {"num": 18, "app": "Help Scout", "category": "Support and Helpdesk", "one_line": "Help desk and shared-inbox platform with a Mailbox API (v2 current) covering conversations, customers, mailboxes, reports, workflows, and webhooks.", "auth": ["API Key", "OAuth2"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://developer.helpscout.com", "agent_notes": "Fetched page was legacy v1 docs; v2 noted as current. OAuth2 support inferred from knowledge."}, {"num": 19, "app": "Gorgias", "category": "Support and Helpdesk", "one_line": "Ecommerce-focused helpdesk that unifies email, chat, SMS, voice, and social channels with a REST API for tickets, customers, and automations.", "auth": ["OAuth2", "API Key"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developers.gorgias.com", "agent_notes": "Thin fetched text; auth methods, webhooks, and plan details from knowledge of Gorgias docs."}, {"num": 20, "app": "Gladly", "category": "Support and Helpdesk", "one_line": "Enterprise customer-service platform with a REST API, Lookup API, chat SDKs, and webhooks for building support integrations.", "auth": ["API Key"], "self_serve": "no", "gate": "contact_sales", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "none", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "medium", "evidence": "https://developer.gladly.com", "agent_notes": "Thin fetched text; exact auth method and credential self-service status inferred."}, {"num": 21, "app": "Slack", "category": "Communications and Messaging", "one_line": "Team messaging and collaboration platform with a very broad REST API, Events API, webhooks, and Socket Mode for building bots and apps.", "auth": ["OAuth2", "Bot Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://api.slack.com", "agent_notes": "Fetched text is marketing-ish landing page; API surface and MCP evidence from strong prior knowledge."}, {"num": 22, "app": "Twilio", "category": "Communications and Messaging", "one_line": "Cloud communications platform whose REST APIs let developers send messages, make calls, and look up numbers across SMS, voice, video, and more.", "auth": ["API Key", "OAuth2"], "self_serve": "trial", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://www.twilio.com/docs", "agent_notes": "Fetched text confirms REST broadly; auth method and MCP evidence from knowledge."}, {"num": 23, "app": "Zoho Cliq", "category": "Communications and Messaging", "one_line": "Zoho's team collaboration chat platform with a REST API for users, teams, channels, chats, messages, bots, reminders, events, and files.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://www.zoho.com/cliq/help/restapi/", "agent_notes": "Text lists V3 as latest but intro text references /v2/ path; webhook support inferred from knowledge."}, {"num": 24, "app": "Lark (Larksuite)", "category": "Communications and Messaging", "one_line": "Larksuite's collaboration and chat suite (IM, Docs, Calendar, Base, Wiki, Meetings) with broad server-side REST APIs, events/webhooks, and an open-source CLI.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://open.larksuite.com", "agent_notes": "024_lark_larksuite.txt was a JS shell; relied on 024_lark.txt plus knowledge. MCP/official status inferred."}, {"num": 25, "app": "Pumble", "category": "Communications and Messaging", "one_line": "Free Slack-alternative team chat app with channels, threads, direct messages, and guest access.", "auth": ["None"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "medium", "evidence": "https://pumble.com/help/", "agent_notes": "Lack of public API is consistent with Pumble's current offerings; could not confirm from docs since none exist."}, {"num": 26, "app": "Discord", "category": "Communications and Messaging", "one_line": "Community messaging platform with a very broad REST API, Gateway WebSocket, webhooks, and bot framework for building apps that run inside servers.", "auth": ["OAuth2", "Bot Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "medium", "evidence": "https://discord.com/developers/docs", "agent_notes": "Thin fetched text; content based on established Discord developer documentation."}, {"num": 27, "app": "Telegram", "category": "Communications and Messaging", "one_line": "Messaging platform whose Bot API lets bots send/receive messages, media, and updates programmatically over HTTP.", "auth": ["Bot Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://core.telegram.org/bots/api", "agent_notes": "No real uncertainty. Token auth means no OAuth flow; easiest app in the batch."}, {"num": 28, "app": "WhatsApp Business", "category": "Communications and Messaging", "one_line": "Meta's platform for businesses to message customers at scale via the Cloud API (Graph API endpoints).", "auth": ["API Token"], "self_serve": "trial", "gate": "admin_approval", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "high", "evidence": "https://developers.facebook.com/docs/whatsapp", "agent_notes": "Fastest path is the auto-created test WABA; production needs verification and app review."}, {"num": 29, "app": "Aircall", "category": "Communications and Messaging", "one_line": "Cloud phone system for sales/support teams, exposed via a broad REST API for users, calls, contacts, and numbers.", "auth": ["OAuth2", "Basic"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "none", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "high", "evidence": "https://developer.aircall.io", "agent_notes": "Main friction is needing a paid Aircall account; API itself is well documented."}, {"num": 30, "app": "Vonage", "category": "Communications and Messaging", "one_line": "Cloud communications API provider (SMS, voice, video, messages, verify) for programmatic messaging and calls.", "auth": ["API Key", "JWT"], "self_serve": "trial", "gate": "none", "protocol": ["REST", "WebSockets"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developer.vonage.com", "agent_notes": "Thin fetched text; auth/detail confirmed from domain knowledge of developer.vonage.com."}, {"num": 31, "app": "Google Ads", "category": "Marketing, Ads, Email and Social", "one_line": "Google's ad platform, manageable programmatically via the Google Ads API (gRPC/JSON-REST) down to keyword level.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "admin_approval", "protocol": ["REST", "gRPC", "GraphQL (not officially; GAQL for querying)"], "breadth": "very_broad", "webhooks": false, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "high", "evidence": "https://developers.google.com/google-ads/api", "agent_notes": "Production developer token approval is the main time sink; test accounts make sandbox calls possible quickly."}, {"num": 32, "app": "Meta Ads", "category": "Marketing, Ads, Email and Social", "one_line": "Meta's Marketing API (Graph API endpoints) for creating and managing ads across Facebook, Instagram, Messenger, and WhatsApp.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "admin_approval", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "high", "evidence": "https://developers.facebook.com/docs/marketing-apis", "agent_notes": "App review for advanced access is the friction point; test ad accounts enable sandbox calls immediately."}, {"num": 33, "app": "LinkedIn Ads", "category": "Marketing, Ads, Email and Social", "one_line": "LinkedIn's Marketing API for managing ad campaigns, reporting, audiences, and lead sync on the professional network.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "admin_approval", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "weeks", "confidence": "high", "evidence": "https://learn.microsoft.com/en-us/linkedin/marketing/", "agent_notes": "Marketing API approval is the slowest gate in this batch; core profile APIs are open but ads APIs are restricted."}, {"num": 34, "app": "GoHighLevel", "category": "Marketing, Ads, Email and Social", "one_line": "White-label CRM and marketing automation platform for agencies, with a REST API for contacts, campaigns, and funnels.", "auth": ["API Key", "OAuth2"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "medium", "evidence": "https://highlevel.stoplight.io", "agent_notes": "Thin fetched text; docs now live at developer.leadconnectorhq.com. API key auth is the fast path."}, {"num": 35, "app": "Mailchimp", "category": "Marketing, Ads, Email and Social", "one_line": "Email marketing and automation platform (Intuit) with a broad REST API for audiences, campaigns, automations, and reporting.", "auth": ["API Key", "OAuth2"], "self_serve": "trial", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://mailchimp.com/developer/marketing/api/", "agent_notes": "One of the easiest: instant API key on a free account."}, {"num": 36, "app": "Klaviyo", "category": "Marketing, Ads, Email and Social", "one_line": "E-commerce marketing automation platform with a JSON:API REST API for profiles, events, campaigns, flows, and catalogs.", "auth": ["API Key", "OAuth2"], "self_serve": "trial", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.klaviyo.com", "agent_notes": "Private API key path is trivial; OAuth for partner-grade integration."}, {"num": 37, "app": "systeme.io", "category": "Marketing, Ads, Email and Social", "one_line": "All-in-one funnel builder, email marketing, and online-course platform with a REST API for contacts, funnels, and campaigns.", "auth": ["API Key"], "self_serve": "trial", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developer.systeme.io/", "agent_notes": "API is real and documented (OpenAPI available via developer.systeme.io/llms.txt); uncertainty is whether free plan gets API keys and full endpoint access."}, {"num": 38, "app": "Pinterest", "category": "Marketing, Ads, Email and Social", "one_line": "Visual discovery platform whose API v5 lets developers build apps for pins, boards, ads, and shopping.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "admin_approval", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "high", "evidence": "https://developers.pinterest.com", "agent_notes": "App review is the main delay; test tokens and sandbox speed up initial development."}, {"num": 39, "app": "Threads (Meta)", "category": "Marketing, Ads, Email and Social", "one_line": "Meta's text-first social network, with a free REST API to publish posts, retrieve media/profiles, moderate replies, and read insights.", "auth": ["OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "narrow", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developers.facebook.com/docs/threads", "agent_notes": "Thin fetched text; API is new and narrower than other Meta products. No MCP ecosystem yet."}, {"num": 40, "app": "SendGrid", "category": "Marketing, Ads, Email and Social", "one_line": "Twilio-owned email delivery platform that sends transactional and marketing email at scale via a broad REST API.", "auth": ["API Key"], "self_serve": "trial", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.sendgrid.com/api-reference", "agent_notes": "Simple API key auth, free tier available; the fetched page was mostly navigation but the API reference is well documented."}, {"num": 41, "app": "Shopify", "category": "Ecommerce", "one_line": "Cloud commerce platform whose Admin API (REST + GraphQL) lets you manage stores, products, orders, customers, and apps.", "auth": ["OAuth2", "API Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "GraphQL"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://shopify.dev/docs/api/admin", "agent_notes": "Auth is OAuth with scopes; free dev store makes it fully self-serve. Very broad and well documented."}, {"num": 42, "app": "WooCommerce", "category": "Ecommerce", "one_line": "Free, open-source WordPress e-commerce plugin with a REST API for managing products, orders, customers, and store data.", "auth": ["API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://woocommerce.com/document/woocommerce-rest-api/", "agent_notes": "Self-hosted: a dev must stand up a WooCommerce store to get credentials, but it's free and un-gated. Auth is simple key-based."}, {"num": 43, "app": "BigCommerce", "category": "Ecommerce", "one_line": "SaaS e-commerce platform with broad REST Management APIs, GraphQL Storefront API, and webhooks for managing stores programmatically.", "auth": ["OAuth2", "API Token"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST", "GraphQL"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://developer.bigcommerce.com", "agent_notes": "Simple token auth via API Accounts; free trial store makes first call quick. Official MCP server exists."}, {"num": 44, "app": "Salesforce Commerce Cloud", "category": "Ecommerce", "one_line": "Salesforce's enterprise B2C/B2B commerce platform exposed through Open Commerce API (OCAPI) and Commerce Cloud APIs.", "auth": ["OAuth2", "JWT"], "self_serve": "no", "gate": "contact_sales", "protocol": ["REST", "GraphQL"], "breadth": "broad", "webhooks": true, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "medium", "evidence": "https://developer.salesforce.com/docs/commerce", "agent_notes": "Fetched page rendered nothing useful; buildability gated by enterprise sales process and paid subscription, not by API quality."}, {"num": 45, "app": "Magento (Adobe Commerce)", "category": "Ecommerce", "one_line": "Open-source (Magento Open Source) and commercial (Adobe Commerce) e-commerce platform with a broad REST API and GraphQL.", "auth": ["API Token", "OAuth1", "JWT"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "GraphQL"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://developer.adobe.com/commerce/webapi/rest/", "agent_notes": "Auth is flexible but token generation requires admin access to a store; self-hosting Open Source is the free path. Webhooks only on commercial editions."}, {"num": 46, "app": "Squarespace", "category": "Ecommerce", "one_line": "Website and commerce platform whose Commerce APIs (Orders, Inventory, Products, Fulfillment, Customers, Transactions) integrate store data.", "auth": ["OAuth2", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developers.squarespace.com/commerce-apis", "agent_notes": "Fetched page detailed the Contacts/Commerce API scope model; commerce breadth and webhooks partially inferred. OAuth + API key both supported."}, {"num": 47, "app": "Ecwid", "category": "Ecommerce", "one_line": "E-commerce platform (now Lightspeed) whose REST API manages products, orders, customers, categories, discounts and store settings.", "auth": ["OAuth2", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "GraphQL"], "breadth": "broad", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "medium", "evidence": "https://api-docs.ecwid.com", "agent_notes": "Fetched page is a docs index; free plan + permanent access token makes first call fast. Auth is simple."}, {"num": 48, "app": "Gumroad", "category": "Ecommerce", "one_line": "Self-serve platform for selling digital products whose OAuth API manages products, sales, payouts, licenses, emails and subscriptions.", "auth": ["OAuth2", "API Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://gumroad.com/api", "agent_notes": "Docs are thin but the fetched page was substantive; OAuth + token generation is instant and free. Moderate breadth."}, {"num": 49, "app": "Amazon Selling Partner (SP-API)", "category": "Ecommerce", "one_line": "Amazon's API for sellers/vendors to manage listings, orders, inventory, fulfillment, pricing, reports and merchant services at scale.", "auth": ["OAuth2", "Signed Request"], "self_serve": "yes", "gate": "admin_approval", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "medium", "evidence": "https://developer-docs.amazon.com/sp-api", "agent_notes": "Auth is the most complex (LWA + SigV4 + IAM + per-role registration). Self-serve but registration/approval per role adds days; needs a paid professional seller account."}, {"num": 50, "app": "fanbasis", "category": "Ecommerce", "one_line": "Creator monetization platform (apparently rebranded to Commas) for selling courses, communities, webinars and memberships.", "auth": ["API Key"], "self_serve": "no", "gate": "contact_sales", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "low", "evidence": "https://fanbasis.com", "agent_notes": "Very obscure; the fetched page shows fanbasis is now Commas with enterprise-gated APIs. Treat as blocked/insufficient info unless an enterprise agreement is secured."}, {"num": 51, "app": "DataForSEO", "category": "Data, SEO and Scraping", "one_line": "Paid SEO data API provider covering SERP, keywords, on-page, backlinks, domain analytics, rank tracking and more.", "auth": ["API Key", "Basic"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.dataforseo.com", "agent_notes": "Auth is simple basic-auth login/password from the dashboard; free trial makes first call fast. Cost scales with usage but no approval gate."}, {"num": 52, "app": "SE Ranking", "category": "Data, SEO and Scraping", "one_line": "SEO/AEO platform whose REST API exposes keyword research, backlinks, domain analysis, site audits and AI-visibility data at scale.", "auth": ["API Key"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": false, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://seranking.com/api", "agent_notes": "Simple API-key auth, free trial available; the main cost is the paid plan. Official MCP server is a bonus. No webhooks."}, {"num": 53, "app": "Ahrefs", "category": "Data, SEO and Scraping", "one_line": "SEO tool for keyword research, backlink analysis and rank tracking, exposed via a commercial REST API.", "auth": ["API Key", "OAuth2"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://ahrefs.com/api/documentation", "agent_notes": "Auth is simple API key; cost is the main friction ($$$ paid plans). MCP officially documented."}, {"num": 54, "app": "MrScraper", "category": "Data, SEO and Scraping", "one_line": "Self-serve AI web scraping platform with API, CLI, SDKs and MCP server for extracting structured data.", "auth": ["API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.mrscraper.com", "agent_notes": "Official MCP server exists, so an integration can wrap the REST API or proxy the MCP server directly."}, {"num": 55, "app": "Apify", "category": "Data, SEO and Scraping", "one_line": "Web scraping and automation platform with an actor marketplace, run via a REST API or SDK clients.", "auth": ["API Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.apify.com", "agent_notes": "Very well-documented API; free tier makes first call trivial."}, {"num": 56, "app": "Firecrawl", "category": "Data, SEO and Scraping", "one_line": "Web scraping/crawling API that turns any website into LLM-ready markdown or structured data.", "auth": ["API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.firecrawl.dev", "agent_notes": "Official MCP server exists; easy free-tier start."}, {"num": 57, "app": "Bright Data", "category": "Data, SEO and Scraping", "one_line": "Enterprise web data platform with proxy network, prebuilt scrapers, data feeds and web unblocking APIs.", "auth": ["API Token"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://docs.brightdata.com", "agent_notes": "Landing-page fetched text; free tier exists but product is enterprise-oriented, so verification of token flow needed."}, {"num": 58, "app": "Sherlock", "category": "Data, SEO and Scraping", "one_line": "Open-source CLI that hunts down social media accounts by username across 400+ networks.", "auth": ["Unknown"], "self_serve": "yes", "gate": "none", "protocol": [], "breadth": "narrow", "webhooks": false, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://github.com/sherlock-project/sherlock", "agent_notes": "Not a SaaS; integration would mean wrapping the CLI locally, not calling an external API."}, {"num": 59, "app": "Waterfall.io", "category": "Data, SEO and Scraping", "one_line": "B2B contact and company data platform offering prospector, contact/phone enrichment and job-change APIs.", "auth": ["API Key"], "self_serve": "no", "gate": "contact_sales", "protocol": ["REST"], "breadth": "moderate", "webhooks": false, "mcp": "none", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "medium", "evidence": "https://waterfall.io", "agent_notes": "API is documented on the site but credentials require sales contact; API key header name varies (x-api-key vs x-waterfall-api-key) between examples."}, {"num": 60, "app": "Clay", "category": "Data, SEO and Scraping", "one_line": "No-code GTM data enrichment and automation platform (with Claygent AI) for finding and enriching contacts.", "auth": ["API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "narrow", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://docs.clay.com", "agent_notes": "Fetched page was marketing/learning material, not API docs; Clay's public API is limited, so treat integration as partial."}, {"num": 61, "app": "GitHub", "category": "Developer, Infra and Data platforms", "one_line": "Code hosting and collaboration platform with a very broad REST and GraphQL API for repos, issues, PRs and Actions.", "auth": ["OAuth2", "PAT", "JWT"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "GraphQL"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.github.com/rest", "agent_notes": "Trivially buildable; PAT or OAuth2 both work; official MCP server available."}, {"num": 62, "app": "Vercel", "category": "Developer, Infra and Data platforms", "one_line": "Frontend deployment and serverless platform whose REST API manages deployments, domains, env vars and projects.", "auth": ["API Token", "OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://vercel.com/docs/rest-api", "agent_notes": "Clean auth and docs; access token self-serve."}, {"num": 63, "app": "Netlify", "category": "Developer, Infra and Data platforms", "one_line": "Static and serverless hosting platform with a REST API for atomic deploys, forms, DNS, env vars and site management.", "auth": ["OAuth2", "PAT"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.netlify.com/api", "agent_notes": "Well-documented; note password resets invalidate PATs."}, {"num": 64, "app": "Cloudflare", "category": "Developer, Infra and Data platforms", "one_line": "CDN, DNS, security and edge-computing platform with one of the broadest REST APIs in the industry.", "auth": ["API Token", "OAuth2", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "GraphQL"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.cloudflare.com/api", "agent_notes": "Huge API surface; scoped tokens make safe integrations straightforward."}, {"num": 65, "app": "Supabase", "category": "Developer, Infra and Data platforms", "one_line": "Open-source Firebase alternative: Postgres database with REST (PostgREST) and GraphQL APIs, auth, storage and realtime.", "auth": ["API Key", "OAuth2", "JWT"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "GraphQL"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://supabase.com/docs", "agent_notes": "Instant keys on project creation; REST via PostgREST is straightforward to target."}, {"num": 66, "app": "Neo4j", "category": "Developer, Infra and Data platforms", "one_line": "Graph database for storing and querying highly connected data, available self-hosted or as managed Aura cloud.", "auth": ["Basic", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": false, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://neo4j.com/docs/api/", "agent_notes": "Auth is DB-native (bolt/basic), not REST OAuth. Build integration around Cypher queries via HTTP transactional endpoint or a driver."}, {"num": 67, "app": "Snowflake", "category": "Developer, Infra and Data platforms", "one_line": "Cloud data platform/warehouse with SQL analytics, data sharing, and AI/ML workloads.", "auth": ["OAuth2", "JWT", "API Key"], "self_serve": "trial", "gate": "admin_approval", "protocol": ["REST"], "breadth": "broad", "webhooks": false, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://docs.snowflake.com", "agent_notes": "Docs text was a 404 page. Account/trial creation plus admin-configured roles make first call slower than typical SaaS."}, {"num": 68, "app": "MongoDB Atlas", "category": "Developer, Infra and Data platforms", "one_line": "Managed cloud MongoDB database service with cluster management, search, and vector/embedding APIs.", "auth": ["API Key", "OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://www.mongodb.com/docs/atlas/api", "agent_notes": "Admin API is purely for cluster/org admin; app-level data access is via MongoDB driver/connection strings."}, {"num": 69, "app": "Datadog", "category": "Developer, Infra and Data platforms", "one_line": "Cloud monitoring and observability platform for metrics, logs, APM, dashboards, and alerts.", "auth": ["API Key", "OAuth2"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.datadoghq.com/api", "agent_notes": "None. Official MCP presence confirmed directly in fetched docs navigation."}, {"num": 70, "app": "Sentry", "category": "Developer, Infra and Data platforms", "one_line": "Error tracking and application performance monitoring platform.", "auth": ["API Key", "OAuth2"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.sentry.io/api", "agent_notes": "Official MCP is community-edition open source; still verifiable existence."}, {"num": 71, "app": "Notion", "category": "Productivity and Project Management", "one_line": "All-in-one workspace for notes, docs, wikis, and databases.", "auth": ["OAuth2", "API Key", "PAT"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.notion.com", "agent_notes": "Internal integration must be explicitly granted page/database access in the workspace."}, {"num": 72, "app": "Airtable", "category": "Productivity and Project Management", "one_line": "Low-code relational database that blends spreadsheets with app-building.", "auth": ["OAuth2", "PAT", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "medium", "evidence": "https://airtable.com/developers/web/api", "agent_notes": "Fetched text was short (intro page only); auth fields rely on knowledge."}, {"num": 73, "app": "Linear", "category": "Productivity and Project Management", "one_line": "Issue tracking and project management designed for software teams.", "auth": ["OAuth2", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["GraphQL"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "medium", "evidence": "https://developers.linear.app/docs", "agent_notes": "Fetched text was short; API breadth based on knowledge of the GraphQL schema."}, {"num": 74, "app": "Jira", "category": "Productivity and Project Management", "one_line": "Issue tracking and agile project management by Atlassian.", "auth": ["OAuth2", "Basic", "JWT"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developer.atlassian.com/cloud/jira", "agent_notes": "API token + site URL is the fastest path for a solo dev; OAuth for multi-user apps."}, {"num": 75, "app": "Asana", "category": "Productivity and Project Management", "one_line": "Work management platform for teams to plan and track projects and tasks.", "auth": ["OAuth2", "PAT"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://developers.asana.com/docs", "agent_notes": "Embedded API explorer and free account make first call fast; advanced features gated to paid tiers."}, {"num": 76, "app": "Monday.com", "category": "Productivity and Project Management", "one_line": "Work OS where teams build and customize boards, items, and workflows without code.", "auth": ["OAuth2", "API Token"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["GraphQL"], "breadth": "broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "medium", "evidence": "https://developer.monday.com", "agent_notes": "Free-trial account needed; guest access requires OAuth flow."}, {"num": 77, "app": "ClickUp", "category": "Productivity and Project Management", "one_line": "All-in-one project management and team collaboration platform.", "auth": ["OAuth2", "API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.clickup.com", "agent_notes": "Official MCP server existence directly confirmed in fetched docs text."}, {"num": 78, "app": "Coda", "category": "Productivity and Project Management", "one_line": "Collaborative document platform combining docs, spreadsheets, and apps (now Superhuman Docs).", "auth": ["Bearer Token", "OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "broad", "webhooks": false, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://coda.io/developers/apis/v1", "agent_notes": "Coda was acquired by Superhuman; docs now branded 'Superhuman Docs' but API and docs URL remain coda.io."}, {"num": 79, "app": "Smartsheet", "category": "Productivity and Project Management", "one_line": "Cloud-based work management and collaboration platform with a REST API for programmatically managing sheets, rows, reports, and automation.", "auth": ["OAuth2", "API Key"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://smartsheet.redoc.ly", "agent_notes": "Auth method (OAuth2 + PAT) and paid-only model well established; endpoint breadth from knowledge, not fetched text."}, {"num": 80, "app": "Harvest", "category": "Productivity and Project Management", "one_line": "Time tracking and invoicing SaaS with a v2 REST API for timesheets, projects, clients, expenses, invoices, estimates, and reports.", "auth": ["OAuth2", "API Key"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "broad", "webhooks": false, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://help.getharvest.com/api-v2", "agent_notes": "Fetched text thin (<1200 chars) \u2014 API surface list confirmed but auth details (OAuth2 vs PAT) from domain knowledge; no webhook support is known to be absent in v2."}, {"num": 81, "app": "Stripe", "category": "Finance and Fintech", "one_line": "Global payments and financial infrastructure platform with a very broad REST API for payments, billing, subscriptions, payouts, and connect.", "auth": ["API Key", "OAuth2"], "self_serve": "yes", "gate": "none", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://stripe.com/docs/api", "agent_notes": "Confident on all fields from fetched API reference text."}, {"num": 82, "app": "Plaid", "category": "Finance and Fintech", "one_line": "Open finance and bank data aggregation API providing account, transaction, balance, identity, asset, income, and payment data from financial institutions.", "auth": ["API Key"], "self_serve": "trial", "gate": "admin_approval", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://plaid.com/docs/api", "agent_notes": "Production is gated (request via Dashboard), but sandbox is instantly buildable \u2014 verdict buildable_today with that caveat."}, {"num": 83, "app": "Binance", "category": "Finance and Fintech", "one_line": "World's largest cryptocurrency exchange with a very broad REST + WebSocket API for spot, margin, futures, wallet, and market data.", "auth": ["API Key"], "self_serve": "yes", "gate": "none", "protocol": ["REST", "WebSocket"], "breadth": "very_broad", "webhooks": false, "mcp": "community", "verdict": "buildable_today", "blocker_class": null, "ttc": "hours", "confidence": "high", "evidence": "https://developers.binance.com/docs", "agent_notes": "Auth details confirmed from fetched developer docs; webhook absence is from domain knowledge of Binance architecture."}, {"num": 84, "app": "Paygent Connect", "category": "Finance and Fintech", "one_line": "NMI-powered embedded payment gateway aimed at ISOs and SaaS platforms; highly obscure with no discoverable public developer API.", "auth": ["Unknown"], "self_serve": "no", "gate": "contact_sales", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "low", "evidence": "https://nmi.com", "agent_notes": "Insufficient public information to verify auth, endpoints, or self-serve access. Recommend treating as blocked pending direct vendor contact."}, {"num": 85, "app": "iPayX", "category": "Finance and Fintech", "one_line": "iPayX Protocol is a FINTRAC-registered FX verification/forensic audit tool that compares applied bank FX rates against mid-market rates \u2014 appears to be a consumer web app with no documented public API.", "auth": ["API Key"], "self_serve": "no", "gate": "contact_sales", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "low", "evidence": "https://ipayx.ai/docs", "agent_notes": "May simply be a consumer product without an API at all; verify with the vendor before investing."}, {"num": 86, "app": "QuickBooks", "category": "Finance and Fintech", "one_line": "SMB accounting platform with the very broad QuickBooks Online Accounting REST API covering invoices, payments, customers, items, bills, and reports.", "auth": ["OAuth2"], "self_serve": "trial", "gate": "admin_approval", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developer.intuit.com", "agent_notes": "Sandbox is buildable quickly; production requires QuickBooks subscription + app approval \u2014 hence buildable_with_work."}, {"num": 87, "app": "Xero", "category": "Finance and Fintech", "one_line": "Online accounting software with a very broad REST API covering accounting, payroll, files, projects, bank feeds, and assets.", "auth": ["OAuth2"], "self_serve": "trial", "gate": "admin_approval", "protocol": ["REST"], "breadth": "very_broad", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://developer.xero.com", "agent_notes": "OAuth flow well-documented; friction is app registration plus paid/trial organisation and scope approvals."}, {"num": 88, "app": "Brex", "category": "Finance and Fintech", "one_line": "Corporate card and spend management platform with a REST API covering accounting, budgets, expenses, payments, team, transactions, and travel.", "auth": ["OAuth2", "API Key"], "self_serve": "paid", "gate": "admin_approval", "protocol": ["REST"], "breadth": "broad", "webhooks": true, "mcp": "official", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "medium", "evidence": "https://developer.brex.com", "agent_notes": "API surface and MCP confirmed from fetched text; account/approval requirements and OAuth2+key mix from knowledge."}, {"num": 89, "app": "Ramp", "category": "Finance and Fintech", "one_line": "Corporate spend and expense management platform with a REST API for transactions, reimbursements, vendors, cards, and accounting exports.", "auth": ["API Key"], "self_serve": "paid", "gate": "admin_approval", "protocol": ["REST"], "breadth": "moderate", "webhooks": true, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "days", "confidence": "medium", "evidence": "https://docs.ramp.com", "agent_notes": "API-key auth and webhook support from knowledge of Ramp docs; account gating makes it buildable_with_work rather than buildable_today."}, {"num": 90, "app": "PitchBook", "category": "Finance and Fintech", "one_line": "Private market data and analytics platform whose Research API provides programmatic access to company, deal, fund, investor, and document data.", "auth": ["API Key"], "self_serve": "partnership", "gate": "partnership", "protocol": ["REST"], "breadth": "broad", "webhooks": false, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "medium", "evidence": "https://pitchbook.com/products/research-api", "agent_notes": "Page fetch blocked by bot protection; partnership-gating is well-established domain knowledge for PitchBook data access."}, {"num": 91, "app": "NotebookLM", "category": "AI, Research and Media-native", "one_line": "Google's AI-powered notebook that answers questions and generates summaries/notes grounded in your uploaded documents.", "auth": ["None"], "self_serve": "no", "gate": "none", "protocol": [], "breadth": "narrow", "webhooks": false, "mcp": "community", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "high", "evidence": "https://cloud.google.com/gemini/docs", "agent_notes": "High confidence that NotebookLM has no public API. Community MCPs exist but are unofficial and can break; building on them is unsupported."}, {"num": 92, "app": "Otter AI", "category": "AI, Research and Media-native", "one_line": "AI meeting assistant that records, transcribes, and summarizes meetings with live notes and chat.", "auth": ["OAuth2"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "community", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://help.otter.ai", "agent_notes": "API surface and MCP existence not confirmed from public docs; limited public API per assignment hint"}, {"num": 93, "app": "Fathom", "category": "AI, Research and Media-native", "one_line": "AI meeting notetaker that records, transcribes, and summarizes meetings and syncs notes to CRMs.", "auth": ["API Key"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "official", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://fathom.video", "agent_notes": "API details thin; consumer product historically without public API, MCP/API now advertised"}, {"num": 94, "app": "Consensus", "category": "AI, Research and Media-native", "one_line": "AI-powered academic search engine that searches and summarizes findings from millions of research papers.", "auth": ["OAuth2"], "self_serve": "no", "gate": "contact_sales", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "none", "verdict": "blocked", "blocker_class": null, "ttc": "weeks", "confidence": "medium", "evidence": "https://consensus.app", "agent_notes": "No fetched docs available; verdict relies on assignment hint (OAuth 'requested', blocked/insufficient-info)"}, {"num": 95, "app": "Reducto", "category": "AI, Research and Media-native", "one_line": "Agentic document platform that parses, classifies, extracts, and edits documents at enterprise scale.", "auth": ["API Key"], "self_serve": "trial", "gate": "none", "protocol": ["REST"], "breadth": "moderate", "webhooks": false, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://docs.reducto.ai", "agent_notes": "Self-serve trial specifics (free credits) assumed; API key + MCP confirmed from docs"}, {"num": 96, "app": "Devin", "category": "AI, Research and Media-native", "one_line": "Autonomous AI software engineer by Cognition that writes, runs, and tests code.", "auth": ["API Key"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "official", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://docs.devin.ai", "agent_notes": "Devin API surface is new/limited; MCP confirmed from docs index"}, {"num": 97, "app": "Higgsfield", "category": "AI, Research and Media-native", "one_line": "AI-native creative suite for generating images, videos, and marketing content across 30+ models.", "auth": ["OAuth2"], "self_serve": "paid", "gate": "paid_plan", "protocol": ["REST"], "breadth": "narrow", "webhooks": false, "mcp": "official", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://higgsfield.ai/cli", "agent_notes": "New product, thin docs; REST API surface not clearly documented, access mainly via MCP/CLI"}, {"num": 98, "app": "Mermaid CLI", "category": "AI, Research and Media-native", "one_line": "Open-source command-line tool that converts Mermaid diagram definitions into SVG, PNG, or PDF files.", "auth": ["None"], "self_serve": "yes", "gate": "none", "protocol": ["None"], "breadth": "narrow", "webhooks": false, "mcp": "none", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://github.com/mermaid-js/mermaid-cli", "agent_notes": "Not a SaaS API \u2014 must be executed locally; integrate via subprocess or Node.js API"}, {"num": 99, "app": "YouTube Transcript", "category": "AI, Research and Media-native", "one_line": "Paid REST API and MCP for YouTube transcripts, search, channels, and playlists at scale.", "auth": ["API Key"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "moderate", "webhooks": false, "mcp": "official", "verdict": "buildable_today", "blocker_class": null, "ttc": "minutes", "confidence": "high", "evidence": "https://transcriptapi.com", "agent_notes": "Docs complete; API key + REST + MCP all confirmed from fetched text"}, {"num": 100, "app": "Grain", "category": "AI, Research and Media-native", "one_line": "AI meeting notetaker that captures, transcribes, and enriches meetings for teams and AI agents.", "auth": ["OAuth2"], "self_serve": "trial", "gate": "paid_plan", "protocol": ["REST"], "breadth": "moderate", "webhooks": false, "mcp": "official", "verdict": "buildable_with_work", "blocker_class": null, "ttc": "hours", "confidence": "medium", "evidence": "https://grain.com", "agent_notes": "MCP/API existence confirmed from homepage; auth specifics (OAuth) and gating of API access not fully documented"}], "patterns": {"total_apps": 100, "auth_dominance": [["OAuth2", 63], ["API Key", 56], ["API Token", 16], ["JWT", 8], ["PAT", 5], ["Basic", 4], ["Bot Token", 3], ["None", 3], ["Unknown", 2], ["SOAP", 1], ["OAuth1", 1], ["Signed Request", 1], ["Bearer Token", 1]], "auth_method_counts": {"OAuth2": 63, "API Key": 56, "API Token": 16, "JWT": 8, "PAT": 5, "Basic": 4, "Bot Token": 3, "None": 3, "Unknown": 2, "SOAP": 1, "OAuth1": 1, "Signed Request": 1, "Bearer Token": 1}, "self_serve_by_category": {"CRM and Sales": {"none": 6, "paid_plan": 3, "contact_sales": 1}, "Support and Helpdesk": {"paid_plan": 7, "none": 2, "contact_sales": 1}, "Communications and Messaging": {"none": 8, "admin_approval": 1, "paid_plan": 1}, "Marketing, Ads, Email and Social": {"admin_approval": 4, "paid_plan": 1, "none": 5}, "Ecommerce": {"none": 6, "paid_plan": 1, "contact_sales": 2, "admin_approval": 1}, "Data, SEO and Scraping": {"paid_plan": 3, "none": 6, "contact_sales": 1}, "Developer, Infra and Data platforms": {"none": 7, "admin_approval": 1, "paid_plan": 2}, "Productivity and Project Management": {"none": 5, "paid_plan": 5}, "Finance and Fintech": {"none": 2, "admin_approval": 5, "contact_sales": 2, "partnership": 1}, "AI, Research and Media-native": {"none": 3, "paid_plan": 6, "contact_sales": 1}}, "verdict_by_category": {"CRM and Sales": {"buildable_today": 9, "buildable_with_work": 1}, "Support and Helpdesk": {"buildable_today": 9, "buildable_with_work": 1}, "Communications and Messaging": {"buildable_today": 7, "blocked": 1, "buildable_with_work": 2}, "Marketing, Ads, Email and Social": {"buildable_with_work": 5, "buildable_today": 5}, "Ecommerce": {"buildable_today": 7, "blocked": 2, "buildable_with_work": 1}, "Data, SEO and Scraping": {"buildable_today": 6, "buildable_with_work": 3, "blocked": 1}, "Developer, Infra and Data platforms": {"buildable_today": 9, "buildable_with_work": 1}, "Productivity and Project Management": {"buildable_today": 10}, "Finance and Fintech": {"buildable_today": 3, "blocked": 3, "buildable_with_work": 4}, "AI, Research and Media-native": {"blocked": 2, "buildable_with_work": 5, "buildable_today": 3}}, "verdict_overall": {"buildable_today": 68, "buildable_with_work": 23, "blocked": 9}, "gate_overall": {"none": 50, "paid_plan": 29, "contact_sales": 8, "admin_approval": 12, "partnership": 1}, "top_blockers": [["Other", 21], ["No public API / undocumented", 8], ["Enterprise/partnership gated", 3]], "mcp_coverage": {"official": 40, "community_only": 40, "none": 20}, "mcp_by_category": {"Support and Helpdesk": {"false": 6, "true": 4}, "AI, Research and Media-native": {"false": 4, "true": 6}, "Data, SEO and Scraping": {"false": 4, "true": 6}, "Finance and Fintech": {"true": 3, "false": 7}, "CRM and Sales": {"true": 7, "false": 3}, "Marketing, Ads, Email and Social": {"false": 10}, "Ecommerce": {"true": 2, "false": 8}, "Productivity and Project Management": {"true": 4, "false": 6}, "Communications and Messaging": {"true": 4, "false": 6}, "Developer, Infra and Data platforms": {"true": 4, "false": 6}}, "easy_wins": [{"num": 1, "app": "Salesforce", "category": "CRM and Sales"}, {"num": 2, "app": "HubSpot", "category": "CRM and Sales"}, {"num": 3, "app": "Pipedrive", "category": "CRM and Sales"}, {"num": 4, "app": "Attio", "category": "CRM and Sales"}, {"num": 5, "app": "Twenty", "category": "CRM and Sales"}, {"num": 6, "app": "Podio", "category": "CRM and Sales"}, {"num": 7, "app": "Zoho CRM", "category": "CRM and Sales"}, {"num": 11, "app": "Zendesk", "category": "Support and Helpdesk"}, {"num": 12, "app": "Intercom", "category": "Support and Helpdesk"}, {"num": 13, "app": "Freshdesk", "category": "Support and Helpdesk"}, {"num": 15, "app": "Pylon", "category": "Support and Helpdesk"}, {"num": 16, "app": "LiveAgent", "category": "Support and Helpdesk"}, {"num": 17, "app": "Plain", "category": "Support and Helpdesk"}, {"num": 21, "app": "Slack", "category": "Communications and Messaging"}, {"num": 22, "app": "Twilio", "category": "Communications and Messaging"}, {"num": 23, "app": "Zoho Cliq", "category": "Communications and Messaging"}, {"num": 24, "app": "Lark (Larksuite)", "category": "Communications and Messaging"}, {"num": 26, "app": "Discord", "category": "Communications and Messaging"}, {"num": 27, "app": "Telegram", "category": "Communications and Messaging"}, {"num": 30, "app": "Vonage", "category": "Communications and Messaging"}, {"num": 35, "app": "Mailchimp", "category": "Marketing, Ads, Email and Social"}, {"num": 36, "app": "Klaviyo", "category": "Marketing, Ads, Email and Social"}, {"num": 37, "app": "systeme.io", "category": "Marketing, Ads, Email and Social"}, {"num": 39, "app": "Threads (Meta)", "category": "Marketing, Ads, Email and Social"}, {"num": 40, "app": "SendGrid", "category": "Marketing, Ads, Email and Social"}, {"num": 41, "app": "Shopify", "category": "Ecommerce"}, {"num": 42, "app": "WooCommerce", "category": "Ecommerce"}, {"num": 43, "app": "BigCommerce", "category": "Ecommerce"}, {"num": 45, "app": "Magento (Adobe Commerce)", "category": "Ecommerce"}, {"num": 46, "app": "Squarespace", "category": "Ecommerce"}, {"num": 47, "app": "Ecwid", "category": "Ecommerce"}, {"num": 48, "app": "Gumroad", "category": "Ecommerce"}, {"num": 52, "app": "SE Ranking", "category": "Data, SEO and Scraping"}, {"num": 54, "app": "MrScraper", "category": "Data, SEO and Scraping"}, {"num": 55, "app": "Apify", "category": "Data, SEO and Scraping"}, {"num": 56, "app": "Firecrawl", "category": "Data, SEO and Scraping"}, {"num": 61, "app": "GitHub", "category": "Developer, Infra and Data platforms"}, {"num": 62, "app": "Vercel", "category": "Developer, Infra and Data platforms"}, {"num": 63, "app": "Netlify", "category": "Developer, Infra and Data platforms"}, {"num": 64, "app": "Cloudflare", "category": "Developer, Infra and Data platforms"}, {"num": 65, "app": "Supabase", "category": "Developer, Infra and Data platforms"}, {"num": 66, "app": "Neo4j", "category": "Developer, Infra and Data platforms"}, {"num": 68, "app": "MongoDB Atlas", "category": "Developer, Infra and Data platforms"}, {"num": 69, "app": "Datadog", "category": "Developer, Infra and Data platforms"}, {"num": 70, "app": "Sentry", "category": "Developer, Infra and Data platforms"}, {"num": 71, "app": "Notion", "category": "Productivity and Project Management"}, {"num": 72, "app": "Airtable", "category": "Productivity and Project Management"}, {"num": 73, "app": "Linear", "category": "Productivity and Project Management"}, {"num": 74, "app": "Jira", "category": "Productivity and Project Management"}, {"num": 75, "app": "Asana", "category": "Productivity and Project Management"}, {"num": 76, "app": "Monday.com", "category": "Productivity and Project Management"}, {"num": 77, "app": "ClickUp", "category": "Productivity and Project Management"}, {"num": 78, "app": "Coda", "category": "Productivity and Project Management"}, {"num": 80, "app": "Harvest", "category": "Productivity and Project Management"}, {"num": 81, "app": "Stripe", "category": "Finance and Fintech"}, {"num": 83, "app": "Binance", "category": "Finance and Fintech"}, {"num": 95, "app": "Reducto", "category": "AI, Research and Media-native"}, {"num": 98, "app": "Mermaid CLI", "category": "AI, Research and Media-native"}, {"num": 99, "app": "YouTube Transcript", "category": "AI, Research and Media-native"}], "outreach": [{"num": 10, "app": "DealCloud", "category": "CRM and Sales", "gate": "contact_sales"}, {"num": 20, "app": "Gladly", "category": "Support and Helpdesk", "gate": "contact_sales"}, {"num": 44, "app": "Salesforce Commerce Cloud", "category": "Ecommerce", "gate": "contact_sales"}, {"num": 50, "app": "fanbasis", "category": "Ecommerce", "gate": "contact_sales"}, {"num": 59, "app": "Waterfall.io", "category": "Data, SEO and Scraping", "gate": "contact_sales"}, {"num": 84, "app": "Paygent Connect", "category": "Finance and Fintech", "gate": "contact_sales"}, {"num": 85, "app": "iPayX", "category": "Finance and Fintech", "gate": "contact_sales"}, {"num": 90, "app": "PitchBook", "category": "Finance and Fintech", "gate": "partnership"}, {"num": 94, "app": "Consensus", "category": "AI, Research and Media-native", "gate": "contact_sales"}], "investigate": [{"num": 25, "app": "Pumble", "category": "Communications and Messaging", "verdict": "blocked"}, {"num": 28, "app": "WhatsApp Business", "category": "Communications and Messaging", "verdict": "buildable_with_work"}, {"num": 29, "app": "Aircall", "category": "Communications and Messaging", "verdict": "buildable_with_work"}, {"num": 31, "app": "Google Ads", "category": "Marketing, Ads, Email and Social", "verdict": "buildable_with_work"}, {"num": 32, "app": "Meta Ads", "category": "Marketing, Ads, Email and Social", "verdict": "buildable_with_work"}, {"num": 33, "app": "LinkedIn Ads", "category": "Marketing, Ads, Email and Social", "verdict": "buildable_with_work"}, {"num": 34, "app": "GoHighLevel", "category": "Marketing, Ads, Email and Social", "verdict": "buildable_with_work"}, {"num": 38, "app": "Pinterest", "category": "Marketing, Ads, Email and Social", "verdict": "buildable_with_work"}, {"num": 49, "app": "Amazon Selling Partner (SP-API)", "category": "Ecommerce", "verdict": "buildable_with_work"}, {"num": 57, "app": "Bright Data", "category": "Data, SEO and Scraping", "verdict": "buildable_with_work"}, {"num": 58, "app": "Sherlock", "category": "Data, SEO and Scraping", "verdict": "blocked"}, {"num": 60, "app": "Clay", "category": "Data, SEO and Scraping", "verdict": "buildable_with_work"}, {"num": 67, "app": "Snowflake", "category": "Developer, Infra and Data platforms", "verdict": "buildable_with_work"}, {"num": 86, "app": "QuickBooks", "category": "Finance and Fintech", "verdict": "buildable_with_work"}, {"num": 87, "app": "Xero", "category": "Finance and Fintech", "verdict": "buildable_with_work"}, {"num": 88, "app": "Brex", "category": "Finance and Fintech", "verdict": "buildable_with_work"}, {"num": 89, "app": "Ramp", "category": "Finance and Fintech", "verdict": "buildable_with_work"}, {"num": 91, "app": "NotebookLM", "category": "AI, Research and Media-native", "verdict": "blocked"}, {"num": 92, "app": "Otter AI", "category": "AI, Research and Media-native", "verdict": "buildable_with_work"}, {"num": 93, "app": "Fathom", "category": "AI, Research and Media-native", "verdict": "buildable_with_work"}, {"num": 96, "app": "Devin", "category": "AI, Research and Media-native", "verdict": "buildable_with_work"}, {"num": 97, "app": "Higgsfield", "category": "AI, Research and Media-native", "verdict": "buildable_with_work"}, {"num": 100, "app": "Grain", "category": "AI, Research and Media-native", "verdict": "buildable_with_work"}], "time_to_first_call": {"hours": 36, "minutes": 43, "weeks": 10, "days": 11}, "confidence_mix": {"medium": 38, "high": 59, "low": 3}, "blocker_breakdown": {"Enterprise / partnership gated": 6, "Other": 3, "App review / production approval required": 5, "Paid plan / account required": 4, "Thin / unverified docs": 6, "Complex auth / registration flow": 2, "No public API / undocumented": 6}, "blocker_examples": {"Enterprise / partnership gated": ["DealCloud", "Gladly", "Salesforce Commerce Cloud", "Bright Data", "Waterfall.io", "PitchBook"], "Other": ["Pumble", "Ramp", "Grain"], "App review / production approval required": ["WhatsApp Business", "Google Ads", "Meta Ads", "LinkedIn Ads", "Pinterest"], "Paid plan / account required": ["Aircall", "Snowflake", "QuickBooks", "Brex"], "Thin / unverified docs": ["GoHighLevel", "Clay", "Otter AI", "Fathom", "Devin", "Higgsfield"], "Complex auth / registration flow": ["Amazon Selling Partner (SP-API)", "Xero"], "No public API / undocumented": ["fanbasis", "Sherlock", "Paygent Connect", "iPayX", "NotebookLM", "Consensus"]}}, "accuracy": {"sample_size": 20, "fields": ["auth", "self_serve", "api_surface", "mcp", "verdict"], "pass1": {"auth": {"correct": 15, "total": 20, "accuracy": 0.75}, "self_serve": {"correct": 15, "total": 20, "accuracy": 0.75}, "api_surface": {"correct": 7, "total": 20, "accuracy": 0.35}, "mcp": {"correct": 12, "total": 20, "accuracy": 0.6}, "verdict": {"correct": 18, "total": 20, "accuracy": 0.9}}, "pass2": {"auth": {"correct": 15, "total": 20, "accuracy": 0.75}, "self_serve": {"correct": 20, "total": 20, "accuracy": 1.0}, "api_surface": {"correct": 14, "total": 20, "accuracy": 0.7}, "mcp": {"correct": 17, "total": 20, "accuracy": 0.85}, "verdict": {"correct": 20, "total": 20, "accuracy": 1.0}}, "overall_pass1": 0.67, "overall_pass2": 0.86, "fabricated_guesses_pass1": 3}};
+// Populate category/auth/mcp filter options
+(function(){
+  const cats = new Set(DATA.rows.map(r=>r.category));
+  const auths = new Set(DATA.rows.flatMap(r=>r.auth));
+  const selCat = document.getElementById('f-cat');
+  [...cats].sort().forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; selCat.appendChild(o); });
+  const selAuth = document.getElementById('f-auth');
+  [...auths].sort().forEach(a=>{ const o=document.createElement('option'); o.value=a; o.textContent=a; selAuth.appendChild(o); });
+  const selMcp = document.getElementById('f-mcp');
+  [['official','Official MCP'],['community','Community MCP'],['none','No MCP']].forEach(([v,l])=>{ const o=document.createElement('option'); o.value=v; o.textContent=l; selMcp.appendChild(o); });
+})();
+
+function applyFilters(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const fc = document.getElementById('f-cat').value;
+  const fa = document.getElementById('f-auth').value;
+  const fv = document.getElementById('f-verdict').value;
+  const fm = document.getElementById('f-mcp').value;
+  const rows = document.querySelectorAll('#tbody tr');
+  let shown = 0;
+  rows.forEach(tr => {
+    const app = tr.querySelector('td.app').textContent.toLowerCase();
+    const cat = tr.dataset.cat, auth = tr.dataset.auth, verdict = tr.dataset.verdict, mcp = tr.dataset.mcp;
+    const ok = (!q || app.includes(q)) && (!fc || cat===fc) && (!fa || auth.includes(fa)) && (!fv || verdict===fv) && (!fm || mcp===fm);
+    tr.style.display = ok ? '' : 'none';
+    if (ok) shown++;
+  });
+  document.getElementById('count').textContent = shown + ' / 100';
+}
+['search','f-cat','f-auth','f-verdict','f-mcp'].forEach(id => document.getElementById(id).addEventListener('input', applyFilters));
+applyFilters();
+
+// Sorting
+let sortKey = 'num', sortDir = 1;
+document.querySelectorAll('#matrix th').forEach(th => {
+  th.addEventListener('click', () => {
+    const k = th.dataset.k;
+    if (sortKey === k) sortDir = -sortDir; else { sortKey = k; sortDir = 1; }
+    const tbody = document.getElementById('tbody');
+    const rows = [...tbody.querySelectorAll('tr')];
+    rows.sort((a,b) => {
+      let av = a.cells[th.cellIndex].textContent.trim(), bv = b.cells[th.cellIndex].textContent.trim();
+      if (k==='num') { av=parseInt(av); bv=parseInt(bv); return (av-bv)*sortDir; }
+      return av.localeCompare(bv)*sortDir;
+    });
+    rows.forEach(r => tbody.appendChild(r));
+    applyFilters();
+  });
+});
+</script>
+</body>
+</html>

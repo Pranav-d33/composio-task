@@ -1,0 +1,34 @@
+{
+  "num": 18,
+  "app": "Help Scout",
+  "category": "Customer Support",
+  "one_line": "Help desk and shared-inbox platform with a Mailbox API (v2 current) covering conversations, customers, mailboxes, reports, workflows, and webhooks.",
+  "auth_methods": ["API key", "OAuth2"],
+  "auth_notes": "API keys passed via HTTP Basic auth (API key as username) for API 2.0; OAuth2 also supported for user-scoped access.",
+  "self_serve": "paid",
+  "self_serve_notes": "Paid plans only; API keys generated in account settings. No free tier, but no sales gate.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Conversations, threads, customers, mailboxes, folders, tags, teams, users, workflows, and extensive reports endpoints; 100+ endpoints.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported (create webhook endpoint; conversation event notifications)."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official MCP server found; community servers unverified."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.helpscout.com",
+    "note": "Fetched text (018_help_scout.txt) is the Mailbox API docs: API-key auth, endpoint list, webhooks, rate limits."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page was legacy v1 docs; v2 noted as current. OAuth2 support inferred from knowledge."
+  }

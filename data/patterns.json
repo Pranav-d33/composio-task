@@ -1,0 +1,804 @@
+{
+ "total_apps": 100,
+ "auth_dominance": [
+  [
+   "OAuth2",
+   63
+  ],
+  [
+   "API Key",
+   56
+  ],
+  [
+   "API Token",
+   16
+  ],
+  [
+   "JWT",
+   8
+  ],
+  [
+   "PAT",
+   5
+  ],
+  [
+   "Basic",
+   4
+  ],
+  [
+   "Bot Token",
+   3
+  ],
+  [
+   "None",
+   3
+  ],
+  [
+   "Unknown",
+   2
+  ],
+  [
+   "SOAP",
+   1
+  ],
+  [
+   "OAuth1",
+   1
+  ],
+  [
+   "Signed Request",
+   1
+  ],
+  [
+   "Bearer Token",
+   1
+  ]
+ ],
+ "auth_method_counts": {
+  "OAuth2": 63,
+  "API Key": 56,
+  "API Token": 16,
+  "JWT": 8,
+  "PAT": 5,
+  "Basic": 4,
+  "Bot Token": 3,
+  "None": 3,
+  "Unknown": 2,
+  "SOAP": 1,
+  "OAuth1": 1,
+  "Signed Request": 1,
+  "Bearer Token": 1
+ },
+ "self_serve_by_category": {
+  "CRM and Sales": {
+   "none": 6,
+   "paid_plan": 3,
+   "contact_sales": 1
+  },
+  "Support and Helpdesk": {
+   "paid_plan": 7,
+   "none": 2,
+   "contact_sales": 1
+  },
+  "Communications and Messaging": {
+   "none": 8,
+   "admin_approval": 1,
+   "paid_plan": 1
+  },
+  "Marketing, Ads, Email and Social": {
+   "admin_approval": 4,
+   "paid_plan": 1,
+   "none": 5
+  },
+  "Ecommerce": {
+   "none": 6,
+   "paid_plan": 1,
+   "contact_sales": 2,
+   "admin_approval": 1
+  },
+  "Data, SEO and Scraping": {
+   "paid_plan": 3,
+   "none": 6,
+   "contact_sales": 1
+  },
+  "Developer, Infra and Data platforms": {
+   "none": 7,
+   "admin_approval": 1,
+   "paid_plan": 2
+  },
+  "Productivity and Project Management": {
+   "none": 5,
+   "paid_plan": 5
+  },
+  "Finance and Fintech": {
+   "none": 2,
+   "admin_approval": 5,
+   "contact_sales": 2,
+   "partnership": 1
+  },
+  "AI, Research and Media-native": {
+   "none": 3,
+   "paid_plan": 6,
+   "contact_sales": 1
+  }
+ },
+ "verdict_by_category": {
+  "CRM and Sales": {
+   "buildable_today": 9,
+   "buildable_with_work": 1
+  },
+  "Support and Helpdesk": {
+   "buildable_today": 9,
+   "buildable_with_work": 1
+  },
+  "Communications and Messaging": {
+   "buildable_today": 7,
+   "blocked": 1,
+   "buildable_with_work": 2
+  },
+  "Marketing, Ads, Email and Social": {
+   "buildable_with_work": 5,
+   "buildable_today": 5
+  },
+  "Ecommerce": {
+   "buildable_today": 7,
+   "blocked": 2,
+   "buildable_with_work": 1
+  },
+  "Data, SEO and Scraping": {
+   "buildable_today": 6,
+   "buildable_with_work": 3,
+   "blocked": 1
+  },
+  "Developer, Infra and Data platforms": {
+   "buildable_today": 9,
+   "buildable_with_work": 1
+  },
+  "Productivity and Project Management": {
+   "buildable_today": 10
+  },
+  "Finance and Fintech": {
+   "buildable_today": 3,
+   "blocked": 3,
+   "buildable_with_work": 4
+  },
+  "AI, Research and Media-native": {
+   "blocked": 2,
+   "buildable_with_work": 5,
+   "buildable_today": 3
+  }
+ },
+ "verdict_overall": {
+  "buildable_today": 68,
+  "buildable_with_work": 23,
+  "blocked": 9
+ },
+ "gate_overall": {
+  "none": 50,
+  "paid_plan": 29,
+  "contact_sales": 8,
+  "admin_approval": 12,
+  "partnership": 1
+ },
+ "top_blockers": [
+  [
+   "Other",
+   21
+  ],
+  [
+   "No public API / undocumented",
+   8
+  ],
+  [
+   "Enterprise/partnership gated",
+   3
+  ]
+ ],
+ "mcp_coverage": {
+  "official": 40,
+  "community_only": 40,
+  "none": 20
+ },
+ "mcp_by_category": {
+  "Support and Helpdesk": {
+   "false": 6,
+   "true": 4
+  },
+  "AI, Research and Media-native": {
+   "false": 4,
+   "true": 6
+  },
+  "Data, SEO and Scraping": {
+   "false": 4,
+   "true": 6
+  },
+  "Finance and Fintech": {
+   "true": 3,
+   "false": 7
+  },
+  "CRM and Sales": {
+   "true": 7,
+   "false": 3
+  },
+  "Marketing, Ads, Email and Social": {
+   "false": 10
+  },
+  "Ecommerce": {
+   "true": 2,
+   "false": 8
+  },
+  "Productivity and Project Management": {
+   "true": 4,
+   "false": 6
+  },
+  "Communications and Messaging": {
+   "true": 4,
+   "false": 6
+  },
+  "Developer, Infra and Data platforms": {
+   "true": 4,
+   "false": 6
+  }
+ },
+ "easy_wins": [
+  {
+   "num": 1,
+   "app": "Salesforce",
+   "category": "CRM and Sales"
+  },
+  {
+   "num": 2,
+   "app": "HubSpot",
+   "category": "CRM and Sales"
+  },
+  {
+   "num": 3,
+   "app": "Pipedrive",
+   "category": "CRM and Sales"
+  },
+  {
+   "num": 4,
+   "app": "Attio",
+   "category": "CRM and Sales"
+  },
+  {
+   "num": 5,
+   "app": "Twenty",
+   "category": "CRM and Sales"
+  },
+  {
+   "num": 6,
+   "app": "Podio",
+   "category": "CRM and Sales"
+  },
+  {
+   "num": 7,
+   "app": "Zoho CRM",
+   "category": "CRM and Sales"
+  },
+  {
+   "num": 11,
+   "app": "Zendesk",
+   "category": "Support and Helpdesk"
+  },
+  {
+   "num": 12,
+   "app": "Intercom",
+   "category": "Support and Helpdesk"
+  },
+  {
+   "num": 13,
+   "app": "Freshdesk",
+   "category": "Support and Helpdesk"
+  },
+  {
+   "num": 15,
+   "app": "Pylon",
+   "category": "Support and Helpdesk"
+  },
+  {
+   "num": 16,
+   "app": "LiveAgent",
+   "category": "Support and Helpdesk"
+  },
+  {
+   "num": 17,
+   "app": "Plain",
+   "category": "Support and Helpdesk"
+  },
+  {
+   "num": 21,
+   "app": "Slack",
+   "category": "Communications and Messaging"
+  },
+  {
+   "num": 22,
+   "app": "Twilio",
+   "category": "Communications and Messaging"
+  },
+  {
+   "num": 23,
+   "app": "Zoho Cliq",
+   "category": "Communications and Messaging"
+  },
+  {
+   "num": 24,
+   "app": "Lark (Larksuite)",
+   "category": "Communications and Messaging"
+  },
+  {
+   "num": 26,
+   "app": "Discord",
+   "category": "Communications and Messaging"
+  },
+  {
+   "num": 27,
+   "app": "Telegram",
+   "category": "Communications and Messaging"
+  },
+  {
+   "num": 30,
+   "app": "Vonage",
+   "category": "Communications and Messaging"
+  },
+  {
+   "num": 35,
+   "app": "Mailchimp",
+   "category": "Marketing, Ads, Email and Social"
+  },
+  {
+   "num": 36,
+   "app": "Klaviyo",
+   "category": "Marketing, Ads, Email and Social"
+  },
+  {
+   "num": 37,
+   "app": "systeme.io",
+   "category": "Marketing, Ads, Email and Social"
+  },
+  {
+   "num": 39,
+   "app": "Threads (Meta)",
+   "category": "Marketing, Ads, Email and Social"
+  },
+  {
+   "num": 40,
+   "app": "SendGrid",
+   "category": "Marketing, Ads, Email and Social"
+  },
+  {
+   "num": 41,
+   "app": "Shopify",
+   "category": "Ecommerce"
+  },
+  {
+   "num": 42,
+   "app": "WooCommerce",
+   "category": "Ecommerce"
+  },
+  {
+   "num": 43,
+   "app": "BigCommerce",
+   "category": "Ecommerce"
+  },
+  {
+   "num": 45,
+   "app": "Magento (Adobe Commerce)",
+   "category": "Ecommerce"
+  },
+  {
+   "num": 46,
+   "app": "Squarespace",
+   "category": "Ecommerce"
+  },
+  {
+   "num": 47,
+   "app": "Ecwid",
+   "category": "Ecommerce"
+  },
+  {
+   "num": 48,
+   "app": "Gumroad",
+   "category": "Ecommerce"
+  },
+  {
+   "num": 52,
+   "app": "SE Ranking",
+   "category": "Data, SEO and Scraping"
+  },
+  {
+   "num": 54,
+   "app": "MrScraper",
+   "category": "Data, SEO and Scraping"
+  },
+  {
+   "num": 55,
+   "app": "Apify",
+   "category": "Data, SEO and Scraping"
+  },
+  {
+   "num": 56,
+   "app": "Firecrawl",
+   "category": "Data, SEO and Scraping"
+  },
+  {
+   "num": 61,
+   "app": "GitHub",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 62,
+   "app": "Vercel",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 63,
+   "app": "Netlify",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 64,
+   "app": "Cloudflare",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 65,
+   "app": "Supabase",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 66,
+   "app": "Neo4j",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 68,
+   "app": "MongoDB Atlas",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 69,
+   "app": "Datadog",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 70,
+   "app": "Sentry",
+   "category": "Developer, Infra and Data platforms"
+  },
+  {
+   "num": 71,
+   "app": "Notion",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 72,
+   "app": "Airtable",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 73,
+   "app": "Linear",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 74,
+   "app": "Jira",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 75,
+   "app": "Asana",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 76,
+   "app": "Monday.com",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 77,
+   "app": "ClickUp",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 78,
+   "app": "Coda",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 80,
+   "app": "Harvest",
+   "category": "Productivity and Project Management"
+  },
+  {
+   "num": 81,
+   "app": "Stripe",
+   "category": "Finance and Fintech"
+  },
+  {
+   "num": 83,
+   "app": "Binance",
+   "category": "Finance and Fintech"
+  },
+  {
+   "num": 95,
+   "app": "Reducto",
+   "category": "AI, Research and Media-native"
+  },
+  {
+   "num": 98,
+   "app": "Mermaid CLI",
+   "category": "AI, Research and Media-native"
+  },
+  {
+   "num": 99,
+   "app": "YouTube Transcript",
+   "category": "AI, Research and Media-native"
+  }
+ ],
+ "outreach": [
+  {
+   "num": 10,
+   "app": "DealCloud",
+   "category": "CRM and Sales",
+   "gate": "contact_sales"
+  },
+  {
+   "num": 20,
+   "app": "Gladly",
+   "category": "Support and Helpdesk",
+   "gate": "contact_sales"
+  },
+  {
+   "num": 44,
+   "app": "Salesforce Commerce Cloud",
+   "category": "Ecommerce",
+   "gate": "contact_sales"
+  },
+  {
+   "num": 50,
+   "app": "fanbasis",
+   "category": "Ecommerce",
+   "gate": "contact_sales"
+  },
+  {
+   "num": 59,
+   "app": "Waterfall.io",
+   "category": "Data, SEO and Scraping",
+   "gate": "contact_sales"
+  },
+  {
+   "num": 84,
+   "app": "Paygent Connect",
+   "category": "Finance and Fintech",
+   "gate": "contact_sales"
+  },
+  {
+   "num": 85,
+   "app": "iPayX",
+   "category": "Finance and Fintech",
+   "gate": "contact_sales"
+  },
+  {
+   "num": 90,
+   "app": "PitchBook",
+   "category": "Finance and Fintech",
+   "gate": "partnership"
+  },
+  {
+   "num": 94,
+   "app": "Consensus",
+   "category": "AI, Research and Media-native",
+   "gate": "contact_sales"
+  }
+ ],
+ "investigate": [
+  {
+   "num": 25,
+   "app": "Pumble",
+   "category": "Communications and Messaging",
+   "verdict": "blocked"
+  },
+  {
+   "num": 28,
+   "app": "WhatsApp Business",
+   "category": "Communications and Messaging",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 29,
+   "app": "Aircall",
+   "category": "Communications and Messaging",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 31,
+   "app": "Google Ads",
+   "category": "Marketing, Ads, Email and Social",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 32,
+   "app": "Meta Ads",
+   "category": "Marketing, Ads, Email and Social",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 33,
+   "app": "LinkedIn Ads",
+   "category": "Marketing, Ads, Email and Social",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 34,
+   "app": "GoHighLevel",
+   "category": "Marketing, Ads, Email and Social",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 38,
+   "app": "Pinterest",
+   "category": "Marketing, Ads, Email and Social",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 49,
+   "app": "Amazon Selling Partner (SP-API)",
+   "category": "Ecommerce",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 57,
+   "app": "Bright Data",
+   "category": "Data, SEO and Scraping",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 58,
+   "app": "Sherlock",
+   "category": "Data, SEO and Scraping",
+   "verdict": "blocked"
+  },
+  {
+   "num": 60,
+   "app": "Clay",
+   "category": "Data, SEO and Scraping",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 67,
+   "app": "Snowflake",
+   "category": "Developer, Infra and Data platforms",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 86,
+   "app": "QuickBooks",
+   "category": "Finance and Fintech",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 87,
+   "app": "Xero",
+   "category": "Finance and Fintech",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 88,
+   "app": "Brex",
+   "category": "Finance and Fintech",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 89,
+   "app": "Ramp",
+   "category": "Finance and Fintech",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 91,
+   "app": "NotebookLM",
+   "category": "AI, Research and Media-native",
+   "verdict": "blocked"
+  },
+  {
+   "num": 92,
+   "app": "Otter AI",
+   "category": "AI, Research and Media-native",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 93,
+   "app": "Fathom",
+   "category": "AI, Research and Media-native",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 96,
+   "app": "Devin",
+   "category": "AI, Research and Media-native",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 97,
+   "app": "Higgsfield",
+   "category": "AI, Research and Media-native",
+   "verdict": "buildable_with_work"
+  },
+  {
+   "num": 100,
+   "app": "Grain",
+   "category": "AI, Research and Media-native",
+   "verdict": "buildable_with_work"
+  }
+ ],
+ "time_to_first_call": {
+  "hours": 36,
+  "minutes": 43,
+  "weeks": 10,
+  "days": 11
+ },
+ "confidence_mix": {
+  "medium": 38,
+  "high": 59,
+  "low": 3
+ },
+ "blocker_breakdown": {
+  "Enterprise / partnership gated": 6,
+  "Other": 3,
+  "App review / production approval required": 5,
+  "Paid plan / account required": 4,
+  "Thin / unverified docs": 6,
+  "Complex auth / registration flow": 2,
+  "No public API / undocumented": 6
+ },
+ "blocker_examples": {
+  "Enterprise / partnership gated": [
+   "DealCloud",
+   "Gladly",
+   "Salesforce Commerce Cloud",
+   "Bright Data",
+   "Waterfall.io",
+   "PitchBook"
+  ],
+  "Other": [
+   "Pumble",
+   "Ramp",
+   "Grain"
+  ],
+  "App review / production approval required": [
+   "WhatsApp Business",
+   "Google Ads",
+   "Meta Ads",
+   "LinkedIn Ads",
+   "Pinterest"
+  ],
+  "Paid plan / account required": [
+   "Aircall",
+   "Snowflake",
+   "QuickBooks",
+   "Brex"
+  ],
+  "Thin / unverified docs": [
+   "GoHighLevel",
+   "Clay",
+   "Otter AI",
+   "Fathom",
+   "Devin",
+   "Higgsfield"
+  ],
+  "Complex auth / registration flow": [
+   "Amazon Selling Partner (SP-API)",
+   "Xero"
+  ],
+  "No public API / undocumented": [
+   "fanbasis",
+   "Sherlock",
+   "Paygent Connect",
+   "iPayX",
+   "NotebookLM",
+   "Consensus"
+  ]
+ }
+}

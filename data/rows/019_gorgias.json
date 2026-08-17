@@ -1,0 +1,34 @@
+{
+  "num": 19,
+  "app": "Gorgias",
+  "category": "Customer Support",
+  "one_line": "Ecommerce-focused helpdesk that unifies email, chat, SMS, voice, and social channels with a REST API for tickets, customers, and automations.",
+  "auth_methods": ["OAuth2", "API key"],
+  "auth_notes": "REST API at developers.gorgias.com supports OAuth2 and API keys; app registration / API key creation in Gorgias settings.",
+  "self_serve": "paid",
+  "self_serve_notes": "Paid plans (with trial); API credentials available to any account, no sales gate.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Tickets, customers, messages, rules, macros, tags, users, integrations; 100+ endpoints with OpenAPI spec.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported for ticket/message events."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official MCP server found; community servers unverified."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developers.gorgias.com",
+    "note": "Fetched text (019_gorgias.txt) was a thin JS shell referencing developers.gorgias.com/llms.txt. Auth/API details from knowledge."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Thin fetched text; auth methods, webhooks, and plan details from knowledge of Gorgias docs."
+  }

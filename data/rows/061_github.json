@@ -1,0 +1,34 @@
+{
+  "num": 61,
+  "app": "GitHub",
+  "category": "Developer Tools",
+  "one_line": "Code hosting and collaboration platform with a very broad REST and GraphQL API for repos, issues, PRs and Actions.",
+  "auth_methods": ["OAuth2", "Personal Access Token", "Fine-grained PAT", "GitHub App JWT"],
+  "auth_notes": "OAuth2 apps, classic/fine-grained personal access tokens, GitHub App installation tokens (JWT) and device flow; scopes/permissions per token type",
+  "self_serve": "yes",
+  "self_serve_notes": "Free accounts; PATs and OAuth apps are self-serve in user settings; fine-grained tokens scoped to repos",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "very_broad",
+    "breadth_estimate": "198+ REST endpoint categories (repos, issues, pulls, Actions, Packages, Codespaces, orgs, etc.) plus GraphQL API; fully described in OpenAPI",
+    "webhooks": true,
+    "webhook_note": "Repository and org webhooks for push, PR, issue, release events; also Actions workflow events"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official GitHub MCP server exists (knowledge); fetched text confirms REST API, versioning and OpenAPI description"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.github.com/rest",
+    "note": "fetched text confirms REST API docs, authentication article, versioning and OpenAPI"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Trivially buildable; PAT or OAuth2 both work; official MCP server available."
+}

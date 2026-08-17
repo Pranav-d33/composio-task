@@ -1,0 +1,13 @@
+{
+ "num": 25,
+ "app": "Pumble",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "wrong",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "No public API found (fetched help center shows none). Agent claimed narrow REST surface \u2014 wrong; no documented public API. Blocked verdict correct.",
+ "method": "browser fetch + docs"
+}

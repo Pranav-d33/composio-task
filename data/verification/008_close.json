@@ -1,0 +1,13 @@
+{
+ "num": 8,
+ "app": "Close",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "unknown",
+  "verdict": "correct"
+ },
+ "notes": "API key + OAuth2; paid plans; broad REST; webhooks. MCP community-only, unconfirmed in docs.",
+ "method": "docs_text+knowledge"
+}

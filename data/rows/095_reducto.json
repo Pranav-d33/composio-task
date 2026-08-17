@@ -1,0 +1,34 @@
+{
+  "num": 95,
+  "app": "Reducto",
+  "category": "Document Processing / OCR / Data Extraction",
+  "one_line": "Agentic document platform that parses, classifies, extracts, and edits documents at enterprise scale.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "Bearer API key; self-serve signup; SDKs in Python, Node.js, Go, plus REST",
+  "self_serve": "trial",
+  "self_serve_notes": "Self-serve signup with free credits to get started; usage-based pricing after",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Classify, Parse, Extract, Split, Edit, and Pipeline endpoints; 30+ file types; SDKs and CLI",
+    "webhooks": false,
+    "webhook_note": "Webhooks not confirmed in fetched docs"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "MCP server documented at docs.reducto.ai; fetched text explicitly lists MCP server, CLI, and native SDKs for agent workflows"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.reducto.ai",
+    "note": "fetched text (overview page) + quickstart: 'Parse your first document in 5 minutes'"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Self-serve trial specifics (free credits) assumed; API key + MCP confirmed from docs"
+}

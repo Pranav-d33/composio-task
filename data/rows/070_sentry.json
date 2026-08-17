@@ -1,0 +1,34 @@
+{
+  "num": 70,
+  "app": "Sentry",
+  "category": "Observability",
+  "one_line": "Error tracking and application performance monitoring platform.",
+  "auth_methods": ["API Key (Auth Token)", "OAuth2"],
+  "auth_notes": "Web API authenticates with auth tokens (user or org-level, scope-limited); OAuth2 for integrations; region-specific domains (us.sentry.io, de.sentry.io).",
+  "self_serve": "trial",
+  "self_serve_notes": "Free developer tier with paid Team/Business plans; auth tokens are self-service in account settings.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Organizations, projects, teams, issues/events, releases, dashboards, crons, profiling, replays, SCIM, alerts.",
+    "webhooks": true,
+    "webhook_note": "Webhooks for alert rules and event/issue activity."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Sentry MCP server exists (getsentry/sentry-mcp); community servers also exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.sentry.io/api",
+    "note": "Fetched text is the Sentry API Reference overview confirming the web API, auth tokens, scopes, pagination, and rate limits."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Official MCP is community-edition open source; still verifiable existence."
+}

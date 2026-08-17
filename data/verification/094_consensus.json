@@ -1,0 +1,13 @@
+{
+ "num": 94,
+ "app": "Consensus",
+ "checks": {
+  "auth_methods": "unknown",
+  "self_serve": "correct",
+  "api_surface": "wrong",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "No public API; OAuth 'requested' but not available. Agent claimed OAuth2+rest \u2014 wrong/unknown. Blocked correct.",
+ "method": "browser fetch + search"
+}

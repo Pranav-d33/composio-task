@@ -1,0 +1,34 @@
+{
+  "num": 76,
+  "app": "Monday.com",
+  "category": "Project Management",
+  "one_line": "Work OS where teams build and customize boards, items, and workflows without code.",
+  "auth_methods": ["OAuth2", "API Token"],
+  "auth_notes": "GraphQL API; admins/members have their own API tokens; guests cannot get tokens and must use OAuth or short-lived tokens. Apps framework for native integrations.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free trial account then paid plans; tokens are self-service in account settings for any admin/member.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["GraphQL"],
+    "breadth": "broad",
+    "breadth_estimate": "Boards, items, column values, groups, subitems, users, workspaces, docs; also REST endpoints and webhooks.",
+    "webhooks": true,
+    "webhook_note": "Webhooks for board/item/column event triggers."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community monday.com MCP servers exist; official MCP not confirmed."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developer.monday.com",
+    "note": "Fetched 'The basics' page confirms GraphQL API, token access rules, products supported, and apps framework."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Free-trial account needed; guest access requires OAuth flow."
+}

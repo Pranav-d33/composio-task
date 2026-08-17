@@ -1,0 +1,34 @@
+{
+  "num": 54,
+  "app": "MrScraper",
+  "category": "Web Scraping",
+  "one_line": "Self-serve AI web scraping platform with API, CLI, SDKs and MCP server for extracting structured data.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "API token created in the dashboard ('Token Plan' page); used as Bearer/auth header for REST API calls",
+  "self_serve": "yes",
+  "self_serve_notes": "Fully self-serve; sign up, create an API token in the dashboard, token-based billing ('Token Plan') with a playground and free quickstart to test",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "REST API for AI/manual scrapers, bulk scraping, scheduling, scraper-as-endpoint (Scraper API), webhooks, proxies; full API reference published",
+    "webhooks": true,
+    "webhook_note": "Webhook integration documented to send scraper results to external services"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Official MrScraper MCP Server documented in fetched text; also n8n node, Zapier integration, Python/Node.js/LangChain SDKs and CLI"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.mrscraper.com",
+    "note": "fetched text confirms token auth, MCP server, CLI, SDKs, webhooks and API reference"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Official MCP server exists, so an integration can wrap the REST API or proxy the MCP server directly."
+}

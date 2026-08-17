@@ -1,0 +1,34 @@
+{
+  "num": 63,
+  "app": "Netlify",
+  "category": "Deployment and Hosting",
+  "one_line": "Static and serverless hosting platform with a REST API for atomic deploys, forms, DNS, env vars and site management.",
+  "auth_methods": ["OAuth2", "Personal Access Token"],
+  "auth_notes": "OAuth2 for public integrations (app registration in user settings, authorize endpoint app.netlify.com/authorize); personal access tokens (PATs) for scripts; 'Authorization: Bearer' header; SAML teams need explicit token grant",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier; PAT generation is self-serve in user settings (Applications > Personal access tokens); OAuth apps registered self-serve",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "REST API at api.netlify.com/api/v1 covering sites, deploys (digest/ZIP), forms/submissions, env vars, snippets, DNS, hooks; OpenAPI reference published",
+    "webhooks": true,
+    "webhook_note": "Hooks API triggers webhooks/email/Slack on events like submission_created, deploy_created, deploy_failed"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP server confirmed; community MCP servers exist (knowledge); official Go and JS API clients documented"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.netlify.com/api",
+    "note": "fetched text confirms OAuth2/PAT auth, REST endpoints, hooks/webhooks, rate limits and OpenAPI"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Well-documented; note password resets invalidate PATs."
+}

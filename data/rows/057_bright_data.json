@@ -1,0 +1,34 @@
+{
+  "num": 57,
+  "app": "Bright Data",
+  "category": "Web Scraping",
+  "one_line": "Enterprise web data platform with proxy network, prebuilt scrapers, data feeds and web unblocking APIs.",
+  "auth_methods": ["API Token"],
+  "auth_notes": "Account-based API token/credentials used to call Web Unlocker, browser, scraping and proxy APIs; enterprise account management",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier with 5,000 monthly credits, no credit card required (confirmed in fetched text); higher/enterprise usage requires paid account or sales",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Web Unlocker API, scraping browser API, Web Scraper API, dataset/data feed APIs and proxy APIs; docs index at docs.brightdata.com",
+    "webhooks": true,
+    "webhook_note": "Webhooks available for dataset delivery and job completion on some products"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Official Bright Data MCP server confirmed in fetched text ('MCP server: Power AI systems with live web intelligence')"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://docs.brightdata.com",
+    "note": "fetched text confirms free tier, API products and official MCP server; auth details from knowledge"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Landing-page fetched text; free tier exists but product is enterprise-oriented, so verification of token flow needed."
+}

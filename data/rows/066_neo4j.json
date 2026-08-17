@@ -1,0 +1,34 @@
+{
+  "num": 66,
+  "app": "Neo4j",
+  "category": "Database",
+  "one_line": "Graph database for storing and querying highly connected data, available self-hosted or as managed Aura cloud.",
+  "auth_methods": ["Basic Auth", "API Key"],
+  "auth_notes": "Connects over the Bolt protocol (neo4j:// URI) with username/password; Aura cloud instances provide generated credentials. The HTTP API uses basic auth or bearer token. No OAuth2 — not a typical REST SaaS auth model.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free Community Edition can be self-hosted; Aura offers a free tier. A developer can get working credentials solo without sales.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Primary interface is Bolt/Cypher (arbitrary graph queries); HTTP API has a transactional Cypher endpoint plus admin/management endpoints.",
+    "webhooks": false,
+    "webhook_note": null
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MCP servers exist (e.g. mcp-neo4j in neo4j-contrib); no official Neo4j-hosted MCP confirmed."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://neo4j.com/docs/api/",
+    "note": "Fetched text was the Neo4j Python Driver 6.2 docs page confirming bolt protocol, neo4j:// URIs and username/password auth; open-source and Aura cloud."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth is DB-native (bolt/basic), not REST OAuth. Build integration around Cypher queries via HTTP transactional endpoint or a driver."
+}

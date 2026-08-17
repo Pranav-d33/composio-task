@@ -1,0 +1,34 @@
+{
+  "num": 28,
+  "app": "WhatsApp Business",
+  "category": "Messaging",
+  "one_line": "Meta's platform for businesses to message customers at scale via the Cloud API (Graph API endpoints).",
+  "auth_methods": ["OAuth access tokens", "Permanent/temporary system user tokens"],
+  "auth_notes": "Built on Meta Graph API. Requires a Meta developer account, app, business portfolio, and WhatsApp Business Account (WABA). Uses OAuth-style access tokens; permissions scoped by the app. Test account + test phone number auto-created on setup.",
+  "self_serve": "trial",
+  "self_serve_notes": "Self-serve via Meta developer account; free test resources (test WABA/number) with relaxed limits and no payment method. Production messaging requires business verification + per-message pricing (conversation-based).",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Cloud API (messaging/calls/groups), Business Management API (numbers, templates, analytics), Marketing Messages API",
+    "webhooks": true,
+    "webhook_note": "Webhooks are core: incoming messages, message status updates, template status all delivered via webhooks"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Meta MCP for WhatsApp Cloud API; community MCP servers exist."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developers.facebook.com/docs/whatsapp",
+    "note": "Rich fetched text (12.6KB) covering Cloud API, Business Management API, webhooks, test resources, rate limits"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fastest path is the auto-created test WABA; production needs verification and app review."
+}

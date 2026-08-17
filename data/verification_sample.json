@@ -1,0 +1,166 @@
+{
+ "seed": 7,
+ "count": 20,
+ "sample": [
+  {
+   "num": 1,
+   "app": "Salesforce",
+   "category": "CRM / Enterprise Sales & Marketing",
+   "confidence": "medium",
+   "verdict": "buildable_today",
+   "docs_url": "https://developer.salesforce.com/docs"
+  },
+  {
+   "num": 2,
+   "app": "HubSpot",
+   "category": "CRM / Marketing, Sales & Service Platform",
+   "confidence": "medium",
+   "verdict": "buildable_today",
+   "docs_url": "https://developers.hubspot.com/docs"
+  },
+  {
+   "num": 3,
+   "app": "Pipedrive",
+   "category": "CRM / Sales Pipeline",
+   "confidence": "high",
+   "verdict": "buildable_today",
+   "docs_url": "https://developers.pipedrive.com/docs/api/v1"
+  },
+  {
+   "num": 4,
+   "app": "Attio",
+   "category": "CRM / Data-driven Workspace",
+   "confidence": "high",
+   "verdict": "buildable_today",
+   "docs_url": "https://docs.attio.com"
+  },
+  {
+   "num": 5,
+   "app": "Twenty",
+   "category": "CRM / Open-source",
+   "confidence": "medium",
+   "verdict": "buildable_today",
+   "docs_url": "https://twenty.com/developers"
+  },
+  {
+   "num": 6,
+   "app": "Podio",
+   "category": "Work Management / Collaboration Platform",
+   "confidence": "high",
+   "verdict": "buildable_today",
+   "docs_url": "https://developers.podio.com"
+  },
+  {
+   "num": 7,
+   "app": "Zoho CRM",
+   "category": "CRM / Sales & Marketing",
+   "confidence": "medium",
+   "verdict": "buildable_today",
+   "docs_url": "https://www.zoho.com/crm/developer/docs/api/v6/"
+  },
+  {
+   "num": 8,
+   "app": "Close",
+   "category": "CRM / Sales",
+   "confidence": "high",
+   "verdict": "buildable_today",
+   "docs_url": "https://developer.close.com"
+  },
+  {
+   "num": 9,
+   "app": "Copper",
+   "category": "CRM / Relationship Intelligence",
+   "confidence": "high",
+   "verdict": "buildable_today",
+   "docs_url": "https://developer.copper.com"
+  },
+  {
+   "num": 10,
+   "app": "DealCloud",
+   "category": "CRM / Deal Management (Investment/Private Markets)",
+   "confidence": "high",
+   "verdict": "buildable_with_work",
+   "docs_url": "https://api.docs.dealcloud.com"
+  },
+  {
+   "num": 11,
+   "app": "Zendesk",
+   "category": "Customer Support / Helpdesk",
+   "confidence": "high",
+   "verdict": "buildable_today",
+   "docs_url": "https://developer.zendesk.com"
+  },
+  {
+   "num": 25,
+   "app": "Pumble",
+   "category": "Team Communication",
+   "confidence": "medium",
+   "verdict": "blocked",
+   "docs_url": "https://pumble.com/help/"
+  },
+  {
+   "num": 44,
+   "app": "Salesforce Commerce Cloud",
+   "category": "E-commerce",
+   "confidence": "medium",
+   "verdict": "blocked",
+   "docs_url": "https://developer.salesforce.com/docs/commerce"
+  },
+  {
+   "num": 50,
+   "app": "fanbasis",
+   "category": "Creator / Fan Platform",
+   "confidence": "low",
+   "verdict": "blocked",
+   "docs_url": "https://fanbasis.com"
+  },
+  {
+   "num": 58,
+   "app": "Sherlock",
+   "category": "OSINT",
+   "confidence": "high",
+   "verdict": "blocked",
+   "docs_url": "https://github.com/sherlock-project/sherlock"
+  },
+  {
+   "num": 84,
+   "app": "Paygent Connect",
+   "category": "Payments",
+   "confidence": "low",
+   "verdict": "blocked",
+   "docs_url": "https://nmi.com"
+  },
+  {
+   "num": 85,
+   "app": "iPayX",
+   "category": "Payments",
+   "confidence": "low",
+   "verdict": "blocked",
+   "docs_url": "https://ipayx.ai/docs"
+  },
+  {
+   "num": 90,
+   "app": "PitchBook",
+   "category": "Financial Data / Market Intelligence",
+   "confidence": "medium",
+   "verdict": "blocked",
+   "docs_url": "https://pitchbook.com/products/research-api"
+  },
+  {
+   "num": 91,
+   "app": "NotebookLM",
+   "category": "AI / Productivity",
+   "confidence": "high",
+   "verdict": "blocked",
+   "docs_url": "https://cloud.google.com/gemini/docs"
+  },
+  {
+   "num": 94,
+   "app": "Consensus",
+   "category": "Academic Search / Research",
+   "confidence": "medium",
+   "verdict": "blocked",
+   "docs_url": "https://consensus.app"
+  }
+ ]
+}

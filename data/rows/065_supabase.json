@@ -1,0 +1,34 @@
+{
+  "num": 65,
+  "app": "Supabase",
+  "category": "Backend-as-a-Service",
+  "one_line": "Open-source Firebase alternative: Postgres database with REST (PostgREST) and GraphQL APIs, auth, storage and realtime.",
+  "auth_methods": ["API Key", "OAuth2", "JWT"],
+  "auth_notes": "Project URL + anon/publishable key (client) or service_role key (admin) passed as apikey header; keys are JWTs; OAuth2 available for auth providers via Supabase Auth",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier; create a project in dashboard and get URL + keys instantly; self-serve, no approval",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "broad",
+    "breadth_estimate": "PostgREST auto-generated REST per table plus GraphQL (pg_graphql), RPC, Storage, Auth, Edge Functions, Realtime; SDKs for JS/Python/etc",
+    "webhooks": true,
+    "webhook_note": "Database webhooks (via pg_net), Edge Function triggers, and Realtime subscription streams"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP server confirmed; multiple community MCP servers exist (knowledge); fetched text confirms REST (PostgREST) + JWT keys and official JS client"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://supabase.com/docs",
+    "note": "fetched text confirms supabase-js client, Data API/PostgREST, JWT keys, RLS and RPC"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Instant keys on project creation; REST via PostgREST is straightforward to target."
+}

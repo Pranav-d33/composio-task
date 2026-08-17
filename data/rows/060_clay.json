@@ -1,0 +1,34 @@
+{
+  "num": 60,
+  "app": "Clay",
+  "category": "Data Enrichment",
+  "one_line": "No-code GTM data enrichment and automation platform (with Claygent AI) for finding and enriching contacts.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "Clay has a limited REST API for exporting/triggering runs; primary model is no-code tables rather than OAuth API access",
+  "self_serve": "yes",
+  "self_serve_notes": "Self-serve signup with free plan and trial credits; paid plans based on credits; API access available but is not the primary interface",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Limited public API (triggers, exports); most functionality is internal/no-code; docs at docs.clay.com",
+    "webhooks": true,
+    "webhook_note": "Workflow triggers and exports to external tools supported; no broad event webhook API confirmed"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP server confirmed; some community servers exist (knowledge)"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://docs.clay.com",
+    "note": "fetched text is Clay University (learning) page confirming no-code platform and Claygent; API facts from knowledge"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page was marketing/learning material, not API docs; Clay's public API is limited, so treat integration as partial."
+}

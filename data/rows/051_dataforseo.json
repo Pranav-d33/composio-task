@@ -1,0 +1,34 @@
+{
+  "num": 51,
+  "app": "DataForSEO",
+  "category": "SEO and Web Analytics",
+  "one_line": "Paid SEO data API provider covering SERP, keywords, on-page, backlinks, domain analytics, rank tracking and more.",
+  "auth_methods": ["API Key", "Basic Auth"],
+  "auth_notes": "Credentials are an API login + password (email) set in the dashboard; sent as HTTP Basic Authorization header on every request to api.dataforseo.com; REST with JSON/XML/HTML responses and per-endpoint rate limits.",
+  "self_serve": "paid",
+  "self_serve_notes": "Free unlimited trial (limited credits, no card) then pay-as-you-go; API login/password are generated instantly in the dashboard after signup, no approval needed.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across SERP (Google/Bing/etc. organic/maps/news), Keywords Data, On-page, Backlinks, Domain Analytics, Rank Tracking, Business Data, App Data, Merchant, Content Generation, Appendix; OpenAPI spec published",
+    "webhooks": true,
+    "webhook_note": "Webhooks & callbacks supported for task completion notifications; standard (async) and live (sync) task methods"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official DataForSEO MCP server; community MCP servers for DataForSEO exist on GitHub/MCP registries"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.dataforseo.com",
+    "note": "Fetched text confirms REST technology, client libraries, JSON/XML/HTML responses, rate-limit headers, standard/live methods, webhooks & callbacks, sandbox and free trial"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth is simple basic-auth login/password from the dashboard; free trial makes first call fast. Cost scales with usage but no approval gate."
+  }

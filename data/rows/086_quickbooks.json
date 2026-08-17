@@ -1,0 +1,34 @@
+{
+  "num": 86,
+  "app": "QuickBooks",
+  "category": "Accounting",
+  "one_line": "SMB accounting platform with the very broad QuickBooks Online Accounting REST API covering invoices, payments, customers, items, bills, and reports.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth 2.0 with scopes via the Intuit developer portal; app registration (self-serve) yields client key/secret. Sandbox/test company is free; production access requires an active QuickBooks subscription and app approval.",
+  "self_serve": "trial",
+  "self_serve_notes": "Developer sandbox and app registration are free and self-serve; real accounting data requires a QuickBooks Online subscription (free trial then paid) and Intuit app approval for production.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across QuickBooks Online Accounting (customers, invoices, payments, bills, items, journal entries, reports), plus Payments, eCommerce, Payroll, and 3rd-party APIs.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported — subscribe to entity events (invoice, payment, etc.) with signed payloads."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MCP servers for QuickBooks exist; no official MCP published by Intuit."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.intuit.com",
+    "note": "No fetched text file existed for this app; facts from domain knowledge of the Intuit developer platform and QuickBooks Online Accounting API."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Sandbox is buildable quickly; production requires QuickBooks subscription + app approval — hence buildable_with_work."
+}

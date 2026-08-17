@@ -1,0 +1,13 @@
+{
+ "num": 4,
+ "app": "Attio",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "REST API + OAuth2; docs explicitly list MCP (official); webhooks; self-serve.",
+ "method": "docs_text (fetched)"
+}

@@ -1,0 +1,13 @@
+{
+ "num": 91,
+ "app": "NotebookLM",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "No public NotebookLM API; only Gemini API is public. None/blocked correct. MCP: community wrappers exist but unofficial.",
+ "method": "knowledge + docs"
+}

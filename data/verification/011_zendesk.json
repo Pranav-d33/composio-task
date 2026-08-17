@@ -1,0 +1,13 @@
+{
+ "num": 11,
+ "app": "Zendesk",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "API token + OAuth2; free trial then paid; very broad REST; webhooks; community MCP only.",
+ "method": "docs_text+knowledge"
+}

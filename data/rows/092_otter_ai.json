@@ -1,0 +1,34 @@
+{
+  "num": 92,
+  "app": "Otter AI",
+  "category": "AI Meeting Notetakers and Transcription",
+  "one_line": "AI meeting assistant that records, transcribes, and summarizes meetings with live notes and chat.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2; public API is limited and not documented in the public help center; API access tied to paid/enterprise plans",
+  "self_serve": "paid",
+  "self_serve_notes": "Self-serve consumer signup with free basic tier and paid plans; developer/API access is limited and gated to paid plans",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Limited set of endpoints (conversations/transcripts); public docs are minimal",
+    "webhooks": false,
+    "webhook_note": "No webhooks documented in public help center"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "MCP server exists per assignment hint; not documented in Otter's public help center (fetched text was a nav shell)"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://help.otter.ai",
+    "note": "fetched text (help center shell, no API docs) + knowledge + assignment hint"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API surface and MCP existence not confirmed from public docs; limited public API per assignment hint"
+}

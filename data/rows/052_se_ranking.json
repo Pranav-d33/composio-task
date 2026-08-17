@@ -1,0 +1,34 @@
+{
+  "num": 52,
+  "app": "SE Ranking",
+  "category": "SEO and Web Analytics",
+  "one_line": "SEO/AEO platform whose REST API exposes keyword research, backlinks, domain analysis, site audits and AI-visibility data at scale.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "API key generated in the SE Ranking account (Settings > API tab), sent as a header/param on REST calls; API access included in every plan; no first-party SDKs (use REST reference + Postman collection).",
+  "self_serve": "trial",
+  "self_serve_notes": "Free trial (no credit card) includes API access; thereafter API comes with any paid plan (Core $129/mo, Growth $279/mo), API Add-On from $149/mo, or pay-as-you-go from a $50 deposit.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Data API (Keyword Research, Backlinks, Domain Analysis, SERP, Website Audit, AI Visibility) plus Project API (rank tracking, keyword grouping, competitor and AI tracking); up to 10 requests/second",
+    "webhooks": false,
+    "webhook_note": "No webhook support mentioned in the docs; results are pulled on demand"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Official SE Ranking MCP server documented on the fetched page ('Explore MCP Server', query data inside Claude/Codex/Cursor); 1-minute setup"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://seranking.com/api",
+    "note": "Fetched text confirms API key from account settings, REST via Postman collection, Data + Project API layers, official MCP server, pricing and free trial"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Simple API-key auth, free trial available; the main cost is the paid plan. Official MCP server is a bonus. No webhooks."
+  }

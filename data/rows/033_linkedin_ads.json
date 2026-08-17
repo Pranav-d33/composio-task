@@ -1,0 +1,34 @@
+{
+  "num": 33,
+  "app": "LinkedIn Ads",
+  "category": "Advertising",
+  "one_line": "LinkedIn's Marketing API for managing ad campaigns, reporting, audiences, and lead sync on the professional network.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 with a LinkedIn developer app. Marketing API access requires applying for the Marketing API program in the developer portal and having a LinkedIn Company Page + Ad account; some products are partner-only.",
+  "self_serve": "yes",
+  "self_serve_notes": "Creating a LinkedIn developer app is free and self-serve; but access to Marketing APIs (Advertising, Reporting, Lead Sync) is gated behind an application/review process in the Developer Portal.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Campaign management, advertising analytics/reporting, matched audiences, lead sync, conversions, company intelligence, audience insights",
+    "webhooks": true,
+    "webhook_note": "Webhooks for ad account/campaign status changes and lead events (Lead Sync)"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official LinkedIn Marketing API MCP; community MCP servers exist."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://learn.microsoft.com/en-us/linkedin/marketing/",
+    "note": "Fetched text (3.7KB) confirms Marketing API program scope; access gating from LinkedIn docs"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Marketing API approval is the slowest gate in this batch; core profile APIs are open but ads APIs are restricted."
+}

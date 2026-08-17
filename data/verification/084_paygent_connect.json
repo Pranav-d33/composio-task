@@ -1,0 +1,13 @@
+{
+ "num": 84,
+ "app": "Paygent Connect",
+ "checks": {
+  "auth_methods": "unknown",
+  "self_serve": "correct",
+  "api_surface": "unknown",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "NMI-powered gateway; no public docs/portal; gated behind sales. Blocked correct; auth/API surface unknown (honest).",
+ "method": "browser fetch + search"
+}

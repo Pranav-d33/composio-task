@@ -1,0 +1,34 @@
+{
+  "num": 44,
+  "app": "Salesforce Commerce Cloud",
+  "category": "E-commerce",
+  "one_line": "Salesforce's enterprise B2C/B2B commerce platform exposed through Open Commerce API (OCAPI) and Commerce Cloud APIs.",
+  "auth_methods": ["OAuth2", "JWT Bearer"],
+  "auth_notes": "REST/OCAPI requires a Commerce Cloud account with API client IDs and secret; client-credential (OAuth2) or JWT bearer grants produce bearer tokens; B2C/B2B instances each need API client configured in the Business Manager.",
+  "self_serve": "no",
+  "self_serve_notes": "Enterprise SaaS — requires a Commerce Cloud subscription/sales process; no free solo signup. Dev/test sandboxes exist only within an active enterprise contract.",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "broad",
+    "breadth_estimate": "Open Commerce API (OCAPI) covering catalog, product, customers, baskets/carts, orders, payments and web services; B2B Commerce GraphQL API; headless storefront APIs",
+    "webhooks": true,
+    "webhook_note": "Event hooks / webhooks available in newer Commerce Cloud releases (e.g., B2C event notifications); less mature than other platforms"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official Commerce Cloud-specific MCP server verified; Salesforce has MCP servers for other products but none confirmed for Commerce Cloud"
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "Enterprise-only: credentials require an active Salesforce Commerce Cloud subscription obtained through sales; no self-serve signup",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://developer.salesforce.com/docs/commerce",
+    "note": "Fetched text was a thin cookie-consent/JS shell (~1.6KB) with no content; facts from knowledge of Commerce Cloud OCAPI and enterprise gating plus official docs URL"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page rendered nothing useful; buildability gated by enterprise sales process and paid subscription, not by API quality."
+  }

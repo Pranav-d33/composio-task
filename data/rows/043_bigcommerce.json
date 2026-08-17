@@ -1,0 +1,34 @@
+{
+  "num": 43,
+  "app": "BigCommerce",
+  "category": "E-commerce",
+  "one_line": "SaaS e-commerce platform with broad REST Management APIs, GraphQL Storefront API, and webhooks for managing stores programmatically.",
+  "auth_methods": ["OAuth2", "API token"],
+  "auth_notes": "API credentials = store_hash + access token created under Settings > API Accounts with chosen scopes, sent as X-Auth-Token header; single-click apps use OAuth2 (client id/secret) for marketplace apps; storefront GraphQL uses its own storefront API token.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free 15-day trial store (sandbox) to generate API credentials solo; after trial a paid plan is required. Docs walk through sandbox creation + API account setup.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Large REST Management API (catalog/products, orders, customers, carts, checkout, payments, price lists, channels, settings) plus GraphQL Storefront API; API reference with Request Runner",
+    "webhooks": true,
+    "webhook_note": "Webhooks for store events (orders, products, customers, categories, carts) delivered to HTTPS endpoints"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official BigCommerce MCP server exists (bigcommerce/mcp); docs also advertise an MCP for connecting AI agents to BigCommerce developer docs"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.bigcommerce.com",
+    "note": "Fetched text confirms free trial sandbox store, API Accounts with scopes, X-Auth-Token, REST/GraphQL APIs, webhooks, MCP AI Agent setup"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Simple token auth via API Accounts; free trial store makes first call quick. Official MCP server exists."
+  }

@@ -1,0 +1,34 @@
+{
+  "num": 10,
+  "app": "DealCloud",
+  "category": "CRM / Deal Management (Investment/Private Markets)",
+  "one_line": "Enterprise deal-management and investment CRM with a partner/enterprise REST API, Python SDK, and an announced MCP server.",
+  "auth_methods": ["API key", "Authorization token"],
+  "auth_notes": "API keys plus an authorization token for requests; docs cover getting started, API keys, auth token, pagination, rate limits. Official Python SDK provided. Access is partner/enterprise only - credentials are issued to DealCloud customers/partners, not self-serve.",
+  "self_serve": "partnership",
+  "self_serve_notes": "Gated - requires a DealCloud partnership or client relationship; must contact sales/DealCloud to obtain credentials.",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Schema, entry types, fields, cells, rows, views, history, files, reports, user management, publications/real-time events",
+    "webhooks": true,
+    "webhook_note": "Publications/subscription model for real-time events from DealCloud (documented under 'Real-Time Events from DealCloud')"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Docs announce a DealCloud MCP Server (client preview starting July 2026) with a dedicated MCP section covering auth and available tools"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": "API access gated behind DealCloud partnership/client credentials (contact sales); no self-serve signup.",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://api.docs.dealcloud.com",
+    "note": "Fetched docs nav confirmed API keys, auth token, Python SDK, MCP server preview, and full API surface"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Docs are excellent and MCP is officially coming, but credentials require an enterprise/partner relationship - main friction."
+}

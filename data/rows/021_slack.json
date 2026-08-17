@@ -1,0 +1,34 @@
+{
+  "num": 21,
+  "app": "Slack",
+  "category": "Team Communication",
+  "one_line": "Team messaging and collaboration platform with a very broad REST API, Events API, webhooks, and Socket Mode for building bots and apps.",
+  "auth_methods": ["OAuth2", "bot token"],
+  "auth_notes": "OAuth2 with scoped tokens (bot + user tokens); apps created free in seconds at api.slack.com/apps; Slack CLI and Bolt SDKs available.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free self-serve app creation; works on free plans. No approval needed beyond installing the app to a workspace.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across chat, conversations, users, files, workflows, admin, and audit; plus Events API and WebSocket/Socket Mode.",
+    "webhooks": true,
+    "webhook_note": "Incoming/outgoing webhooks plus Events API subscriptions for granular event delivery."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Slack MCP server exists; numerous community MCP servers also available."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://api.slack.com",
+    "note": "Fetched text (021_slack.txt) confirms developer platform, CLI, and SDKs. Auth/API details from knowledge."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched text is marketing-ish landing page; API surface and MCP evidence from strong prior knowledge."
+  }

@@ -1,0 +1,34 @@
+{
+  "num": 97,
+  "app": "Higgsfield",
+  "category": "AI Image and Video Generation",
+  "one_line": "AI-native creative suite for generating images, videos, and marketing content across 30+ models.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "No API key; MCP/CLI authenticate via Higgsfield account (browser login / OAuth); generation consumes platform credits",
+  "self_serve": "paid",
+  "self_serve_notes": "Self-serve signup; credit-based pricing using existing Higgsfield plan credits; CLI install is free but generation costs credits",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "No clearly documented public REST API; access via MCP server and CLI (30+ models, image/video/character training)",
+    "webhooks": false,
+    "webhook_note": "No webhooks documented"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Official Higgsfield MCP server + CLI documented at higgsfield.ai/cli; works with Claude, ChatGPT, OpenClaw, Hermes Agent, NemoClaw"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://higgsfield.ai/cli",
+    "note": "fetched text (marketing) + confirmed via https://higgsfield.ai/cli FAQ (MCP, no API key, account auth, credits)"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "New product, thin docs; REST API surface not clearly documented, access mainly via MCP/CLI"
+}

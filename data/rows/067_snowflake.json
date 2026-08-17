@@ -1,0 +1,34 @@
+{
+  "num": 67,
+  "app": "Snowflake",
+  "category": "Data Cloud",
+  "one_line": "Cloud data platform/warehouse with SQL analytics, data sharing, and AI/ML workloads.",
+  "auth_methods": ["OAuth2", "Key-Pair Authentication", "API Key (JWT)"],
+  "auth_notes": "Drivers use username/password or key-pair auth; OAuth2 for integrations; the Snowflake REST/SQL REST API uses JWT tokens derived from a private key or OAuth. Requires an account identifier and roles configured by an admin.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free 30-day trial (no credit card), then paid. Creating an account is self-serve but provisioning users/roles/integrations is admin work.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Full SQL execution, SQL REST API, and admin REST endpoints for accounts, databases, roles, users; very broad data surface but gated by warehouse setup.",
+    "webhooks": false,
+    "webhook_note": null
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MCP servers for Snowflake exist (e.g. snowflake-mcp); no official MCP confirmed."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://docs.snowflake.com",
+    "note": "Fetched URL returned a 404 shell; fields based on knowledge plus official docs URL."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Docs text was a 404 page. Account/trial creation plus admin-configured roles make first call slower than typical SaaS."
+}

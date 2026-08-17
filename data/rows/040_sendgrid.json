@@ -1,0 +1,34 @@
+{
+  "num": 40,
+  "app": "SendGrid",
+  "category": "Email Delivery / Email Marketing",
+  "one_line": "Twilio-owned email delivery platform that sends transactional and marketing email at scale via a broad REST API.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "API key (starts with SG.) generated in the SendGrid dashboard; sent as 'Authorization: Bearer <key>' header on v3 Web API calls. Full account access key or scoped keys (mail.send, stats, etc.).",
+  "self_serve": "trial",
+  "self_serve_notes": "Free tier (100 emails/day, no credit card) that upgrades to paid plans; a dev can sign up solo and generate API keys immediately.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "v3 Web API with ~150+ endpoints covering mail send, templates, marketing campaigns, contacts/lists, stats, IP pools, suppression groups, subusers and more; OpenAPI spec published",
+    "webhooks": true,
+    "webhook_note": "Event webhook (delivered/opened/clicked/bounced etc.) and Inbound Parse webhook for receiving email"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Twilio SendGrid MCP server found; community MCP servers for SendGrid exist in registries/GitHub"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.sendgrid.com/api-reference",
+    "note": "Fetched text confirms SendGrid v3 Web API is REST for sending email, campaigns, contacts and stats (docs.sendgrid.com); auth/plans/webhooks from platform knowledge"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Simple API key auth, free tier available; the fetched page was mostly navigation but the API reference is well documented."
+  }

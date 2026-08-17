@@ -1,0 +1,34 @@
+{
+  "num": 32,
+  "app": "Meta Ads",
+  "category": "Advertising",
+  "one_line": "Meta's Marketing API (Graph API endpoints) for creating and managing ads across Facebook, Instagram, Messenger, and WhatsApp.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 via a Meta app with Marketing API / Ads Management permissions. Requires a Meta developer account, Business Manager, and Ad account. App review + advanced access required for production marketing permissions.",
+  "self_serve": "yes",
+  "self_serve_notes": "Self-serve: create a Meta app free, use test ad accounts immediately; production access needs app review to add marketing permissions (advanced access).",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Campaigns, ad sets, ads, creatives, audiences, insights, custom conversions, catalogs, Business Management; tens of Graph API endpoints",
+    "webhooks": true,
+    "webhook_note": "Webhooks for asynchronous ad review/status updates and conversion events"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Meta MCP for Marketing API; community MCP servers exist."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developers.facebook.com/docs/marketing-apis",
+    "note": "Fetched text (2KB) confirms Marketing API scope and related APIs; auth/self-serve from Meta docs"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "App review for advanced access is the friction point; test ad accounts enable sandbox calls immediately."
+}

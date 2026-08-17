@@ -1,0 +1,34 @@
+{
+  "num": 36,
+  "app": "Klaviyo",
+  "category": "Email / SMS Marketing",
+  "one_line": "E-commerce marketing automation platform with a JSON:API REST API for profiles, events, campaigns, flows, and catalogs.",
+  "auth_methods": ["Private API key", "OAuth2", "Public key (client-side)"],
+  "auth_notes": "Server-side /api endpoints use private API keys with scopes (header Klaviyo-API-Key); OAuth2 recommended for tech partners; public keys for client-side /client endpoints. Keys generated in account settings.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free tier (up to ~250 contacts) allows generating API keys and calling APIs immediately; paid plans above the cap. No approval.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Profiles, events, metrics, campaigns, flows, messages, segments, lists, tags, catalogs/items, templates, webhooks, tracking; ~60+ JSON:API endpoints",
+    "webhooks": true,
+    "webhook_note": "Webhooks for events like subscribe/unsubscribe and order events"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Klaviyo MCP confirmed; community MCP servers exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developers.klaviyo.com",
+    "note": "Rich fetched text (7.8KB) covering auth methods, scopes, rate limits, JSON:API features"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Private API key path is trivial; OAuth for partner-grade integration."
+}

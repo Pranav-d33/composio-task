@@ -1,0 +1,34 @@
+{
+  "num": 38,
+  "app": "Pinterest",
+  "category": "Social Media / Advertising",
+  "one_line": "Visual discovery platform whose API v5 lets developers build apps for pins, boards, ads, and shopping.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 with scopes (boards:read, pins:read, ads:read, etc.). Requires a Pinterest developer account and registering an app; then submitting the app for review to access most scopes.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free self-serve: create a developer account, register a business app, get client ID/secret, and generate test tokens. App review required before production access to most API features.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Boards, pins, media, users, ad accounts/campaigns/ad groups/ads, audiences, conversions, shopping (products), analytics & reporting; ~60+ endpoints",
+    "webhooks": true,
+    "webhook_note": "Webhooks for some integration events (e.g., lead ads / conversion)."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP; community MCP servers for Pinterest exist."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developers.pinterest.com",
+    "note": "Fetched text (2.6KB) covers developer platform overview, app connection, review process, API v5"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "App review is the main delay; test tokens and sandbox speed up initial development."
+}

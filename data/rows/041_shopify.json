@@ -1,0 +1,34 @@
+{
+  "num": 41,
+  "app": "Shopify",
+  "category": "E-commerce",
+  "one_line": "Cloud commerce platform whose Admin API (REST + GraphQL) lets you manage stores, products, orders, customers, and apps.",
+  "auth_methods": ["OAuth2", "API token"],
+  "auth_notes": "Public/custom apps use OAuth2 (client id/secret, scopes) to obtain an access token sent as X-Shopify-Access-Token header; admin-generated custom apps use admin-authenticated tokens; scopes requested at install.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free Partner/dev store + free Shopify development store; any dev can create an app in the Dev Dashboard and get OAuth credentials without paying.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across Admin REST (~50 resources) and Admin GraphQL (products, orders, customers, inventory, fulfillment, metafields, marketing, payments, plus B2B); also Storefront API, Payments, Marketplaces, Bulk operations",
+    "webhooks": true,
+    "webhook_note": "Full webhook subsystem (products/orders/customers/fulfillments etc.) delivered to HTTPS endpoints; GraphQL webhooks with filterable topics"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Shopify MCP server exists (Shopify/mcp, supports Admin GraphQL); several community MCP servers also published"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://shopify.dev/docs/api/admin",
+    "note": "Fetched text confirms GraphQL Admin API endpoint, OAuth access tokens, scopes, cost-based rate limits (shopify.dev/docs/api/admin); REST/webhooks/MCP from platform knowledge"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth is OAuth with scopes; free dev store makes it fully self-serve. Very broad and well documented."
+  }

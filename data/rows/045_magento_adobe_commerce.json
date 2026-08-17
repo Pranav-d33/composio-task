@@ -1,0 +1,34 @@
+{
+  "num": 45,
+  "app": "Magento (Adobe Commerce)",
+  "category": "E-commerce",
+  "one_line": "Open-source (Magento Open Source) and commercial (Adobe Commerce) e-commerce platform with a broad REST API and GraphQL.",
+  "auth_methods": ["API token", "OAuth1.0a", "JWT Bearer"],
+  "auth_notes": "REST API supports OAuth 1.0a for third-party apps, integration access tokens, and admin/customer login tokens; Adobe Commerce as a Cloud Service requires Adobe IMS (Identity Management System) access tokens signed per request.",
+  "self_serve": "yes",
+  "self_serve_notes": "Magento Open Source is free to self-host, so a dev can install it and generate integration tokens freely; Adobe Commerce (commercial/cloud) requires a paid license. Token generation needs store admin access.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "GraphQL"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of REST endpoints (catalog, products, inventory, orders, customers, carts, quotes, shipments, invoices, integrations, stores) plus GraphQL API; cloud version exposes a smaller subset",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported in Adobe Commerce 2.4.6+/cloud (commercial); Magento Open Source has no first-class webhook system without extensions"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Adobe MCP server; community MCP servers for Magento exist on GitHub/MCP registries"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.adobe.com/commerce/webapi/rest/",
+    "note": "Fetched text confirms REST API framework shared across Magento Open Source / Adobe Commerce, OAuth 1.0a + tokens auth, IMS auth for cloud, GraphQL for cloud"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth is flexible but token generation requires admin access to a store; self-hosting Open Source is the free path. Webhooks only on commercial editions."
+  }

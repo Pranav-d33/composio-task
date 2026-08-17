@@ -1,0 +1,34 @@
+{
+  "num": 71,
+  "app": "Notion",
+  "category": "Productivity",
+  "one_line": "All-in-one workspace for notes, docs, wikis, and databases.",
+  "auth_methods": ["OAuth2", "API Key (Internal integration token)", "Personal Access Token"],
+  "auth_notes": "Three auth models: internal connections (static API token, single workspace), public connections (OAuth 2.0, security review only for Marketplace listing), and personal access tokens (user-scoped bearer token).",
+  "self_serve": "yes",
+  "self_serve_notes": "Free personal plan; any developer can create an internal integration or PAT in the Notion developer portal without approval.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Pages, databases, views, comments, users, search, file uploads, data sources — nearly everything in a workspace.",
+    "webhooks": true,
+    "webhook_note": "Connections can subscribe to webhook events (page/property updates, new comments) per the webhooks guide."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Notion MCP server exists (notion-io/notion-mcp-server); community servers also exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developers.notion.com",
+    "note": "Fetched 'Using Notion API' overview confirms all three auth models, capabilities, and webhook support."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Internal integration must be explicitly granted page/database access in the workspace."
+}

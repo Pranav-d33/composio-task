@@ -1,0 +1,34 @@
+{
+  "num": 27,
+  "app": "Telegram",
+  "category": "Messaging",
+  "one_line": "Messaging platform whose Bot API lets bots send/receive messages, media, and updates programmatically over HTTP.",
+  "auth_methods": ["Bot token (HTTP header)"],
+  "auth_notes": "No OAuth. Auth is a bot token obtained from @BotFather by creating a bot. Token sent as a URL query param or Bearer token header. Bot creation is free and instant.",
+  "self_serve": "yes",
+  "self_serve_notes": "Anyone can create a bot free via @BotFather; no app registration, approval, or payment required.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "150+ methods (messages, media, payments, games, inline queries, webhooks via getUpdates/long polling)",
+    "webhooks": true,
+    "webhook_note": "setWebhook endpoint for push updates; long polling alternative via getUpdates"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Bot API MCP confirmed (core.telegram.org/bots/mcp returns 404). Community servers exist (e.g. mark3labs/mcp-telegram)."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://core.telegram.org/bots/api",
+    "note": "Fetched text is the full Bot API reference (479KB); MCP existence verified via curl (404 at official URL)"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "No real uncertainty. Token auth means no OAuth flow; easiest app in the batch."
+}

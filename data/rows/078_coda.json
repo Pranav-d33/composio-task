@@ -1,0 +1,34 @@
+{
+  "num": 78,
+  "app": "Coda",
+  "category": "Productivity",
+  "one_line": "Collaborative document platform combining docs, spreadsheets, and apps (now Superhuman Docs).",
+  "auth_methods": ["API Token (Bearer)", "OAuth2"],
+  "auth_notes": "REST API v1 uses Bearer API tokens; OAuth2 also supported for Packs. API base is coda.io/apis/v1; rate limits per user; some write endpoints return 202 with requestId for async completion.",
+  "self_serve": "yes",
+  "self_serve_notes": "API is free in both free and paid workspaces; any user can generate an API token in account settings. Doc creation requires Doc Maker/Admin role in the workspace.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Docs, pages, tables, columns, rows, formulas, controls, folders, permissions, publishing, analytics, automations.",
+    "webhooks": false,
+    "webhook_note": "No general webhooks API; automations can be triggered via API endpoints."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Docs explicitly mention the Superhuman Docs MCP server optimized for LLM usage."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://coda.io/developers/apis/v1",
+    "note": "Fetched text is the full Superhuman Docs API (formerly Coda) v1 reference confirming Bearer auth, endpoint breadth, rate limits, and MCP server."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Coda was acquired by Superhuman; docs now branded 'Superhuman Docs' but API and docs URL remain coda.io."
+}

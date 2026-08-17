@@ -1,0 +1,34 @@
+{
+  "num": 17,
+  "app": "Plain",
+  "category": "Customer Support",
+  "one_line": "Modern B2B customer support platform with a GraphQL API that mirrors the full UI (no API limitations), plus an official MCP server.",
+  "auth_methods": ["API key"],
+  "auth_notes": "GraphQL API at https://core-api.uk.plain.com/graphql/v1, POST-only, Authorization: Bearer <API key>. API keys created in the workspace with scoped permissions (e.g. customer:read).",
+  "self_serve": "trial",
+  "self_serve_notes": "Workspace signup is self-serve with a trial; API keys available to any workspace user. Paid plan required for production use.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["GraphQL"],
+    "breadth": "broad",
+    "breadth_estimate": "Full GraphQL schema covering customers, threads, messages, timelines, and every UI capability; no documented limitations.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported for thread/message/customer events (docs.plain.com)."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Docs explicitly recommend their 'MCP Server' for accessing the GraphQL API from an agent (017_plain.txt)."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://docs.plain.com",
+    "note": "Fetched text (017_plain.txt) confirms GraphQL API, Bearer API-key auth, and official MCP server."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Free-tier availability uncertain; webhook support inferred from knowledge."
+  }

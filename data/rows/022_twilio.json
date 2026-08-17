@@ -1,0 +1,34 @@
+{
+  "num": 22,
+  "app": "Twilio",
+  "category": "Communications",
+  "one_line": "Cloud communications platform whose REST APIs let developers send messages, make calls, and look up numbers across SMS, voice, video, and more.",
+  "auth_methods": ["API key", "OAuth2"],
+  "auth_notes": "Primary auth is Account SID + Auth Token (or scoped API keys); OAuth2 available for some APIs. Self-serve signup at twilio.com/console.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free self-serve trial with credit; real usage requires a paid/verified account. No sales gate.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across Messaging, Voice, Video, Verify, Lookup, Conversations, and more; each product has its own API.",
+    "webhooks": true,
+    "webhook_note": "Webhooks central to Twilio (message status callbacks, voice callbacks, phone-number events)."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Twilio MCP server exists; multiple community MCP servers available."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://www.twilio.com/docs",
+    "note": "Fetched text (022_twilio.txt) confirms REST organization and per-product APIs. Auth details from knowledge."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched text confirms REST broadly; auth method and MCP evidence from knowledge."
+  }

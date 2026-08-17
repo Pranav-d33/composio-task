@@ -1,0 +1,34 @@
+{
+  "num": 20,
+  "app": "Gladly",
+  "category": "Customer Support",
+  "one_line": "Enterprise customer-service platform with a REST API, Lookup API, chat SDKs, and webhooks for building support integrations.",
+  "auth_methods": ["API key"],
+  "auth_notes": "REST API authenticated with API keys / connector credentials provisioned by Gladly; no public OAuth app flow.",
+  "self_serve": "no",
+  "self_serve_notes": "Gated enterprise product; access is via sales/implementation, API credentials provisioned with the account.",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "REST APIs for conversations/people data plus Lookup API for enrichment; webhook examples provided; tens of endpoints.",
+    "webhooks": true,
+    "webhook_note": "Webhooks documented with code examples (Webhook Examples section)."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official MCP server found."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": "Enterprise account/sales involvement required to obtain credentials.",
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developer.gladly.com",
+    "note": "Fetched text (020_gladly.txt) lists REST API, Lookup API, Chat SDK, and webhook examples. Gating/auth from knowledge."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Thin fetched text; exact auth method and credential self-service status inferred."
+  }

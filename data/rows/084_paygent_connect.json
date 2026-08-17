@@ -1,0 +1,34 @@
+{
+  "num": 84,
+  "app": "Paygent Connect",
+  "category": "Payments",
+  "one_line": "NMI-powered embedded payment gateway aimed at ISOs and SaaS platforms; highly obscure with no discoverable public developer API.",
+  "auth_methods": ["Unknown"],
+  "auth_notes": "No public API or developer documentation found. Paygent Connect appears to be an NMI-powered embedded payments/gateway product; access is via NMI sales and account onboarding, not self-serve credentials.",
+  "self_serve": "no",
+  "self_serve_notes": "No self-serve developer signup located. Getting credentials would require engaging NMI/Paygent sales and underwriting (ISO/SaaS onboarding).",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Unknown — no public API reference exists; NMI's gateway platform is the underlying API surface.",
+    "webhooks": false,
+    "webhook_note": "Webhooks not publicly documented for Paygent Connect specifically."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No MCP server found for Paygent Connect; NMI's platform MCP availability unconfirmed."
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "No public API documentation or developer portal found. Paygent Connect is gated behind NMI sales/partnership onboarding; auth method and endpoints are undisclosed.",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://nmi.com",
+    "note": "Fetched text was the NMI home page confirming Paygent Connect is NMI-powered embedded payments; searched for a Paygent Connect developer portal/docs and found none public."
+  },
+  "confidence": "low",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Insufficient public information to verify auth, endpoints, or self-serve access. Recommend treating as blocked pending direct vendor contact."
+}

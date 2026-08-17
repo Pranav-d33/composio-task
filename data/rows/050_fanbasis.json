@@ -1,0 +1,34 @@
+{
+  "num": 50,
+  "app": "fanbasis",
+  "category": "Creator / Fan Platform",
+  "one_line": "Creator monetization platform (apparently rebranded to Commas) for selling courses, communities, webinars and memberships.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "No public developer documentation or self-serve API credentials found; the platform advertises 'Enterprise & APIs' (embedded checkouts, payouts, SDKs) and an MCP beta, implying API access is offered only to enterprise customers.",
+  "self_serve": "no",
+  "self_serve_notes": "Cannot sign up and obtain API credentials solo; APIs are presented as an enterprise feature. Standard account signup exists but no public API key flow documented.",
+  "gate_type": "contact_sales",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Undocumented; marketing mentions checkout links, refunds and payouts via API/SDKs and an MCP beta, but no public endpoint inventory exists",
+    "webhooks": false,
+    "webhook_note": "No webhook documentation found; unknown"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "Marketing page mentions an 'MCP (beta)' for AI assistants, but it is enterprise-gated and undocumented; no public MCP server located"
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "No public API docs, no self-serve credentials; API is enterprise-gated (contact sales) and platform appears rebranded (fanbasis -> Commas) with unclear API stability",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://fanbasis.com",
+    "note": "Fetched text is the marketing site for 'Commas' (Where you make money on the internet), confirming the fanbasis rebrand and enterprise-only API/MCP mentions; no developer docs exist"
+  },
+  "confidence": "low",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Very obscure; the fetched page shows fanbasis is now Commas with enterprise-gated APIs. Treat as blocked/insufficient info unless an enterprise agreement is secured."
+  }

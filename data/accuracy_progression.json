@@ -1,0 +1,67 @@
+{
+ "sample_size": 20,
+ "fields": [
+  "auth",
+  "self_serve",
+  "api_surface",
+  "mcp",
+  "verdict"
+ ],
+ "pass1": {
+  "auth": {
+   "correct": 15,
+   "total": 20,
+   "accuracy": 0.75
+  },
+  "self_serve": {
+   "correct": 15,
+   "total": 20,
+   "accuracy": 0.75
+  },
+  "api_surface": {
+   "correct": 7,
+   "total": 20,
+   "accuracy": 0.35
+  },
+  "mcp": {
+   "correct": 12,
+   "total": 20,
+   "accuracy": 0.6
+  },
+  "verdict": {
+   "correct": 18,
+   "total": 20,
+   "accuracy": 0.9
+  }
+ },
+ "pass2": {
+  "auth": {
+   "correct": 15,
+   "total": 20,
+   "accuracy": 0.75
+  },
+  "self_serve": {
+   "correct": 20,
+   "total": 20,
+   "accuracy": 1.0
+  },
+  "api_surface": {
+   "correct": 14,
+   "total": 20,
+   "accuracy": 0.7
+  },
+  "mcp": {
+   "correct": 17,
+   "total": 20,
+   "accuracy": 0.85
+  },
+  "verdict": {
+   "correct": 20,
+   "total": 20,
+   "accuracy": 1.0
+  }
+ },
+ "overall_pass1": 0.67,
+ "overall_pass2": 0.86,
+ "fabricated_guesses_pass1": 3
+}

@@ -1,0 +1,34 @@
+{
+  "num": 91,
+  "app": "NotebookLM",
+  "category": "AI / Productivity",
+  "one_line": "Google's AI-powered notebook that answers questions and generates summaries/notes grounded in your uploaded documents.",
+  "auth_methods": ["None"],
+  "auth_notes": "NotebookLM has no public API. Google's public AI developer surface is the separate Gemini API (different product); NotebookLM itself exposes no documented auth, endpoints, or developer program.",
+  "self_serve": "no",
+  "self_serve_notes": "The product is free to use, but there is no API or developer credential issuance for NotebookLM — nothing to self-serve against.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": [],
+    "breadth": "narrow",
+    "breadth_estimate": "No public API — no documented endpoints. The closest public API is Google's Gemini API, which is a different product.",
+    "webhooks": false,
+    "webhook_note": "No webhooks — no API exists."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP. Only unofficial/community servers exist, typically wrapping Google's Gemini API or reverse-engineered NotebookLM internals (fragile)."
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "NotebookLM has no public API. There is no auth scheme, endpoint, or developer program for it; only the separate Gemini API is publicly available.",
+  "time_to_first_call": "weeks",
+  "evidence": {
+    "docs": "https://cloud.google.com/gemini/docs",
+    "note": "No fetched text file existed for this app. Evidence: Google's only public AI API is Gemini; NotebookLM has no official API documentation anywhere."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "High confidence that NotebookLM has no public API. Community MCPs exist but are unofficial and can break; building on them is unsupported."
+}

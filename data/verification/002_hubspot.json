@@ -1,0 +1,13 @@
+{
+ "num": 2,
+ "app": "HubSpot",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "OAuth2 + private-app tokens (API keys deprecated); free tier; very broad REST; official HubSpot MCP released.",
+ "method": "docs_text+knowledge"
+}

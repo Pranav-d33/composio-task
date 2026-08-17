@@ -1,0 +1,34 @@
+{
+  "num": 56,
+  "app": "Firecrawl",
+  "category": "Web Scraping",
+  "one_line": "Web scraping/crawling API that turns any website into LLM-ready markdown or structured data.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "API key (fc-...) passed as 'Authorization: Bearer $FIRECRAWL_API_KEY'; first scrape works without a key at low rate limits",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier with a free account and free API key ('Create a free account for direct API access and higher limits'); paid plans raise rate limits and credits",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "REST API (api.firecrawl.dev/v2) covering scrape, crawl, map, search, interact, parse, extract; plus async jobs and webhooks; full API reference published",
+    "webhooks": true,
+    "webhook_note": "Webhooks documented for async event delivery of crawl/scrape results"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Firecrawl MCP Server confirmed in fetched text ('MCP Server: Connect Firecrawl to any AI tool via the Model Context Protocol'); also open-source self-hostable"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://docs.firecrawl.dev",
+    "note": "fetched text confirms API key auth, free tier, REST endpoints, webhooks and official MCP server"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Official MCP server exists; easy free-tier start."
+}

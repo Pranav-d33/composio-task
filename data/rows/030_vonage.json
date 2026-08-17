@@ -1,0 +1,34 @@
+{
+  "num": 30,
+  "app": "Vonage",
+  "category": "Communications / CPaaS",
+  "one_line": "Cloud communications API provider (SMS, voice, video, messages, verify) for programmatic messaging and calls.",
+  "auth_methods": ["API key + secret", "JWT (some APIs)"],
+  "auth_notes": "Most APIs (SMS, Messages) use API key + secret (Basic auth) issued in the Vonage dashboard; Voice API uses JWT. OAuth2 exists for the Account API (enterprise).",
+  "self_serve": "trial",
+  "self_serve_notes": "Self-serve signup grants a free trial credit balance to start; prepaid or invoice billing afterward. API keys available instantly in dashboard.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "WebSockets"],
+    "breadth": "broad",
+    "breadth_estimate": "SMS, Voice, Messages (WhatsApp/Viber/MMS), Verify, Number Insight, Numbers, Video, Conversations, Audit, Subaccounts APIs",
+    "webhooks": true,
+    "webhook_note": "Webhooks for delivery receipts, inbound messages, and voice events (answer, DTMF, recordings)"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP; community MCP servers for Vonage exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developer.vonage.com",
+    "note": "Fetched text was only a cookie-consent shell (~2.9KB, thin); facts from knowledge of Vonage docs"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Thin fetched text; auth/detail confirmed from domain knowledge of developer.vonage.com."
+}

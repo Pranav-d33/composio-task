@@ -1,0 +1,34 @@
+{
+  "num": 48,
+  "app": "Gumroad",
+  "category": "E-commerce / Digital Products",
+  "one_line": "Self-serve platform for selling digital products whose OAuth API manages products, sales, payouts, licenses, emails and subscriptions.",
+  "auth_methods": ["OAuth2", "API token"],
+  "auth_notes": "Register an OAuth application (app id + secret) then generate an access token; fine-grained scopes (view_sales, edit_products, view_payouts, etc.); legacy personal access token also used; Verify License API needs no token.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free to join and fully self-serve; create an OAuth app on the Gumroad settings page and generate a token without payment. No app-store approval.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "REST API covering products, variants, offer codes, custom fields, files/media, emails, workflows, sales, licenses, payouts, tax forms, earnings, resource subscriptions",
+    "webhooks": true,
+    "webhook_note": "Webhooks (resource subscriptions) notify on sale/refund/dispute events to a configured URL; docs also ship a CLI wrapping every endpoint"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official Gumroad MCP server found; community servers not verified"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://gumroad.com/api",
+    "note": "Fetched text (full gumroad.com/api docs) confirms OAuth2 app registration, scopes, access tokens, REST JSON API, webhooks, Verify License API"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Docs are thin but the fetched page was substantive; OAuth + token generation is instant and free. Moderate breadth."
+  }

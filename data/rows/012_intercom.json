@@ -1,0 +1,34 @@
+{
+  "num": 12,
+  "app": "Intercom",
+  "category": "Customer Support / Customer Engagement",
+  "one_line": "Customer service and engagement platform (help desk, messenger, tickets, AI) with REST APIs and a free development workspace.",
+  "auth_methods": ["OAuth2", "API token"],
+  "auth_notes": "OAuth2 for app integrations; personal access tokens for direct API access. Free development workspace provided for building and testing apps before publishing to the Intercom App Store.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free development workspace is self-serve for building/testing; production workspace and full API usage require a paid Intercom plan.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Contacts, conversations, tickets, messages, articles, events, tags, teammates, and reporting APIs",
+    "webhooks": true,
+    "webhook_note": "Webhooks documented for conversation/ticket/contact events (e.g. create a GitHub issue when a ticket is created)"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Intercom has released an official MCP server on its developer platform (2025); community servers also exist. Marked with moderate confidence."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developers.intercom.com",
+    "note": "Fetched developer portal confirmed free dev workspace, webhooks + Tickets API guides, and app/integration flows"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Free dev workspace makes first call fast. Official MCP existence is my only slight uncertainty."
+}

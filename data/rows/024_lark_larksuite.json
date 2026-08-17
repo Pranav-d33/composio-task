@@ -1,0 +1,34 @@
+{
+  "num": 24,
+  "app": "Lark (Larksuite)",
+  "category": "Team Communication",
+  "one_line": "Larksuite's collaboration and chat suite (IM, Docs, Calendar, Base, Wiki, Meetings) with broad server-side REST APIs, events/webhooks, and an open-source CLI.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 with app_id/app_secret issuing tenant- and user-scoped access tokens; custom apps created in the open platform console (open.larksuite.com).",
+  "self_serve": "yes",
+  "self_serve_notes": "Free self-serve developer account; create custom app, get credentials, and use test tenant for debugging.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Server APIs and events across IM, Contacts, Calendar, Drive, Docs, Sheets, Base, Wiki, Meetings, Email, Approval, Search, Admin; hundreds of endpoints.",
+    "webhooks": true,
+    "webhook_note": "Event subscriptions (webhooks) across all major domains for real-time delivery."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Lark provides official MCP servers; open-source Lark CLI also available for agent use (npx @larksuite/cli)."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://open.larksuite.com",
+    "note": "Fetched text (024_lark.txt) confirms server APIs, events, permission scopes, app types, and Lark CLI. Auth method from knowledge."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "024_lark_larksuite.txt was a JS shell; relied on 024_lark.txt plus knowledge. MCP/official status inferred."
+  }

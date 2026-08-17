@@ -1,0 +1,34 @@
+{
+  "num": 8,
+  "app": "Close",
+  "category": "CRM / Sales",
+  "one_line": "Inside-sales CRM with a full developer platform: REST API, OAuth2, webhooks/event log, and a first-party MCP server.",
+  "auth_methods": ["API key", "OAuth2"],
+  "auth_notes": "API keys for scripts/server integrations; OAuth2 for user-facing integrations (OAuth app creation documented). Community client libraries for Python, Node.js, Ruby, PHP, Go.",
+  "self_serve": "paid",
+  "self_serve_notes": "Paid plans required for API access; free trial available for evaluation. API keys are self-serve within an active account.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Leads, contacts, activities, opportunities, sequences, bulk actions, email/SMS, reporting metrics",
+    "webhooks": true,
+    "webhook_note": "Real-time event notifications plus a 30-day event log for syncing changes out"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Close ships its own MCP server ('Model Context Protocol for AI agents' listed in the developer platform nav); community servers also exist"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developer.close.com",
+    "note": "Fetched developer platform page confirmed REST API, API keys + OAuth2, webhooks/event log, MCP server, and integration directory"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fully confirmed from fetched text including first-party MCP server. Only friction is the paid plan requirement."
+}

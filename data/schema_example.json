@@ -1,0 +1,36 @@
+{
+  "num": 1,
+  "app": "Salesforce",
+  "category": "CRM and Sales",
+  "one_line": "Enterprise CRM for sales, service and marketing automation.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 with connected app; supports JWT bearer and SAML for server-to-server; requires Connected App setup in org",
+  "self_serve": "yes",
+  "self_serve_notes": "Free Developer Edition org; OAuth app registration self-serve via Connected Apps",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "SOAP", "GraphQL", "Bulk"],
+    "breadth": "very_broad",
+    "breadth_estimate": "500+ endpoints across Sales/Service/Marketing clouds",
+    "webhooks": true,
+    "webhook_note": "Platform Events, Change Data Capture, Outbound Messaging"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Salesforce MCP server + community servers on GitHub"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://trailhead.salesforce.com/content/learn/modules/api_basics",
+    "auth": "https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_tokens_scopes.htm",
+    "mcp": "https://github.com/forcedotcom/MCP",
+    "note": "fetched via browser agent"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Details from fetched docs + developer docs"
+}

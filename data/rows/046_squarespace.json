@@ -1,0 +1,34 @@
+{
+  "num": 46,
+  "app": "Squarespace",
+  "category": "E-commerce",
+  "one_line": "Website and commerce platform whose Commerce APIs (Orders, Inventory, Products, Fulfillment, Customers, Transactions) integrate store data.",
+  "auth_methods": ["OAuth2", "API Key"],
+  "auth_notes": "OAuth2 flow against the Squarespace Developer Platform to get access tokens with website scopes (e.g., website.commerce.orders.read), or legacy API keys with scope prefixes (CONTACT, COMMERCE, etc.); Bearer token in Authorization header plus required User-Agent.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free developer account + own site; create an app in the Developer Platform to get API key/OAuth credentials without payment, but Commerce API functionality targets sites on paid commerce plans.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Commerce APIs: Orders, Products, Inventory, Fulfillment, Customers/Contacts, Transactions, Subscriptions, Availabilities, + Commerce Analytics; narrower than Shopify/BigCommerce",
+    "webhooks": true,
+    "webhook_note": "Commerce webhooks exist for order lifecycle events (order.created, order.updated, fulfillment.updated, etc.) on the Developer Platform"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official Squarespace MCP server found; community servers not verified"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developers.squarespace.com/commerce-apis",
+    "note": "Fetched text confirms Commerce API (contacts/orders scope model, Bearer API key or OAuth token, User-Agent requirement) at developers.squarespace.com; broader commerce endpoint set from knowledge"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched page detailed the Contacts/Commerce API scope model; commerce breadth and webhooks partially inferred. OAuth + API key both supported."
+  }

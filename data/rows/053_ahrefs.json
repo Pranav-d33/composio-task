@@ -1,0 +1,34 @@
+{
+  "num": 53,
+  "app": "Ahrefs",
+  "category": "SEO and Web Analytics",
+  "one_line": "SEO tool for keyword research, backlink analysis and rank tracking, exposed via a commercial REST API.",
+  "auth_methods": ["API Key", "OAuth2"],
+  "auth_notes": "API v3 uses API keys created in account settings; OAuth 2.0 is only available through the 'Ahrefs Connect' partner integration program (requires application/approval)",
+  "self_serve": "paid",
+  "self_serve_notes": "Docs mention 'free test queries' to try endpoints without an Enterprise plan, but real API access requires a paid Ahrefs plan (Lite/Standard/Advanced/Enterprise); API keys self-managed in the dashboard once you have a paid subscription",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "REST API v3 with ~40-50 endpoints across keyword, backlink, site explorer, rank tracker, site audit, content explorer and brand radar; OpenAPI spec published",
+    "webhooks": true,
+    "webhook_note": "Webhooks used in Ahrefs Connect integrations (OAuth-based data delivery); no general user-facing webhook API"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Ahrefs MCP server documented in the fetched docs (MCP section with Claude Desktop/Web, ChatGPT and Claude Code setup guides)"
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://ahrefs.com/api/documentation",
+    "note": "fetched text confirms REST API, API keys, free test queries, MCP docs and OAuth (Ahrefs Connect)"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth is simple API key; cost is the main friction ($$$ paid plans). MCP officially documented."
+}

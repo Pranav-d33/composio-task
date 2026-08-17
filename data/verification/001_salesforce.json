@@ -1,0 +1,13 @@
+{
+ "num": 1,
+ "app": "Salesforce",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "correct",
+  "verdict": "correct"
+ },
+ "notes": "OAuth2+JWT+SOAP+REST+GraphQL confirmed; free Dev Edition self-serve; official MCP server announced by Salesforce.",
+ "method": "docs_text+knowledge"
+}

@@ -1,0 +1,34 @@
+{
+  "num": 15,
+  "app": "Pylon",
+  "category": "Customer Support",
+  "one_line": "Agentic B2B support platform that tracks customer issues across Slack, email, Microsoft Teams, chat widgets, and forms, and orchestrates AI agents to resolve them.",
+  "auth_methods": ["API key"],
+  "auth_notes": "REST API authenticated with API keys issued in the Pylon app; docs also cover Custom Apps and embedded iframes. OAuth2 not confirmed from evidence.",
+  "self_serve": "yes",
+  "self_serve_notes": "Self-serve signup available; API credentials obtainable solo without sales, though advanced support/enterprise features may require a paid tier.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "moderate",
+    "breadth_estimate": "Endpoints across issues, accounts, contacts, conversations, messages, analytics; tens of endpoints.",
+    "webhooks": true,
+    "webhook_note": "Docs include a dedicated Webhooks section for receiving issue/message events."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": false,
+    "note": "Docs navigation lists a dedicated 'Pylon MCP' section (docs.usepylon.com)."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://docs.usepylon.com",
+    "note": "Fetched text (015_pylon.txt) shows API, Custom Apps, Webhooks, and Pylon MCP sections. Exact auth method inferred from knowledge."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Text confirms B2B positioning and API/MCP existence but does not state the exact auth method or free-tier availability."
+  }

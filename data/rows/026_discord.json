@@ -1,0 +1,34 @@
+{
+  "num": 26,
+  "app": "Discord",
+  "category": "Community & Messaging",
+  "one_line": "Community messaging platform with a very broad REST API, Gateway WebSocket, webhooks, and bot framework for building apps that run inside servers.",
+  "auth_methods": ["OAuth2", "bot token"],
+  "auth_notes": "Bot tokens and OAuth2 with scopes; apps created free in the Discord developer portal with no approval for unverified public bots.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free self-serve; create application/bot in developer portal in minutes. Privileged intents need verification for large apps only.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across messages, channels, guilds, users, interactions, and more; plus Gateway (WebSocket), webhooks, and SDKs.",
+    "webhooks": true,
+    "webhook_note": "Webhooks fully supported for posting messages and bot interactions; plus Gateway for real-time events."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Discord MCP server exists; many community MCP servers also available."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://discord.com/developers/docs",
+    "note": "Fetched text (026_discord.txt) is a thin landing page; detailed API/auth/MCP facts from strong knowledge."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Thin fetched text; content based on established Discord developer documentation."
+  }

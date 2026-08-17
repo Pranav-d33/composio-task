@@ -1,0 +1,34 @@
+{
+  "num": 58,
+  "app": "Sherlock",
+  "category": "OSINT",
+  "one_line": "Open-source CLI that hunts down social media accounts by username across 400+ networks.",
+  "auth_methods": [],
+  "auth_notes": "No API, no authentication - it is a local open-source CLI/Python tool that performs unauthenticated HTTP checks against social sites",
+  "self_serve": "yes",
+  "self_serve_notes": "Free and open-source (MIT); install via pipx/pip, Docker or distro packages and run locally - no account or credentials needed",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": [],
+    "breadth": "narrow",
+    "breadth_estimate": "No public API; CLI with per-site checks and JSON/CSV/XLSX output (uses upstream data.json site list)",
+    "webhooks": false,
+    "webhook_note": "None"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official MCP server; as a local CLI it could be wrapped in a custom MCP server if desired"
+  },
+  "buildability_verdict": "blocked",
+  "blocker": "No API to integrate against - Sherlock is a self-hosted CLI tool, not a SaaS with an API surface",
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://github.com/sherlock-project/sherlock",
+    "note": "fetched GitHub README confirms CLI usage, install methods, 400+ networks, MIT license"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Not a SaaS; integration would mean wrapping the CLI locally, not calling an external API."
+}

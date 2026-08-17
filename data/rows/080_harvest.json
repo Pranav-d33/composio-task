@@ -1,0 +1,34 @@
+{
+  "num": 80,
+  "app": "Harvest",
+  "category": "Time Tracking / Invoicing",
+  "one_line": "Time tracking and invoicing SaaS with a v2 REST API for timesheets, projects, clients, expenses, invoices, estimates, and reports.",
+  "auth_methods": ["OAuth2", "API Key"],
+  "auth_notes": "OAuth2 with app registration via Harvest ID; also supports Personal Access Tokens (PAT) for direct API access. Token sent via Bearer header.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free 30-day trial then paid plans — no free tier. API usable on trial account; credentials obtainable solo from account settings.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Roughly 100+ endpoints across clients, contacts, projects, tasks, time entries, expenses, invoices, estimates, reports, roles, users, and company settings.",
+    "webhooks": false,
+    "webhook_note": "Harvest API v2 does not offer webhooks (roadmap item); use polling."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community-built Harvest MCP servers exist; no official MCP published by Harvest."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://help.getharvest.com/api-v2",
+    "note": "Fetched text from Harvest API v2 help center confirms API surface and auth sections; doc URL confirmed via curl."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched text thin (<1200 chars) — API surface list confirmed but auth details (OAuth2 vs PAT) from domain knowledge; no webhook support is known to be absent in v2."
+}

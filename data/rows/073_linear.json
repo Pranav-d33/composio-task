@@ -1,0 +1,34 @@
+{
+  "num": 73,
+  "app": "Linear",
+  "category": "Project Management",
+  "one_line": "Issue tracking and project management designed for software teams.",
+  "auth_methods": ["OAuth2", "Personal API Key"],
+  "auth_notes": "GraphQL API authenticated via OAuth 2.0 or personal API keys; TypeScript SDK available; docs explicitly cover integrating AI agents.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free tier available; personal API keys are self-service in workspace settings, no approval needed.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["GraphQL"],
+    "breadth": "broad",
+    "breadth_estimate": "Full GraphQL schema over issues, cycles, projects, teams, comments, users, attachments; plus file uploads and CLI importer.",
+    "webhooks": true,
+    "webhook_note": "Webhooks for issue/comment/project/cycle events."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "Community MCP servers exist (e.g. sheriferson/linear-mcp-server); official Linear MCP not confirmed."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://developers.linear.app/docs",
+    "note": "Fetched getting-started page confirms GraphQL API and OAuth 2.0 / personal API key auth."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Fetched text was short; API breadth based on knowledge of the GraphQL schema."
+}

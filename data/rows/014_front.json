@@ -1,0 +1,34 @@
+{
+  "num": 14,
+  "app": "Front",
+  "category": "Customer Support",
+  "one_line": "Shared inbox and customer communication platform for support teams, with a Core API giving comprehensive control over contacts, conversations, and messages.",
+  "auth_methods": ["OAuth2", "API key"],
+  "auth_notes": "Front supports OAuth2.0 as well as API tokens (personal/bot API keys). Requires registering an app or generating a token in the Front admin under the company's paid account.",
+  "self_serve": "paid",
+  "self_serve_notes": "No free tier; needs a paid Front subscription (or trial) to generate an API token or register an OAuth app. No enterprise sales gate for the API itself.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Core API covering contacts, conversations, messages, inboxes, teammates, rules, events, accounts; 100+ endpoints with OpenAPI spec.",
+    "webhooks": true,
+    "webhook_note": "Webhooks supported for events such as message inbound/outbound, conversation assignment, comments, etc."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Front publishes an official MCP server; community wrappers also exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://dev.frontapp.com",
+    "note": "Fetched text (014_front.txt) confirms OAuth2 + API tokens, base URL api2.frontapp.com, JSON + multipart, rate limits. MCP/webhook details from knowledge."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Webhook support and MCP existence inferred from knowledge, not the fetched text."
+}

@@ -1,0 +1,13 @@
+{
+ "num": 5,
+ "app": "Twenty",
+ "checks": {
+  "auth_methods": "correct",
+  "self_serve": "correct",
+  "api_surface": "correct",
+  "mcp": "wrong",
+  "verdict": "correct"
+ },
+ "notes": "Open-source CRM, REST+GraphQL, API key/OAuth; self-serve (self-host). MCP claim unverifiable \u2014 no official/community MCP confirmed.",
+ "method": "docs_text+knowledge"
+}

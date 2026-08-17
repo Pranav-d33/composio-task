@@ -1,0 +1,34 @@
+{
+  "num": 31,
+  "app": "Google Ads",
+  "category": "Advertising",
+  "one_line": "Google's ad platform, manageable programmatically via the Google Ads API (gRPC/JSON-REST) down to keyword level.",
+  "auth_methods": ["OAuth2"],
+  "auth_notes": "OAuth2 (Google account) + a developer token, plus a Google Ads Manager account and API Center enablement. Requires linking a Google Ads customer ID. Developer token has test and production approval tiers.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free self-serve developer access: create Google Cloud project, enable API, get developer token in API Center, test against a test account without approval; production access needs token approval by Google.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST", "gRPC", "GraphQL (not officially; GAQL for querying)"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of resources/services: campaigns, ad groups, keywords, budgets, billing, reporting via GAQL, asset management, Smart Bidding, offline conversions, audience targeting",
+    "webhooks": false,
+    "webhook_note": "No push webhooks; reporting is pull-based via GAQL queries"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Google Ads MCP; multiple community MCP servers exist on GitHub/npm."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developers.google.com/google-ads/api",
+    "note": "Fetched text (3.4KB) covers API intro and positioning; auth/self-serve facts from Google Ads API docs"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Production developer token approval is the main time sink; test accounts make sandbox calls possible quickly."
+}

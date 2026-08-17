@@ -1,0 +1,34 @@
+{
+  "num": 35,
+  "app": "Mailchimp",
+  "category": "Email Marketing",
+  "one_line": "Email marketing and automation platform (Intuit) with a broad REST API for audiences, campaigns, automations, and reporting.",
+  "auth_methods": ["API key", "OAuth2"],
+  "auth_notes": "Simplest path is an API key from account settings (used as Basic-auth username, password 'x'); OAuth2 available for third-party apps. Both self-serve.",
+  "self_serve": "trial",
+  "self_serve_notes": "Free tier (up to ~500 contacts) lets you generate an API key and call endpoints immediately; paid plans unlock more. No approval needed.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "200+ endpoints: audiences, contacts, campaigns, templates, automations/journeys, reports, batches, e-commerce, tags, segments, account exports",
+    "webhooks": true,
+    "webhook_note": "Webhooks for subscribe/unsubscribe, campaign events, abuse reports, and more"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official Mailchimp MCP confirmed; community MCP servers exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "minutes",
+  "evidence": {
+    "docs": "https://mailchimp.com/developer/marketing/api/",
+    "note": "Full API reference fetched (52KB) showing endpoint inventory; auth/self-serve from Mailchimp docs"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "One of the easiest: instant API key on a free account."
+}

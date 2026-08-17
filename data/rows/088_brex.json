@@ -1,0 +1,34 @@
+{
+  "num": 88,
+  "app": "Brex",
+  "category": "Corporate Cards / Spend Management",
+  "one_line": "Corporate card and spend management platform with a REST API covering accounting, budgets, expenses, payments, team, transactions, and travel.",
+  "auth_methods": ["OAuth2", "API Key"],
+  "auth_notes": "OAuth2 authorization with org admin approval; API keys also supported. Requires an active Brex business account (paid product, enterprise focus) to obtain credentials.",
+  "self_serve": "paid",
+  "self_serve_notes": "No free tier — requires a Brex business account; API access must be approved by the org admin. Enterprise sales often involved.",
+  "gate_type": "admin_approval",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "broad",
+    "breadth_estimate": "Roughly 100+ endpoints across Accounting, Budgets, Expenses, Fields, Onboarding, Payments, Team, Transactions, and Travel APIs, defined via OpenAPI.",
+    "webhooks": true,
+    "webhook_note": "Dedicated Webhooks API for real-time event notifications (confirmed in fetched docs navigation)."
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Brex MCP is listed in the official developer docs navigation; community servers also exist."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developer.brex.com",
+    "note": "Fetched text of developer docs overview confirms REST/OpenAPI architecture, API list, Webhooks API, and Brex MCP; auth specifics from domain knowledge."
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "API surface and MCP confirmed from fetched text; account/approval requirements and OAuth2+key mix from knowledge."
+}

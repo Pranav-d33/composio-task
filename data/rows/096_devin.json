@@ -1,0 +1,34 @@
+{
+  "num": 96,
+  "app": "Devin",
+  "category": "AI Coding Agents",
+  "one_line": "Autonomous AI software engineer by Cognition that writes, runs, and tests code.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "Devin API uses API token auth; Devin CLI authenticates via Cognition account; access requires a Devin plan",
+  "self_serve": "paid",
+  "self_serve_notes": "Sign up at app.devin.ai with Individual and Teams plans; API access gated to paid plans",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "narrow",
+    "breadth_estimate": "Devin API for running sessions is new and limited; CLI and MCP for interaction",
+    "webhooks": false,
+    "webhook_note": "No webhooks documented"
+  },
+  "existing_mcp": {
+    "official": true,
+    "community": true,
+    "note": "Official Devin MCP server documented at docs.devin.ai/work-with-devin/devin-mcp.md (from /llms.txt); Devin CLI also consumes external MCP servers"
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://docs.devin.ai",
+    "note": "fetched text (intro page, mentions Devin API) + docs /llms.txt confirming official Devin MCP server"
+  },
+  "confidence": "medium",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Devin API surface is new/limited; MCP confirmed from docs index"
+}

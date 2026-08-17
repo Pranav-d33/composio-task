@@ -1,0 +1,34 @@
+{
+  "num": 83,
+  "app": "Binance",
+  "category": "Cryptocurrency",
+  "one_line": "World's largest cryptocurrency exchange with a very broad REST + WebSocket API for spot, margin, futures, wallet, and market data.",
+  "auth_methods": ["API Key"],
+  "auth_notes": "API key + secret generated in account settings; requests signed (HMAC SHA256, RSA, or Ed25519) with timestamp + signature and X-MBX-APIKEY header; optional recvWindow. No app registration — key generation is fully self-serve on a free account.",
+  "self_serve": "yes",
+  "self_serve_notes": "Free account; API keys created instantly in user dashboard without approval. Live trading requires account verification/KYC.",
+  "gate_type": "none",
+  "api_surface": {
+    "protocol": ["REST", "WebSocket"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Hundreds of endpoints across market data, account, spot/margin/futures trading, wallet, mining, staking, lending, and portfolio; plus WebSocket streams.",
+    "webhooks": false,
+    "webhook_note": "No webhooks; uses userDataStream WebSocket pushes and local/global spot alert endpoints instead."
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": true,
+    "note": "No official MCP published by Binance; multiple community MCP servers exist."
+  },
+  "buildability_verdict": "buildable_today",
+  "blocker": null,
+  "time_to_first_call": "hours",
+  "evidence": {
+    "docs": "https://developers.binance.com/docs",
+    "note": "Fetched text (large) confirms HMAC/RSA/Ed25519 API key types, X-MBX-APIKEY header, signature requirements, and WebSocket user data streams."
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Auth details confirmed from fetched developer docs; webhook absence is from domain knowledge of Binance architecture."
+}

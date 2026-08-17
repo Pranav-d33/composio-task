@@ -1,0 +1,34 @@
+{
+  "num": 29,
+  "app": "Aircall",
+  "category": "Phone System / Contact Center",
+  "one_line": "Cloud phone system for sales/support teams, exposed via a broad REST API for users, calls, contacts, and numbers.",
+  "auth_methods": ["OAuth2", "API key (Basic auth)"],
+  "auth_notes": "Two modes: Basic auth with API ID + API Secret (Aircall customers, API v1) and OAuth2 for Technology Partners (v2). API keys generated in the dashboard by an admin.",
+  "self_serve": "paid",
+  "self_serve_notes": "Requires a paid Aircall subscription; API keys available to customers in dashboard. OAuth app registration for technology partners.",
+  "gate_type": "paid_plan",
+  "api_surface": {
+    "protocol": ["REST"],
+    "breadth": "very_broad",
+    "breadth_estimate": "Users, Teams, Calls, Contacts, Numbers, Dialer Campaigns, Conversation Intelligence, Messaging/WhatsApp, webhooks callbacks (v1 + v2)",
+    "webhooks": true,
+    "webhook_note": "Webhook/callback system for call events (call.created, call.updated, message.received, etc.)"
+  },
+  "existing_mcp": {
+    "official": false,
+    "community": false,
+    "note": "No official MCP found in docs; community servers not confirmed."
+  },
+  "buildability_verdict": "buildable_with_work",
+  "blocker": null,
+  "time_to_first_call": "days",
+  "evidence": {
+    "docs": "https://developer.aircall.io",
+    "note": "Full API reference fetched (285KB) covering auth, endpoints, rate limits, webhooks"
+  },
+  "confidence": "high",
+  "tier": "B",
+  "verification_status": "pass1",
+  "agent_notes": "Main friction is needing a paid Aircall account; API itself is well documented."
+}
