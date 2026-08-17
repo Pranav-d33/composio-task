@@ -7,6 +7,16 @@ patterns, and verify accuracy on a 20-app sample.
 
 **Live case study:** `site/index.html` (self-contained single page, open in any browser)
 
+## Tooling used
+
+- **Plain HTTP (`requests`)** — most docs pages
+- **scrapling MCP + scrapling's DynamicFetcher (Playwright-backed)** — JS-heavy and
+  lightly protected pages (Slack, Discord, Airtable, Linear, Meta docs, Snowflake, LiveAgent, PitchBook)
+- **Playwright MCP** — interactive docs (Linear developer portal)
+- **Chrome DevTools MCP** — Composio dashboard + final-page verification
+- **Composio's own MCP (`connect.composio.dev/mcp`)** — queried the tool catalog
+  (per the brief's "use Composio's SDK and MCP" — done for real)
+
 ## What the pipeline does
 
 ```
