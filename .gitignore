@@ -12,3 +12,4 @@ data/composio_coverage.json
 
 # browser tooling scratch
 .playwright-mcp/
+.claude/
