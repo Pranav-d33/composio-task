@@ -29,21 +29,42 @@ def esc(s):
     return h.escape(str(s or ""))
 
 # ---- matrix rows ----
+def verdict_short(v):
+    return {"buildable_today":"Today","buildable_with_work":"With work","blocked":"Blocked"}.get(v,v)
+def ttc_short(t):
+    return {"minutes":"min","hours":"hrs","days":"days","weeks":"wks"}.get(t,t)
+
 rows_html = []
 for r in data["rows"]:
     auths = "".join(f'<span class="tag tag-{esc(a.lower().replace(" ","-"))}">{esc(auth_label(a))}</span>' for a in r["auth"])
     mcp = f'<span class="mcp mcp-{r["mcp"]}">{esc(mcp_label(r["mcp"]))}</span>'
-    rows_html.append(f'''<tr data-cat="{esc(r['category'])}" data-auth="{' '.join(r['auth'])}" data-verdict="{r['verdict']}" data-gate="{r['gate']}" data-mcp="{r['mcp']}">
+    breadth_badge = f'<span class="breadth b-{esc(r["breadth"])}">{esc(r["breadth"])}</span>'
+    conf_dot = f'<span class="conf-dot c-{esc(r["confidence"])}" title="confidence: {esc(r["confidence"])}"></span>'
+    wh = '<span class="wh yes" title="webhooks">wh</span>' if r.get("webhooks") else '<span class="wh no" title="no webhooks">—</span>'
+    detail_one = esc(r.get("one_line",""))
+    detail_blk = esc(r.get("blocker_class") or "")
+    detail_notes = esc((r.get("agent_notes","") or "")[:180])
+    detail_ev = esc(r.get("evidence",""))
+    rows_html.append(f'''<tr class="app-row" data-cat="{esc(r['category'])}" data-auth="{' '.join(r['auth'])}" data-verdict="{r['verdict']}" data-gate="{r['gate']}" data-mcp="{r['mcp']}" data-breadth="{esc(r['breadth'])}" data-conf="{esc(r['confidence'])}" data-app="{esc(r['app'].lower())}">
 <td class="num">{r['num']}</td>
 <td class="app"><a href="{esc(r['evidence'])}" target="_blank" rel="noopener">{esc(r['app'])}</a></td>
 <td class="cat">{esc(r['category'])}</td>
 <td class="auth">{auths}</td>
-<td class="gate">{esc(gate_label(r['gate']))}</td>
-<td class="api">{esc('|'.join(r['protocol']) if isinstance(r['protocol'], list) else r['protocol'])}</td>
+<td class="gate"><span class="gate-pill g-{esc(r['gate'])}">{esc(gate_label(r['gate']))}</span></td>
+<td class="api">{breadth_badge}<span class="proto">{esc('|'.join(r['protocol']) if isinstance(r['protocol'], list) else r['protocol'])}</span>{wh}</td>
 <td class="mcp">{mcp}</td>
-<td class="verdict verdict-{r['verdict']}">{esc(verdict_label(r['verdict']))}</td>
-<td class="ttc">{esc(r['ttc'])}</td>
-</tr>''')
+<td class="verdict verdict-{r['verdict']}">{esc(verdict_short(r['verdict']))}</td>
+<td class="ttc">{esc(ttc_short(r['ttc']))}</td>
+<td class="conf">{conf_dot}</td>
+</tr>
+<tr class="detail-row" data-for="{r['num']}"><td colspan="10">
+  <div class="detail">
+    <div class="detail-line"><b>What:</b> {detail_one}</div>
+    {f'<div class="detail-line"><b>Blocker:</b> {detail_blk}</div>' if detail_blk and detail_blk != 'None' else ''}
+    {f'<div class="detail-line"><b>Agent note:</b> {detail_notes}</div>' if detail_notes else ''}
+    <div class="detail-line"><b>Evidence:</b> <a href="{detail_ev}" target="_blank" rel="noopener">{detail_ev}</a></div>
+  </div>
+</td></tr>''')
 MATRIX_ROWS = "\n".join(rows_html)
 
 # ---- verification sample table (from real data) ----
@@ -174,30 +195,86 @@ section h3 {{ font-family:var(--serif); font-size:19px; font-weight:600; margin:
 .bar-val {{ font-family:var(--mono); font-size:13px; }}
 .bar-track.stacked {{ display:flex; }}
 .stacked .v-today {{ background:var(--green); }} .stacked .v-work {{ background:var(--amber); }} .stacked .v-blocked {{ background:var(--red); }}
-.matrix-controls {{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center; }}
-.matrix-controls select,.matrix-controls input {{ padding:8px 12px; font-family:var(--sans); font-size:13px; border:1px solid var(--line); background:var(--paper); color:var(--ink); border-radius:3px; }}
-.matrix-controls .search {{ flex:1; min-width:180px; }}
-.matrix-wrap {{ overflow-x:auto; border:1px solid var(--line); }}
+/* Results summary strip */
+.results-summary {{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:22px; }}
+.sum-tile {{ background:var(--paper); padding:18px 20px; border-left:3px solid transparent; }}
+.sum-tile.s-today {{ border-left-color:var(--green); }} .sum-tile.s-work {{ border-left-color:var(--amber); }}
+.sum-tile.s-blocked {{ border-left-color:var(--red); }} .sum-tile.s-shown {{ border-left-color:var(--ink); }}
+.sum-tile .sn {{ font-family:var(--serif); font-size:30px; font-weight:600; line-height:1; }}
+.sum-tile .sl {{ font-size:11.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-soft); margin-top:5px; }}
+/* Filter bar */
+.filter-bar {{ display:flex; gap:12px; align-items:center; margin-bottom:14px; }}
+.filter-bar .search {{ flex:1; min-width:200px; padding:11px 14px; font-family:var(--sans); font-size:14px; border:1px solid var(--line); background:var(--paper); color:var(--ink); border-radius:4px; }}
+.view-toggle {{ display:flex; border:1px solid var(--line); border-radius:4px; overflow:hidden; }}
+.view-toggle .seg {{ border:none; background:var(--paper); padding:9px 16px; font-family:var(--sans); font-size:13px; cursor:pointer; color:var(--ink-soft); }}
+.view-toggle .seg.active {{ background:var(--ink); color:#fff; }}
+/* Facets */
+.facets {{ display:flex; flex-direction:column; gap:10px; margin-bottom:14px; }}
+.facet-group {{ display:flex; align-items:flex-start; gap:12px; }}
+.facet-label {{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); min-width:70px; padding-top:5px; }}
+.chips {{ display:flex; flex-wrap:wrap; gap:6px; }}
+.facet-chip {{ border:1px solid var(--line); background:var(--paper); padding:4px 11px; font-size:12.5px; border-radius:20px; cursor:pointer; color:var(--ink-soft); transition:all .12s; }}
+.facet-chip:hover {{ border-color:var(--ink-soft); color:var(--ink); }}
+.facet-chip.active {{ background:var(--ink); color:#fff; border-color:var(--ink); }}
+.facet-chip .cnt {{ font-family:var(--mono); font-size:11px; opacity:.7; margin-left:4px; }}
+.active-filters {{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; min-height:24px; }}
+.pill {{ display:inline-flex; align-items:center; gap:6px; background:var(--paper2); border:1px solid var(--line); padding:4px 8px 4px 11px; font-size:12px; border-radius:20px; }}
+.pill .x {{ cursor:pointer; color:var(--ink-soft); font-weight:700; }} .pill .x:hover {{ color:var(--red); }}
+/* matrix table */
+.matrix-wrap {{ overflow-x:auto; border:1px solid var(--line); border-radius:4px; }}
 table.matrix {{ width:100%; border-collapse:collapse; font-size:13px; white-space:nowrap; }}
-table.matrix th {{ text-align:left; padding:10px 12px; background:var(--paper2); border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-soft); position:sticky; top:0; cursor:pointer; user-select:none; }}
-table.matrix td {{ padding:9px 12px; border-bottom:1px solid var(--line); }}
-table.matrix tr:hover td {{ background:#fbfaf7; }}
+table.matrix th {{ text-align:left; padding:11px 12px; background:var(--paper2); border-bottom:1px solid var(--line); font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-soft); position:sticky; top:0; cursor:pointer; user-select:none; }}
+table.matrix th:hover {{ color:var(--ink); }}
+table.matrix td {{ padding:10px 12px; border-bottom:1px solid var(--line); }}
+table.matrix tr.app-row {{ cursor:pointer; }}
+table.matrix tr.app-row:hover td {{ background:#fbfaf7; }}
+table.matrix tr.app-row.expanded td {{ background:#f3efe7; }}
 table.matrix td.num {{ font-family:var(--mono); color:var(--ink-soft); font-size:12px; }}
 table.matrix td.app a {{ color:var(--ink); text-decoration:none; font-weight:500; border-bottom:1px solid transparent; }}
 table.matrix td.app a:hover {{ border-bottom:1px solid var(--accent); color:var(--accent); }}
+tr.detail-row {{ display:none; }}
+tr.detail-row.open {{ display:table-row; }}
+tr.detail-row td {{ background:#f3efe7; padding:14px 18px; }}
+.detail {{ max-width:760px; font-size:13.5px; color:var(--ink-soft); line-height:1.7; }}
+.detail-line {{ margin:2px 0; }} .detail-line b {{ color:var(--ink); font-weight:600; }}
+.detail-line a {{ color:var(--accent); word-break:break-all; }}
 .tag {{ display:inline-block; font-size:11px; padding:2px 7px; border-radius:2px; background:var(--paper2); margin-right:4px; border:1px solid var(--line); }}
 .tag-oauth2 {{ background:#e8eee9; border-color:#c5d4ca; }} .tag-api-key {{ background:#efe9e2; border-color:#ddcfbe; }}
 .tag-api-token {{ background:#e9e6ef; border-color:#cdc7db; }} .tag-jwt {{ background:#f0e6e4; border-color:#ddc3bf; }}
 .tag-bot-token {{ background:#e4e9ef; border-color:#c6d2e0; }} .tag-pat {{ background:#e6efe8; border-color:#c8d8cc; }}
 .tag-basic {{ background:#efe9e0; border-color:#ddd2c0; }} .tag-none {{ background:#eae9e7; border-color:#d3d1cd; }}
 .tag-unknown {{ background:#ececea; border-color:#d5d4d0; }}
+.gate-pill {{ font-size:11px; padding:2px 8px; border-radius:20px; }}
+.g-none {{ background:#e0eee6; color:#1e5a45; }} .g-paid_plan {{ background:#f0e6dc; color:#8a6410; }}
+.g-admin_approval {{ background:#eee6e0; color:#6b5a3a; }} .g-contact_sales {{ background:#f6e0db; color:#a33; }} .g-partnership {{ background:#f0d8e0; color:#933; }}
+.breadth {{ font-size:10.5px; padding:1px 6px; border-radius:2px; margin-right:5px; font-family:var(--mono); }}
+.b-very_broad {{ background:#cde0d4; color:#1e5a45; }} .b-broad {{ background:#d8e6dc; color:#2a6b5a; }}
+.b-moderate {{ background:#e6dccb; color:#6b5a3a; }} .b-narrow {{ background:#e8e2d8; color:#6b655b; }} .b-none {{ background:#ece9e4; color:#8a847a; }}
+.proto {{ font-size:11.5px; color:var(--ink-soft); margin-right:5px; }}
+.wh {{ font-size:10px; padding:1px 5px; border-radius:2px; margin-left:4px; }}
+.wh.yes {{ background:#e0eee6; color:#1e5a45; }} .wh.no {{ background:#ece9e4; color:#8a847a; }}
 .mcp {{ display:inline-block; font-size:11px; padding:2px 7px; border-radius:2px; }}
 .mcp-official {{ background:#e0eee6; color:#1e5a45; }} .mcp-community {{ background:#eaeef0; color:#2c5568; }} .mcp-none {{ background:#ece9e4; color:#6b655b; }}
-.verdict {{ font-weight:600; }}
+.verdict {{ font-weight:600; font-size:12.5px; }}
 .verdict-buildable_today {{ color:var(--green); }} .verdict-buildable_with_work {{ color:#8a6410; }} .verdict-blocked {{ color:var(--red); }}
-.matrix-count {{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); }}
-.legend {{ display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:10px; }}
+.ttc {{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); }}
+.conf-dot {{ width:9px; height:9px; border-radius:50%; display:inline-block; }}
+.c-high {{ background:var(--green); }} .c-medium {{ background:var(--amber); }} .c-low {{ background:var(--red); }}
+.legend {{ display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:12px; align-items:center; }}
 .legend span {{ display:inline-flex; align-items:center; gap:5px; }} .dot {{ width:9px; height:9px; border-radius:2px; display:inline-block; }}
+/* card view */
+.card-grid {{ display:none; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }}
+.card-grid.show {{ display:grid; }}
+.app-card {{ border:1px solid var(--line); border-radius:6px; padding:16px 18px; background:var(--paper); border-top:3px solid var(--ink-soft); }}
+.app-card.v-today {{ border-top-color:var(--green); }} .app-card.v-work {{ border-top-color:var(--amber); }} .app-card.v-blocked {{ border-top-color:var(--red); }}
+.app-card .ac-head {{ display:flex; justify-content:space-between; align-items:baseline; gap:8px; }}
+.app-card .ac-name {{ font-family:var(--serif); font-size:18px; font-weight:600; }}
+.app-card .ac-name a {{ color:var(--ink); text-decoration:none; }} .app-card .ac-name a:hover {{ color:var(--accent); }}
+.app-card .ac-verdict {{ font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }}
+.app-card .ac-cat {{ font-size:11.5px; color:var(--ink-soft); margin-top:3px; }}
+.app-card .ac-line {{ font-size:13px; color:var(--ink-soft); margin-top:10px; line-height:1.5; }}
+.app-card .ac-meta {{ display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; }}
+.app-card .ac-ev {{ margin-top:11px; font-size:12px; }} .app-card .ac-ev a {{ color:var(--accent); text-decoration:none; word-break:break-all; }}
 .acc-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start; }}
 .acc-card {{ border:1px solid var(--line); padding:22px; background:var(--paper); }}
 .acc-card .label {{ font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-soft); }}
@@ -275,29 +352,49 @@ footer {{ border-top:1px solid var(--line); padding:38px 0; color:var(--ink-soft
 
 <section id="matrix">
   <div class="wrap">
-    <div class="sec-head"><span class="num">03</span><div><h2>The full matrix — all 100</h2><div class="desc">Filter, search, sort. Click any app for its evidence link.</div></div></div>
-    <div class="matrix-controls">
-      <input type="text" id="search" class="search" placeholder="Search apps…">
-      <select id="f-cat"><option value="">All categories</option></select>
-      <select id="f-auth"><option value="">All auth</option></select>
-      <select id="f-verdict"><option value="">All verdicts</option></select>
-      <select id="f-mcp"><option value="">All MCP</option></select>
-      <span class="matrix-count" id="count">100 / 100</span>
+    <div class="sec-head"><span class="num">03</span><div><h2>The results — all 100, selectable</h2><div class="desc">Filter by category, auth, access, MCP or verdict. Click a row for the full evidence. Switch to card view to scan visually.</div></div></div>
+
+    <div class="results-summary" id="sumStrip">
+      <div class="sum-tile s-today"><div class="sn" id="sn-today">68</div><div class="sl">Buildable today</div></div>
+      <div class="sum-tile s-work"><div class="sn" id="sn-work">23</div><div class="sl">With work</div></div>
+      <div class="sum-tile s-blocked"><div class="sn" id="sn-blocked">9</div><div class="sl">Blocked</div></div>
+      <div class="sum-tile s-shown"><div class="sn" id="sn-shown">100</div><div class="sl">Showing / 100</div></div>
     </div>
-    <div class="matrix-wrap">
+
+    <div class="filter-bar">
+      <input type="text" id="search" class="search" placeholder="Search 100 apps by name…">
+      <div class="view-toggle" id="viewToggle">
+        <button class="seg active" data-view="table">Table</button>
+        <button class="seg" data-view="cards">Cards</button>
+      </div>
+    </div>
+
+    <div class="facets" id="facets">
+      <div class="facet-group"><span class="facet-label">Category</span><div class="chips" id="catChips"></div></div>
+      <div class="facet-group"><span class="facet-label">Verdict</span><div class="chips" id="verdictChips"></div></div>
+      <div class="facet-group"><span class="facet-label">Access</span><div class="chips" id="gateChips"></div></div>
+      <div class="facet-group"><span class="facet-label">MCP</span><div class="chips" id="mcpChips"></div></div>
+    </div>
+    <div class="active-filters" id="activeFilters"></div>
+
+    <div class="matrix-wrap" id="tableWrap">
       <table class="matrix" id="matrix">
-        <thead><tr><th data-k="num">#</th><th data-k="app">App</th><th data-k="cat">Category</th><th data-k="auth">Auth</th><th data-k="gate">Access</th><th data-k="api">API</th><th data-k="mcp">MCP</th><th data-k="verdict">Verdict</th><th data-k="ttc">First call</th></tr></thead>
+        <thead><tr><th data-k="num">#</th><th data-k="app">App</th><th data-k="cat">Category</th><th data-k="auth">Auth</th><th data-k="gate">Access</th><th data-k="api">API</th><th data-k="mcp">MCP</th><th data-k="verdict">Verdict</th><th data-k="ttc">First call</th><th>Conf</th></tr></thead>
         <tbody id="tbody">
 {MATRIX_ROWS}
         </tbody>
       </table>
     </div>
+
+    <div class="card-grid" id="cardGrid"></div>
+
     <div class="legend">
       <span><i class="dot" style="background:var(--green)"></i> buildable today</span>
       <span><i class="dot" style="background:var(--amber)"></i> buildable with work</span>
       <span><i class="dot" style="background:var(--red)"></i> blocked</span>
       <span><i class="dot" style="background:#e0eee6"></i> official MCP</span>
       <span><i class="dot" style="background:#eaeef0"></i> community MCP</span>
+      <span class="muted">tip: click a row to expand the evidence</span>
     </div>
   </div>
 </section>
@@ -468,47 +565,154 @@ python3 build_site.py      # regenerates this page</pre>
 
 <script>
 const DATA = {DATA_JSON};
+const state = {{ category:new Set(), verdict:new Set(), gate:new Set(), mcp:new Set(), q:'' }};
+
 (function(){{
-  const cats = new Set(DATA.rows.map(r=>r.category));
-  const auths = new Set(DATA.rows.flatMap(r=>r.auth));
-  const selCat = document.getElementById('f-cat');
-  [...cats].sort().forEach(c=>{{ const o=document.createElement('option'); o.value=c; o.textContent=c; selCat.appendChild(o); }});
-  const selAuth = document.getElementById('f-auth');
-  [...auths].sort().forEach(a=>{{ const o=document.createElement('option'); o.value=a; o.textContent=a; selAuth.appendChild(o); }});
-  const selMcp = document.getElementById('f-mcp');
-  [['official','Official MCP'],['community','Community MCP'],['none','No MCP']].forEach(([v,l])=>{{ const o=document.createElement('option'); o.value=v; o.textContent=l; selMcp.appendChild(o); }});
+  // counts per facet
+  const cnt = (key, val) => DATA.rows.filter(r => r[key]===val).length;
+  const addChips = (elId, key, labelFn, vals) => {{
+    const el = document.getElementById(elId);
+    vals.forEach(([v,l]) => {{
+      const c = document.createElement('button');
+      c.className = 'facet-chip'; c.dataset.key=key; c.dataset.val=v;
+      c.innerHTML = labelFn(l) + ' <span class="cnt">'+cnt(key,v)+'</span>';
+      c.addEventListener('click', () => toggleFacet(key,v,c));
+      el.appendChild(c);
+    }});
+  }};
+  addChips('catChips','category', x=>x, DATA.rows.map(r=>r.category).filter((v,i,a)=>a.indexOf(v)===i).sort().map(v=>[v,v]));
+  addChips('verdictChips','verdict', x=>({{buildable_today:'Buildable today',buildable_with_work:'With work',blocked:'Blocked'}}[x]||x),
+    [['buildable_today','Buildable today'],['buildable_with_work','With work'],['blocked','Blocked']]);
+  addChips('gateChips','gate', x=>({{none:'Self-serve',paid_plan:'Paid plan',admin_approval:'Admin approval',contact_sales:'Contact sales',partnership:'Partnership'}}[x]||x),
+    [['none','Self-serve'],['paid_plan','Paid plan'],['admin_approval','Admin approval'],['contact_sales','Contact sales'],['partnership','Partnership']]);
+  addChips('mcpChips','mcp', x=>({{official:'Official',community:'Community',none:'No MCP'}}[x]||x),
+    [['official','Official MCP'],['community','Community MCP'],['none','No MCP']]);
 }})();
-function applyFilters(){{
-  const q = document.getElementById('search').value.toLowerCase();
-  const fc = document.getElementById('f-cat').value, fa = document.getElementById('f-auth').value;
-  const fv = document.getElementById('f-verdict').value, fm = document.getElementById('f-mcp').value;
-  const rows = document.querySelectorAll('#tbody tr');
-  let shown = 0;
-  rows.forEach(tr => {{
-    const app = tr.querySelector('td.app').textContent.toLowerCase();
-    const ok = (!q || app.includes(q)) && (!fc || tr.dataset.cat===fc) && (!fa || tr.dataset.auth.includes(fa)) && (!fv || tr.dataset.verdict===fv) && (!fm || tr.dataset.mcp===fm);
-    tr.style.display = ok ? '' : 'none'; if (ok) shown++;
-  }});
-  document.getElementById('count').textContent = shown + ' / 100';
+
+function toggleFacet(key,val,chip){{
+  const set = state[key];
+  if (set.has(val)) {{ set.delete(val); chip.classList.remove('active'); }}
+  else {{ set.add(val); chip.classList.add('active'); }}
+  applyFilters();
 }}
-['search','f-cat','f-auth','f-verdict','f-mcp'].forEach(id => document.getElementById(id).addEventListener('input', applyFilters));
-applyFilters();
+function clearFacet(key){{
+  state[key].clear();
+  document.querySelectorAll('.facet-chip[data-key="'+key+'"]').forEach(c=>c.classList.remove('active'));
+  applyFilters();
+}}
+
+function matches(r){{
+  if (state.q && !r.app.toLowerCase().includes(state.q)) return false;
+  if (state.category.size && !state.category.has(r.category)) return false;
+  if (state.verdict.size && !state.verdict.has(r.verdict)) return false;
+  if (state.gate.size && !state.gate.has(r.gate)) return false;
+  if (state.mcp.size && !state.mcp.has(r.mcp)) return false;
+  return true;
+}}
+
+function renderActiveFilters(){{
+  const el = document.getElementById('activeFilters');
+  el.innerHTML = '';
+  const addPill = (label, key, val) => {{
+    const p = document.createElement('span'); p.className='pill';
+    p.innerHTML = label+' <span class="x">×</span>';
+    p.querySelector('.x').addEventListener('click',()=>{{ state[key].delete(val); document.querySelector('.facet-chip[data-key="'+key+'"][data-val="'+val+'"]')?.classList.remove('active'); applyFilters(); }});
+    el.appendChild(p);
+  }};
+  state.category.forEach(v=>addPill(v,'category',v));
+  state.verdict.forEach(v=>addPill({{buildable_today:'Buildable today',buildable_with_work:'With work',blocked:'Blocked'}}[v],'verdict',v));
+  state.gate.forEach(v=>addPill({{none:'Self-serve',paid_plan:'Paid plan',admin_approval:'Admin approval',contact_sales:'Contact sales',partnership:'Partnership'}}[v],'gate',v));
+  state.mcp.forEach(v=>addPill({{official:'Official MCP',community:'Community MCP',none:'No MCP'}}[v],'mcp',v));
+  if (state.q) {{ const p=document.createElement('span'); p.className='pill'; p.innerHTML='"'+state.q+'" <span class="x">×</span>'; p.querySelector('.x').addEventListener('click',()=>{{ document.getElementById('search').value=''; state.q=''; applyFilters(); }}); el.appendChild(p); }}
+  if (el.children.length) {{ const c=document.createElement('span'); c.className='pill'; c.style.background='transparent'; c.style.border='none'; c.style.cursor='pointer'; c.textContent='Clear all'; c.addEventListener('click',()=>{{ state.category.clear();state.verdict.clear();state.gate.clear();state.mcp.clear();state.q='';document.getElementById('search').value='';document.querySelectorAll('.facet-chip').forEach(x=>x.classList.remove('active'));applyFilters(); }}); el.appendChild(c); }}
+}}
+
+function applyFilters(){{
+  state.q = document.getElementById('search').value.toLowerCase().trim();
+  const visible = DATA.rows.filter(matches);
+  // table rows + detail rows
+  document.querySelectorAll('#tbody tr.app-row').forEach(tr => {{
+    const num = parseInt(tr.querySelector('td.num').textContent);
+    const r = DATA.rows.find(x=>x.num===num);
+    const show = matches(r);
+    tr.style.display = show ? '' : 'none';
+    const dr = tr.nextElementSibling;
+    if (dr && dr.classList.contains('detail-row')) {{ if(!show) dr.classList.remove('open'); tr.classList.remove('expanded'); }}
+  }});
+  // live summary
+  const today = visible.filter(r=>r.verdict==='buildable_today').length;
+  const work = visible.filter(r=>r.verdict==='buildable_with_work').length;
+  const blocked = visible.filter(r=>r.verdict==='blocked').length;
+  document.getElementById('sn-today').textContent = today;
+  document.getElementById('sn-work').textContent = work;
+  document.getElementById('sn-blocked').textContent = blocked;
+  document.getElementById('sn-shown').textContent = visible.length;
+  renderActiveFilters();
+  renderCards(visible);
+}}
+
+// expandable rows
+document.getElementById('tbody').addEventListener('click', e => {{
+  const tr = e.target.closest('tr.app-row');
+  if (!tr) return;
+  const dr = tr.nextElementSibling;
+  if (dr && dr.classList.contains('detail-row')) {{
+    const open = dr.classList.toggle('open');
+    tr.classList.toggle('expanded', open);
+  }}
+}});
+
+// search
+document.getElementById('search').addEventListener('input', applyFilters);
+
+// view toggle
+document.getElementById('viewToggle').addEventListener('click', e => {{
+  const b = e.target.closest('.seg'); if(!b) return;
+  document.querySelectorAll('#viewToggle .seg').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const cards = b.dataset.view==='cards';
+  document.getElementById('tableWrap').style.display = cards ? 'none' : '';
+  document.getElementById('cardGrid').classList.toggle('show', cards);
+}});
+
+// cards
+function renderCards(visible){{
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = visible.map(r => {{
+    const vshort = {{buildable_today:'Buildable today',buildable_with_work:'With work',blocked:'Blocked'}}[r.verdict]||r.verdict;
+    const vclass = r.verdict.replace('_','-');
+    const auths = r.auth.map(a=>'<span class="tag tag-'+a.toLowerCase().replace(' ','-')+'">'+a+'</span>').join('');
+    const mcp = '<span class="mcp mcp-'+r.mcp+'">'+({{official:'Official MCP',community:'Community MCP',none:'No MCP'}}[r.mcp]||r.mcp)+'</span>';
+    return '<div class="app-card v-'+vclass+'">'+
+      '<div class="ac-head"><div class="ac-name"><a href="'+r.evidence+'" target="_blank" rel="noopener">'+r.app+'</a></div>'+
+      '<div class="ac-verdict verdict-'+r.verdict+'">'+vshort+'</div></div>'+
+      '<div class="ac-cat">'+r.category+'</div>'+
+      '<div class="ac-line">'+(r.one_line||'')+'</div>'+
+      '<div class="ac-meta">'+auths+mcp+'</div>'+
+      '<div class="ac-ev"><a href="'+r.evidence+'" target="_blank" rel="noopener">'+r.evidence+'</a></div>'+
+      '</div>';
+  }}).join('');
+}}
+
+// sorting
 let sortKey='num', sortDir=1;
-document.querySelectorAll('#matrix th').forEach(th => {{
+document.querySelectorAll('#matrix th[data-k]').forEach(th => {{
   th.addEventListener('click', () => {{
     const k = th.dataset.k;
     if (sortKey===k) sortDir=-sortDir; else {{ sortKey=k; sortDir=1; }}
     const tbody = document.getElementById('tbody');
-    const rows = [...tbody.querySelectorAll('tr')];
+    const rows = [...tbody.querySelectorAll('tr.app-row')];
     rows.sort((a,b) => {{
       let av = a.cells[th.cellIndex].textContent.trim(), bv = b.cells[th.cellIndex].textContent.trim();
       if (k==='num') {{ av=parseInt(av); bv=parseInt(bv); return (av-bv)*sortDir; }}
       return av.localeCompare(bv)*sortDir;
     }});
-    rows.forEach(r => tbody.appendChild(r));
+    rows.forEach(r => {{ tbody.appendChild(r); tbody.appendChild(r.nextElementSibling); }});
     applyFilters();
   }});
 }});
+
+applyFilters();
 </script>
 </body>
 </html>'''
